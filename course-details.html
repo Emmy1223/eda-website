@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details — Emmy's Digital Academy</title>
+    <style>
+        /* Variables */
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #FFC400;
+            --black: #0A0A0A;
+            --dark-bg: #1A1A1A;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --glass-bg: rgba(255, 215, 0, 0.1);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Marquee Ticker */
+        .marquee-container {
+            background: linear-gradient(90deg, var(--black), var(--dark-bg));
+            border-bottom: 2px solid var(--gold);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .marquee-item span {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            position: relative;
+            animation: logoGlow 3s infinite alternate;
+            text-decoration: none;
+        }
+
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            100% { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+        }
+
+        .logo-full {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: revealText 2s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        @keyframes revealText {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Glass Golden Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 196, 0, 0.2));
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+            color: var(--black);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            padding: 4rem 3rem;
+            margin-bottom: 3rem;
+            border: 2px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .pill {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: var(--glow);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .info-card h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Content Sections */
+        .section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            border-radius: 2px;
+        }
+
+        .section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* Lists */
+        .section ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .section li {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+            position: relative;
+        }
+
+        .section li::before {
+            content: '✨';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--gold);
+        }
+
+        /* Pricing Section */
+        .pricing-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .faq-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .faq-card h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .faq-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner {
+                padding: 3rem 2rem;
+            }
+            
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .pricing-card {
+                padding: 2rem;
+            }
+            
+            .price {
+                font-size: 2.5rem;
+            }
+            
+            .marquee-item span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Performance Optimizations */
+        .container {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 1500px;
+        }
+        
+        .info-card, .faq-card {
+            will-change: transform, border-color;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">
+                <span class="marquee-icon">🎯</span>
+                <span>Transform Your Skills | Limited Slots Available</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">💰</span>
+                <span>Earn in Dollars | Start Your Freelancing Journey</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🚀</span>
+                <span>1000+ Students Trained | Join Our Success Stories</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">EDA</a>
+                <div class="logo-full">Emmy's Digital Academy</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="mentorship.html" class="nav-link">Mentorship</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Banner -->
+        <div class="banner">
+            <span class="pill">Course Overview</span>
+            <h1>About Our Courses</h1>
+            <p>A complete, beginner-friendly program designed to equip you with practical skills, hands-on exercises, and the knowledge needed to work confidently in the digital world.</p>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Duration</h3>
+                <p>3–4 Weeks (depending on course)</p>
+            </div>
+            <div class="info-card">
+                <h3>Level</h3>
+                <p>Beginner–Intermediate</p>
+            </div>
+            <div class="info-card">
+                <h3>Format</h3>
+                <p>Online Lessons + Tasks + Weekly Reviews</p>
+            </div>
+        </div>
+
+        <!-- About This Course -->
+        <div class="section">
+            <h2>About This Course</h2>
+            <p>This course is crafted for students, beginners, and aspiring digital creators who want to learn real, practical skills in a simple and enjoyable format. Every topic is explained in clear language, backed with examples, practice tasks, and weekly check-ins to ensure you are progressing.</p>
+            
+            <p>Whether you want to learn for freelancing, personal growth, school, business, or career development, this course gives you a strong foundation.</p>
+            
+            <p>You will get access to structured lessons, project-based learning, downloadable materials, and direct support when you need clarification. We focus on real-world application — no confusing theories, no unnecessary stress, just pure learning and growth.</p>
+        </div>
+
+        <!-- What You Will Learn -->
+        <div class="section">
+            <h2>What You Will Learn</h2>
+            <ul>
+                <li>Understanding the core fundamentals of the course</li>
+                <li>How to use essential tools and software</li>
+                <li>Hands-on practical assignments</li>
+                <li>Real project simulations</li>
+                <li>Portfolio-building projects</li>
+                <li>Freelancing guidance and career direction</li>
+                <li>Weekly feedback on tasks</li>
+            </ul>
+        </div>
+
+        <!-- Requirements -->
+        <div class="section">
+            <h2>Requirements</h2>
+            <ul>
+                <li>A smartphone and a laptop</li>
+                <li>Basic English understanding</li>
+                <li>Willingness to learn and complete tasks</li>
+                <li>Access to WhatsApp for support and a reliable internet connection</li>
+            </ul>
+        </div>
+
+        <!-- Who This Course Is For -->
+        <div class="section">
+            <h2>Who This Course Is For</h2>
+            <ul>
+                <li>Students who want a useful skill</li>
+                <li>Beginners learning from scratch</li>
+                <li>People preparing for freelancing</li>
+                <li>Creators and digital enthusiasts</li>
+                <li>Anyone who wants structured, guided learning</li>
+            </ul>
+        </div>
+
+        <!-- Course Pricing -->
+        <div class="pricing-card">
+            <h2>Course Pricing</h2>
+            <div class="price">₦20,000 – ₦1,000,000</div>
+            <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 2rem; font-size: 1.1rem;">
+                Price varies depending on the specific course. You will receive materials, tasks, feedback, and a certificate of completion.
+            </p>
+            <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h3>Are the classes flexible?</h3>
+                    <p>Yes. You can learn at your own pace, and tasks are given weekly so you have enough time to balance school or work.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>Can beginners join?</h3>
+                    <p>Absolutely. Everything is taught from scratch with clear explanations and examples.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>Will I get a certificate?</h3>
+                    <p>Yes. After completing the tasks and final project, you receive a certificate from EDA.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>Is there support?</h3>
+                    <p>Yes. You can ask questions anytime via WhatsApp, and you get weekly reviews from your instructor.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>How do I enroll?</h3>
+                    <p>Just click the Enroll button above or visit the enrollment page. You'll get confirmation and next steps within 24 hours.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept bank transfers, mobile money, and online payments. Flexible payment plans are available for higher-value courses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Transforming aspiring professionals through practical digital education.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: emmysacademy9@gmail.com</p>
+                <p>WhatsApp: +2349118074905</p>
+                <p>Discord: https://discord.gg/BeszMFN4</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Duplicate marquee for continuous scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const marquee = document.querySelector('.marquee');
+            if (marquee) {
+                marquee.innerHTML += marquee.innerHTML;
+            }
+            
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+            
+            // Animate info cards
+            document.querySelectorAll('.info-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Animate FAQ cards
+            document.querySelectorAll('.faq-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Animate sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

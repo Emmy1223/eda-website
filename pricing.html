@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing | Emmy's Digital Academy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-gold: #ffd700;
+        --dark-gold: #b8860b;
+        --light-gold: #fff8dc;
+        --medium-gold: #daa520;
+        --glow-gold: #ffec8b;
+
+        --rich-black: #0a0a0a;
+        --deep-black: #000000;
+        --dark-gray: #1a1a1a;
+        --medium-gray: #2a2a2a;
+        --light-gray: #3a3a3a;
+        --soft-gray: #4a4a4a;
+
+        --emerald: #00e676;
+        --royal-blue: #1a237e;
+        --electric-blue: #283593;
+        --purple: #764ba2;
+        --coral: #ff6b6b;
+        --teal: #20b2aa;
+
+        --white: #f5f5f5;
+        --off-white: #e8e8e8;
+        --light-text: #cccccc;
+        --medium-text: #999999;
+
+        --glass-bg: rgba(26, 26, 26, 0.85);
+        --glass-border: rgba(255, 215, 0, 0.25);
+        --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --gold-glow: 0 0 25px rgba(255, 215, 0, 0.3);
+        --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+
+        --transition-fast: 0.3s ease;
+        --transition-medium: 0.5s ease;
+        --transition-slow: 0.8s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--rich-black);
+        color: var(--white);
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 215, 0, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(184, 134, 11, 0.02) 0%,
+            transparent 50%
+          );
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      .pricing-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(
+            45deg,
+            rgba(255, 215, 0, 0.02) 0px,
+            rgba(255, 215, 0, 0.02) 2px,
+            transparent 2px,
+            transparent 40px
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            rgba(255, 215, 0, 0.01) 0px,
+            rgba(255, 215, 0, 0.01) 2px,
+            transparent 2px,
+            transparent 40px
+          );
+        z-index: -1;
+        pointer-events: none;
+        animation: patternMove 30s linear infinite;
+      }
+
+      @keyframes patternMove {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(40px, 40px);
+        }
+      }
+
+      header {
+        background: rgba(26, 26, 26, 0.95);
+        color: var(--white);
+        padding: 50px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 215, 0, 0.05),
+          transparent 50%
+        );
+        animation: headerGlow 8s ease-in-out infinite alternate;
+      }
+
+      @keyframes headerGlow {
+        0% {
+          transform: scale(1);
+          opacity: 0.2;
+        }
+        100% {
+          transform: scale(1.1);
+          opacity: 0.4;
+        }
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 3.5rem;
+        font-weight: 800;
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(
+          45deg,
+          var(--primary-gold),
+          var(--light-gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        animation: titlePulse 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes titlePulse {
+        0% {
+          filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+        }
+        100% {
+          filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
+        }
+      }
+
+      header p {
+        margin-top: 20px;
+        font-size: 1.3rem;
+        color: var(--light-gold);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 2;
+        line-height: 1.8;
+        opacity: 0.9;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 50px auto;
+        width: 90%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+      }
+
+      .plan-card {
+        background: var(--glass-bg);
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        transition: all var(--transition-medium);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .plan-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+      }
+
+      .plan-card:hover {
+        transform: translateY(-15px);
+        border-color: rgba(255, 215, 0, 0.4);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+          inset 0 0 40px rgba(255, 215, 0, 0.05);
+      }
+
+      .plan-card:hover::before {
+        opacity: 1;
+      }
+
+      .plan-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: var(--primary-gold);
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        transition: transform var(--transition-medium);
+      }
+
+      .plan-card:hover .plan-icon {
+        transform: scale(1.2) rotate(10deg);
+      }
+
+      .plan-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        color: var(--primary-gold);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .plan-price {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+
+      /* Different price colors for different plans */
+      .beginner-price {
+        color: var(--emerald);
+        text-shadow: 0 0 25px rgba(0, 230, 118, 0.4);
+      }
+
+      .intermediate-price {
+        color: var(--electric-blue);
+        text-shadow: 0 0 25px rgba(40, 53, 147, 0.4);
+      }
+
+      .pro-price {
+        color: var(--purple);
+        text-shadow: 0 0 25px rgba(118, 75, 162, 0.4);
+      }
+
+      .courses-price {
+        color: var(--teal);
+        text-shadow: 0 0 25px rgba(32, 178, 170, 0.4);
+      }
+
+      .business-price {
+        color: var(--coral);
+        text-shadow: 0 0 25px rgba(255, 107, 107, 0.4);
+      }
+
+      .elite-price {
+        color: var(--primary-gold);
+        text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+      }
+
+      .plan-duration {
+        color: var(--light-gold);
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .plan-duration i {
+        color: var(--primary-gold);
+      }
+
+      ul {
+        padding-left: 25px;
+        margin-bottom: 30px;
+        list-style: none;
+      }
+
+      li {
+        margin-bottom: 15px;
+        color: var(--light-text);
+        line-height: 1.7;
+        font-size: 1.05rem;
+        position: relative;
+        padding-left: 30px;
+      }
+
+      li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--primary-gold);
+        font-weight: bold;
+        font-size: 1.2em;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 15px 32px;
+        color: var(--rich-black);
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all var(--transition-medium);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Different button colors for different plans */
+      .btn-beginner {
+        background: linear-gradient(135deg, var(--emerald), #00c853);
+      }
+
+      .btn-intermediate {
+        background: linear-gradient(
+          135deg,
+          var(--electric-blue),
+          var(--royal-blue)
+        );
+      }
+
+      .btn-pro {
+        background: linear-gradient(135deg, var(--purple), #6a11cb);
+      }
+
+      .btn-courses {
+        background: linear-gradient(135deg, var(--teal), #008b8b);
+      }
+
+      .btn-business {
+        background: linear-gradient(135deg, var(--coral), #ff4757);
+      }
+
+      .btn-elite {
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s ease;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      footer {
+        margin-top: 80px;
+        background: rgba(10, 10, 10, 0.95);
+        color: var(--white);
+        text-align: center;
+        padding: 40px 20px;
+        border-top: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+      }
+
+      footer p {
+        color: var(--light-gold);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      footer strong {
+        color: var(--primary-gold);
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--light-text);
+      }
+
+      .contact-item i {
+        color: var(--primary-gold);
+      }
+
+      /* Animations */
+      .fade-in {
+        animation: fadeIn 1.2s ease-out;
+      }
+
+      .slide-up {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .pricing-grid {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+      }
+
+      @media (max-width: 1024px) {
+        header h1 {
+          font-size: 2.8rem;
+        }
+
+        .pricing-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 40px 20px;
+        }
+
+        header h1 {
+          font-size: 2.2rem;
+        }
+
+        header p {
+          font-size: 1.1rem;
+        }
+
+        .plan-card {
+          padding: 30px 25px;
+        }
+
+        .plan-price {
+          font-size: 2.5rem;
+        }
+
+        .plan-title {
+          font-size: 1.6rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          width: 95%;
+        }
+
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .plan-card {
+          padding: 25px 20px;
+        }
+
+        .plan-price {
+          font-size: 2.2rem;
+        }
+
+        .contact-info {
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+        }
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--dark-gray);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          to bottom,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        border-radius: 5px;
+        border: 2px solid var(--dark-gray);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          to bottom,
+          var(--light-gold),
+          var(--primary-gold)
+        );
+      }
+
+      /* Selection */
+      ::selection {
+        background-color: var(--primary-gold);
+        color: var(--rich-black);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Pattern -->
+    <div class="pricing-pattern"></div>
+
+    <header class="fade-in">
+      <h1>Pricing Plans</h1>
+      <p>
+        Choose a plan that fits your learning goals and start your journey with
+        Emmy's Digital Academy today.
+      </p>
+    </header>
+
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Beginner Mentorship -->
+        <div class="plan-card slide-up">
+          <div class="plan-icon">🌱</div>
+          <div class="plan-title">
+            <i class="fas fa-seedling"></i>
+            <span>Beginner Mentorship</span>
+          </div>
+          <div class="plan-price beginner-price">₦20,000</div>
+          <div class="plan-duration">
+            <i class="far fa-clock"></i>
+            <span>2 Weeks | 2 Sessions per Week</span>
+          </div>
+          <ul>
+            <li>Personalized guidance and mentorship</li>
+            <li>Mini tasks assigned weekly for practice</li>
+            <li>Access to starter resources and templates</li>
+            <li>Weekly feedback on progress and tasks</li>
+            <li>Foundation building for digital skills</li>
+          </ul>
+          <a href="enroll.html?plan=beginner" class="btn btn-beginner">
+            <i class="fas fa-play-circle"></i>
+            <span>Enroll Now</span>
+          </a>
+        </div>
+
+        <!-- Intermediate Mentorship -->
+        <div class="plan-card slide-up" style="animation-delay: 0.1s">
+          <div class="plan-icon">🚀</div>
+          <div class="plan-title">
+            <i class="fas fa-chart-line"></i>
+            <span>Intermediate Mentorship</span>
+          </div>
+          <div class="plan-price intermediate-price">₦35,000</div>
+          <div class="plan-duration">
+            <i class="far fa-clock"></i>
+            <span>3 Weeks | 2–3 Sessions per Week</span>
+          </div>
+          <ul>
+            <li>Advanced project tasks and simulations</li>
+            <li>Portfolio-building guidance and optimization</li>
+            <li>Detailed performance reviews and strategy</li>
+            <li>Direct mentor support via WhatsApp</li>
+            <li>Freelancing preparation and profile setup</li>
+          </ul>
+          <a href="enroll.html?plan=intermediate" class="btn btn-intermediate">
+            <i class="fas fa-rocket"></i>
+            <span>Get Started</span>
+          </a>
+        </div>
+
+        <!-- Pro Mentorship -->
+        <div class="plan-card slide-up" style="animation-delay: 0.2s">
+          <div class="plan-icon">💎</div>
+          <div class="plan-title">
+            <i class="fas fa-gem"></i>
+            <span>Pro Mentorship</span>
+          </div>
+          <div class="plan-price pro-price">₦50,000</div>
+          <div class="plan-duration">
+            <i class="far fa-clock"></i>
+            <span>1 Month | 3 Sessions per Week + Check-ins</span>
+          </div>
+          <ul>
+            <li>Real client-style tasks and projects</li>
+            <li>Portfolio & profile optimization for visibility</li>
+            <li>Freelancing and bidding training included</li>
+            <li>Ongoing support & career strategy sessions</li>
+            <li>Income-focused project guidance</li>
+          </ul>
+          <a href="enroll.html?plan=pro" class="btn btn-pro">
+            <i class="fas fa-briefcase"></i>
+            <span>Apply Now</span>
+          </a>
+        </div>
+
+        <!-- Digital Skills Courses -->
+        <div class="plan-card slide-up" style="animation-delay: 0.3s">
+          <div class="plan-icon">🎓</div>
+          <div class="plan-title">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Digital Skills Courses</span>
+          </div>
+          <div class="plan-price courses-price">₦15,000 – ₦30,000</div>
+          <div class="plan-duration">
+            <i class="fas fa-laptop-code"></i>
+            <span>Self-Paced Learning</span>
+          </div>
+          <ul>
+            <li>Graphics, Video Editing, Web Basics courses</li>
+            <li>Practical hands-on tasks and projects</li>
+            <li>Certificate of completion upon finishing</li>
+            <li>Optional mentor support available</li>
+            <li>Course materials and templates included</li>
+          </ul>
+          <a href="courses.html" class="btn btn-courses">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Join Now</span>
+          </a>
+        </div>
+
+        <!-- NEW: Business Accelerator -->
+        <div class="plan-card slide-up" style="animation-delay: 0.4s">
+          <div class="plan-icon">🏢</div>
+          <div class="plan-title">
+            <i class="fas fa-briefcase"></i>
+            <span>Business Accelerator</span>
+          </div>
+          <div class="plan-price business-price">₦75,000</div>
+          <div class="plan-duration">
+            <i class="far fa-clock"></i>
+            <span>2 Months | Weekly Strategy Sessions</span>
+          </div>
+          <ul>
+            <li>Business plan development and validation</li>
+            <li>Market research and competitor analysis</li>
+            <li>Digital marketing strategy development</li>
+            <li>Financial planning and pricing strategies</li>
+            <li>Branding and customer acquisition plan</li>
+            <li>Ongoing mentorship for 3 months</li>
+          </ul>
+          <a href="enroll.html?plan=business" class="btn btn-business">
+            <i class="fas fa-chart-bar"></i>
+            <span>Accelerate My Business</span>
+          </a>
+        </div>
+
+        <!-- NEW: Elite Masterclass -->
+        <div class="plan-card slide-up" style="animation-delay: 0.5s">
+          <div class="plan-icon">👑</div>
+          <div class="plan-title">
+            <i class="fas fa-crown"></i>
+            <span>Elite Masterclass</span>
+          </div>
+          <div class="plan-price elite-price">₦120,000</div>
+          <div class="plan-duration">
+            <i class="far fa-clock"></i>
+            <span>3 Months | Intensive Training Program</span>
+          </div>
+          <ul>
+            <li>All Pro Mentorship features included</li>
+            <li>Advanced digital marketing masterclass</li>
+            <li>One-on-one coaching sessions weekly</li>
+            <li>Exclusive access to premium resources</li>
+            <li>Guaranteed internship opportunity</li>
+            <li>Networking with industry professionals</li>
+            <li>Certificate of excellence upon completion</li>
+          </ul>
+          <a href="enroll.html?plan=elite" class="btn btn-elite">
+            <i class="fas fa-crown"></i>
+            <span>Become Elite</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="fade-in">
+      <p>
+        <strong>Emmy's Digital Academy</strong> : Learn the skills. Build the
+        future.
+      </p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>emmysacademy9@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <span>+234 911 807 4905</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Add hover effects
+      document.addEventListener("DOMContentLoaded", function () {
+        const planCards = document.querySelectorAll(".plan-card");
+
+        planCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transition = "all var(--transition-medium)";
+          });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll(".btn").forEach((button) => {
+          button.addEventListener("click", function (e) {
+            const ripple = document.createElement("span");
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.4);
+                        transform: scale(0);
+                        animation: rippleEffect 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        });
+
+        // Add ripple animation style
+        const style = document.createElement("style");
+        style.textContent = `
+                @keyframes rippleEffect {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+        document.head.appendChild(style);
+
+        // Page load animation
+        window.addEventListener("load", () => {
+          document.body.classList.add("loaded");
+
+          // Start pattern animation
+          const pattern = document.querySelector(".pricing-pattern");
+          if (pattern) {
+            pattern.style.animationPlayState = "running";
+          }
+
+          // Stagger card animations
+          planCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+          });
+        });
+
+        // Smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
+
+            if (href !== "#") {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

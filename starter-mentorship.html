@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starter Mentorship Program - Emmy's Digital Academy</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-gold: #ffd700;
+        --dark-gold: #b8860b;
+        --light-gold: #fff8dc;
+        --medium-gold: #daa520;
+        --glow-gold: #ffec8b;
+
+        --rich-black: #0a0a0a;
+        --deep-black: #000000;
+        --dark-gray: #1a1a1a;
+        --medium-gray: #2a2a2a;
+        --light-gray: #3a3a3a;
+        --soft-gray: #4a4a4a;
+
+        --emerald: #00e676;
+        --royal-blue: #1a237e;
+        --electric-blue: #283593;
+        --purple: #764ba2;
+
+        --white: #f5f5f5;
+        --off-white: #e8e8e8;
+        --light-text: #cccccc;
+        --medium-text: #999999;
+
+        --glass-bg: rgba(26, 26, 26, 0.85);
+        --glass-border: rgba(255, 215, 0, 0.25);
+        --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --gold-glow: 0 0 25px rgba(255, 215, 0, 0.3);
+        --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+
+        --transition-fast: 0.3s ease;
+        --transition-medium: 0.5s ease;
+        --transition-slow: 0.8s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--rich-black);
+        color: var(--white);
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 215, 0, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(184, 134, 11, 0.02) 0%,
+            transparent 50%
+          );
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      .mentor-pattern {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 215, 0, 0.02) 20px,
+            rgba(255, 215, 0, 0.02) 21px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 215, 0, 0.02) 20px,
+            rgba(255, 215, 0, 0.02) 21px
+          );
+        z-index: -1;
+        pointer-events: none;
+        animation: patternMove 30s linear infinite;
+      }
+
+      @keyframes patternMove {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(20px);
+        }
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Header Styles */
+      .header {
+        background: rgba(26, 26, 26, 0.9);
+        padding: 5rem 2rem;
+        text-align: center;
+        border-radius: 0 0 25px 25px;
+        margin-bottom: 3rem;
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow), inset 0 0 60px rgba(255, 215, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 215, 0, 0.1),
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: mentorGlow 10s ease-in-out infinite alternate;
+      }
+
+      @keyframes mentorGlow {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.2;
+        }
+        100% {
+          transform: translate(50px, 50px) scale(1.2);
+          opacity: 0.4;
+        }
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        color: var(--rich-black);
+        padding: 0.8rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        font-size: 1.1em;
+        letter-spacing: 0.5px;
+      }
+
+      .header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        background: linear-gradient(
+          45deg,
+          var(--primary-gold),
+          var(--light-gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        animation: titlePulse 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes titlePulse {
+        0% {
+          filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+        100% {
+          filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        }
+      }
+
+      .price-tag {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 1.5rem 0;
+        color: var(--emerald);
+        text-shadow: 0 0 25px rgba(0, 230, 118, 0.4);
+        letter-spacing: 2px;
+      }
+
+      .header p {
+        font-size: 1.3em;
+        color: var(--light-gold);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      /* Section Styles */
+      .section {
+        background: var(--glass-bg);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: var(--glass-shadow);
+        margin-bottom: 2rem;
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        transition: all var(--transition-medium);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+      }
+
+      .section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+          inset 0 0 50px rgba(255, 215, 0, 0.05);
+        border-color: rgba(255, 215, 0, 0.35);
+      }
+
+      h2 {
+        color: var(--primary-gold);
+        margin-bottom: 1.8rem;
+        font-size: 2em;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        border-radius: 2px;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      }
+
+      h3 {
+        color: var(--light-gold);
+        margin: 2rem 0 1.2rem;
+        font-size: 1.5em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      h4 {
+        color: var(--white);
+        margin-bottom: 1rem;
+        font-size: 1.3em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      p {
+        color: var(--light-text);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+        font-size: 1.1em;
+      }
+
+      ul {
+        padding-left: 2rem;
+        margin: 1.5rem 0;
+      }
+
+      li {
+        margin-bottom: 1rem;
+        padding-left: 0.8rem;
+        color: var(--light-text);
+        line-height: 1.7;
+        position: relative;
+        font-size: 1.05em;
+      }
+
+      li::before {
+        content: "✦";
+        position: absolute;
+        left: -1.5rem;
+        color: var(--primary-gold);
+        font-weight: bold;
+        font-size: 1.2em;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      }
+
+      .highlight {
+        background: rgba(255, 215, 0, 0.08);
+        border-left: 5px solid var(--primary-gold);
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 215, 0, 0.15);
+        transition: all var(--transition-medium);
+      }
+
+      .highlight:hover {
+        background: rgba(255, 215, 0, 0.12);
+        transform: translateX(10px);
+        border-color: rgba(255, 215, 0, 0.3);
+        box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+      }
+
+      .highlight strong {
+        color: var(--primary-gold);
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 3rem;
+        margin: 2rem 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 1.2rem;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-gold),
+          transparent
+        );
+        border-radius: 3px;
+      }
+
+      .timeline-item {
+        margin-bottom: 2.5rem;
+        position: relative;
+        padding-left: 1rem;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2rem;
+        top: 0.8rem;
+        width: 16px;
+        height: 16px;
+        background: var(--primary-gold);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        border: 3px solid var(--rich-black);
+        z-index: 1;
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: -2rem;
+        top: 0.8rem;
+        width: 16px;
+        height: 16px;
+        background: var(--primary-gold);
+        border-radius: 50%;
+        animation: pulseCircle 2s ease-in-out infinite;
+        opacity: 0.5;
+      }
+
+      @keyframes pulseCircle {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        color: var(--rich-black);
+        padding: 1.2rem 2.8rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1em;
+        transition: all var(--transition-medium);
+        margin-top: 1rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s ease;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(184, 134, 11, 0.5);
+        background: linear-gradient(
+          135deg,
+          var(--light-gold),
+          var(--primary-gold)
+        );
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--primary-gold);
+        border: 2px solid var(--primary-gold);
+        box-shadow: none;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 215, 0, 0.1);
+        color: var(--light-gold);
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      /* Animations */
+      .fade-in {
+        animation: fadeIn 1.2s ease-out;
+      }
+
+      .slide-up {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        .header h1 {
+          font-size: 2.8rem;
+        }
+
+        .container {
+          padding: 1.5rem;
+        }
+
+        .section {
+          padding: 2.5rem 2rem;
+        }
+
+        .btn-group {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          padding: 4rem 1.5rem;
+        }
+
+        .header h1 {
+          font-size: 2.2rem;
+        }
+
+        .price-tag {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 1.8em;
+        }
+
+        .timeline {
+          padding-left: 2rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .price-tag {
+          font-size: 2rem;
+        }
+
+        .section {
+          padding: 2rem 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.5em;
+        }
+
+        .timeline {
+          padding-left: 1.5rem;
+        }
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--dark-gray);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          to bottom,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        border-radius: 5px;
+        border: 2px solid var(--dark-gray);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          to bottom,
+          var(--light-gold),
+          var(--primary-gold)
+        );
+      }
+
+      /* Selection */
+      ::selection {
+        background-color: var(--primary-gold);
+        color: var(--rich-black);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background Pattern -->
+    <div class="mentor-pattern"></div>
+
+    <div class="header fade-in">
+      <div class="badge">
+        <i class="fas fa-star"></i>
+        <span>BEGINNER TRACK</span>
+      </div>
+      <h1>Starter Mentorship Program</h1>
+      <p class="price-tag">₦20,000</p>
+      <p>
+        Perfect foundation for absolute beginners starting their digital journey
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="section slide-up">
+        <h2><i class="fas fa-bullseye"></i> Program Overview</h2>
+        <p>
+          This 2-week intensive mentorship is designed for absolute beginners
+          who want to build a solid foundation in digital skills. You'll receive
+          step-by-step guidance, build confidence, and create your first
+          portfolio pieces under expert supervision.
+        </p>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.2s">
+        <h2><i class="fas fa-clipboard-list"></i> What You'll Get</h2>
+
+        <div class="highlight">
+          <h3><i class="fas fa-graduation-cap"></i> Core Learning Package:</h3>
+          <ul>
+            <li>
+              <strong>4 Personal Mentorship Sessions</strong> (45-60 minutes
+              each)
+            </li>
+            <li>
+              <strong>Weekly Learning Roadmap</strong> tailored to your pace
+            </li>
+            <li>
+              <strong>Digital Skills Foundation</strong> in your chosen track
+            </li>
+            <li>
+              <strong>Beginner Portfolio</strong> with 2-3 completed projects
+            </li>
+          </ul>
+        </div>
+
+        <h3><i class="fas fa-calendar-week"></i> Weekly Breakdown:</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>
+              <i class="fas fa-layer-group"></i> Week 1: Foundation Building
+            </h4>
+            <ul>
+              <li>Introduction to your chosen digital skill</li>
+              <li>Setting up your workspace and tools</li>
+              <li>Basic concepts and terminology mastery</li>
+              <li>First mini-project assignment</li>
+            </ul>
+          </div>
+          <div class="timeline-item">
+            <h4>
+              <i class="fas fa-hands-helping"></i> Week 2: Skill Application
+            </h4>
+            <ul>
+              <li>Hands-on project work</li>
+              <li>Feedback and improvement sessions</li>
+              <li>Building your portfolio pieces</li>
+              <li>Next steps planning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.3s">
+        <h2><i class="fas fa-trophy"></i> Learning Outcomes</h2>
+        <ul>
+          <li>Solid understanding of basic digital concepts</li>
+          <li>Ability to complete simple digital tasks independently</li>
+          <li>2-3 portfolio projects for your resume</li>
+          <li>Clear roadmap for continued learning</li>
+          <li>Confidence to pursue further training</li>
+          <li>Basic troubleshooting skills</li>
+        </ul>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.4s">
+        <h2><i class="fas fa-users"></i> Who This Is For</h2>
+        <ul>
+          <li>Complete beginners with zero experience</li>
+          <li>Students exploring digital career options</li>
+          <li>Career changers needing foundational knowledge</li>
+          <li>Anyone overwhelmed by online learning</li>
+          <li>Those who need structured, guided learning</li>
+        </ul>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.5s">
+        <h2><i class="fas fa-headset"></i> Support Included</h2>
+        <ul>
+          <li>Email support between sessions</li>
+          <li>Resource library access</li>
+          <li>Templates and cheat sheets</li>
+          <li>Community access (beginner channel)</li>
+          <li>Certificate of completion</li>
+        </ul>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.6s">
+        <h2><i class="fas fa-calendar-alt"></i> Program Schedule</h2>
+        <ul>
+          <li><strong>Duration:</strong> 2 weeks</li>
+          <li>
+            <strong>Sessions:</strong> 2 sessions per week (45-60 min each)
+          </li>
+          <li>
+            <strong>Platform:</strong> Zoom/Google Meet + WhatsApp support
+          </li>
+          <li><strong>Start Dates:</strong> Every Monday</li>
+          <li>
+            <strong>Time:</strong> Flexible scheduling based on your
+            availability
+          </li>
+        </ul>
+      </div>
+
+      <div class="section slide-up" style="animation-delay: 0.7s">
+        <h2><i class="fas fa-check-circle"></i> Next Steps</h2>
+        <p>
+          Ready to start your digital journey? Click below to enroll or contact
+          us for more information.
+        </p>
+        <div class="btn-group">
+          <a
+            href="mailto:emmysacademy9@gmail.com?subject=Starter Mentorship Enrollment"
+            class="btn"
+          >
+            <i class="fas fa-envelope"></i>
+            <span>Enroll Now</span>
+          </a>
+          <a href="mentorship.html" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Programs</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Animate all slide-up elements
+      document.querySelectorAll(".slide-up").forEach((element) => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(30px)";
+        element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        observer.observe(element);
+      });
+
+      // Add ripple effect to buttons
+      document.querySelectorAll(".btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          if (this.href.includes("mailto")) return;
+
+          const ripple = document.createElement("span");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add ripple animation style
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Timeline item hover effects
+      document.querySelectorAll(".timeline-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateX(10px)";
+          this.style.transition = "transform var(--transition-fast)";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateX(0)";
+        });
+      });
+
+      // Highlight section hover effects
+      document.querySelectorAll(".highlight").forEach((highlight) => {
+        highlight.addEventListener("mouseenter", function () {
+          this.style.transform = "translateX(10px)";
+        });
+
+        highlight.addEventListener("mouseleave", function () {
+          this.style.transform = "translateX(0)";
+        });
+      });
+
+      // Page load animation
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+
+        // Start pattern animation
+        const pattern = document.querySelector(".mentor-pattern");
+        if (pattern) {
+          pattern.style.animationPlayState = "running";
+        }
+
+        // Animate timeline items with delay
+        document.querySelectorAll(".timeline-item").forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.2}s`;
+        });
+      });
+
+      // Smooth scrolling for any anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+
+          if (href !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "Demo User",
+    "email": "demo@emmysacademy.com",
+    "password": "Demo@2024",
+    "phone": "",
+    "course": "Demo Course",
+    "progress": 0,
+    "plan": "starter",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]

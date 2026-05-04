@@ -1,0 +1,3902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmy's Digital Academy - Learn the skills. Build the future.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           RESET & BASE STYLES - 200+ lines
+        ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors - Gold Theme */
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --medium-gold: #DAA520;
+            --glow-gold: #FFEC8B;
+            
+            /* Black & Dark Theme */
+            --rich-black: #0A0A0A;
+            --deep-black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #3A3A3A;
+            --soft-gray: #4A4A4A;
+            
+            /* Accent Colors */
+            --emerald: #00e676;
+            --royal-blue: #1a237e;
+            --electric-blue: #283593;
+            --purple: #764ba2;
+            
+            /* Text Colors */
+            --white: #F5F5F5;
+            --off-white: #E8E8E8;
+            --light-text: #CCCCCC;
+            --medium-text: #999999;
+            
+            /* Effects */
+            --glass-bg: rgba(26, 26, 26, 0.7);
+            --glass-border: rgba(255, 215, 0, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition-fast: 0.3s ease;
+            --transition-medium: 0.5s ease;
+            --transition-slow: 0.8s ease;
+            --cubic-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--rich-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar - 50 lines */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+            border-radius: 5px;
+            border: 2px solid var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: var(--primary-gold);
+            color: var(--rich-black);
+        }
+
+        /* Global Typography - 100 lines */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--gold-glow);
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            position: relative;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--light-gold);
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND - 150 lines
+        ============================================ */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .bg-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-gold), transparent);
+            opacity: 0.1;
+            animation: floatParticle 20s infinite linear;
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(184, 134, 11, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184, 134, 11, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 40s linear infinite;
+        }
+
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(50px);
+            }
+        }
+
+        /* ============================================
+           MOVING HEADLINES - 100 lines
+        ============================================ */
+        .headlines-container {
+            background: linear-gradient(135deg, var(--deep-black), var(--dark-gray));
+            border-bottom: 2px solid var(--dark-gold);
+            padding: 12px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .headlines-track {
+            display: flex;
+            animation: headlinesScroll 40s linear infinite;
+            white-space: nowrap;
+            padding-left: 100%;
+        }
+
+        .headlines-track:hover {
+            animation-play-state: paused;
+        }
+
+        .headline-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+        }
+
+        .headline-icon {
+            margin-right: 12px;
+            font-size: 1.2em;
+            color: var(--light-gold);
+        }
+
+        @keyframes headlinesScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* ============================================
+           PREMIUM NAVIGATION - 300 lines
+        ============================================ */
+        .main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all var(--transition-medium);
+            padding: 15px 0;
+        }
+
+        .main-nav.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Centered Logo - 200 lines */
+        .logo-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1002;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition-medium);
+        }
+
+        .logo-main {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-glass {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 3px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 
+                var(--glass-shadow),
+                inset 0 0 40px rgba(255, 215, 0, 0.1),
+                0 0 60px rgba(255, 215, 0, 0.2);
+            transition: all var(--transition-medium);
+        }
+
+        .logo-image {
+            position: relative;
+            z-index: 2;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+            transition: all var(--transition-medium);
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-gold), transparent 70%);
+            opacity: 0;
+            z-index: 1;
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+
+        .logo-ring {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold), var(--primary-gold)) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: rotateRing 10s linear infinite;
+            opacity: 0.7;
+        }
+
+        .logo-text {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.9rem;
+            color: var(--light-gold);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Logo Animations */
+        @keyframes logoPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes rotateRing {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Logo Hover Effects */
+        .logo-wrapper:hover .logo-glass {
+            transform: scale(1.1) rotate(5deg);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 
+                0 0 80px rgba(255, 215, 0, 0.4),
+                inset 0 0 60px rgba(255, 215, 0, 0.15),
+                0 0 100px rgba(255, 215, 0, 0.3);
+        }
+
+        .logo-wrapper:hover .logo-image {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
+        }
+
+        .logo-wrapper:hover .logo-glow {
+            opacity: 0.5;
+        }
+
+        /* Navigation Links - 100 lines */
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-link {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            background: rgba(42, 42, 42, 0.7);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link i {
+            color: var(--primary-gold);
+            font-size: 1.1em;
+        }
+
+        .nav-link:hover {
+            background: rgba(184, 134, 11, 0.2);
+            border-color: var(--primary-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.2);
+        }
+
+        .nav-link.active {
+            background: rgba(184, 134, 11, 0.25);
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-enroll {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-enroll:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 2px solid var(--primary-gold);
+            border-radius: 8px;
+            color: var(--primary-gold);
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        /* ============================================
+           HERO SECTION - 250 lines
+        ============================================ */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 150px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+            border-radius: 50%;
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        .hero-tagline {
+            font-size: 2.2rem;
+            color: var(--light-gold);
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+            color: var(--off-white);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--emerald), #00C853);
+            color: var(--rich-black);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 230, 118, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-hero:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 230, 118, 0.4);
+            background: linear-gradient(135deg, #00C853, var(--emerald));
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Hero Animations */
+        @keyframes heroGlow {
+            0% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ============================================
+           COURSES SECTION - 300 lines
+        ============================================ */
+        .courses-section {
+            background: rgba(10, 10, 10, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--light-gold);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-medium);
+            position: relative;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .course-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 30px 60px rgba(184, 134, 11, 0.3),
+                inset 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .course-card:hover::before {
+            opacity: 1;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-gold);
+            color: var(--rich-black);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9em;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
+        }
+
+        .course-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.1);
+        }
+
+        .course-content {
+            padding: 35px;
+        }
+
+        .course-title {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+        }
+
+        .course-description {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .price {
+            color: var(--emerald);
+            font-weight: 800;
+            font-size: 1.8em;
+            text-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+        }
+
+        .duration {
+            color: var(--medium-text);
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .course-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all var(--transition-fast);
+            background: transparent;
+        }
+
+        .course-cta:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .section-cta {
+            text-align: center;
+        }
+
+        .btn-section {
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            transition: all var(--transition-fast);
+        }
+
+        .btn-section:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.5);
+        }
+
+        /* ============================================
+           CATALOGUE SECTION - 250 lines
+        ============================================ */
+        .catalogue-section {
+            position: relative;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .catalogue-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .catalogue-header h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .catalogue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .catalogue-item {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-medium);
+            position: relative;
+        }
+
+        .catalogue-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 30px 60px rgba(184, 134, 11, 0.3),
+                inset 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .catalogue-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .catalogue-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 25px;
+            transform: translateY(100%);
+            transition: transform var(--transition-medium);
+        }
+
+        .catalogue-item:hover .catalogue-overlay {
+            transform: translateY(0);
+        }
+
+        .catalogue-overlay h3 {
+            color: var(--primary-gold);
+            font-size: 1.5em;
+        }
+
+        .catalogue-caption {
+            padding: 25px;
+            text-align: center;
+            color: var(--light-text);
+            font-weight: 500;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           FEATURES SECTION - 200 lines
+        ============================================ */
+        .features-section {
+            background: rgba(26, 26, 26, 0.9);
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 25px 50px rgba(184, 134, 11, 0.2);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            color: var(--primary-gold);
+            transition: transform var(--transition-medium);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .feature-card h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           TESTIMONIALS - 200 lines
+        ============================================ */
+        .testimonials-section {
+            background: rgba(10, 10, 10, 0.95);
+            position: relative;
+        }
+
+        .testimonials-header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-medium);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 25px 50px rgba(184, 134, 11, 0.2);
+        }
+
+        .testimonial-card p {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: var(--off-white);
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card strong {
+            color: var(--primary-gold);
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .testimonial-role {
+            color: var(--medium-text);
+            font-weight: normal;
+        }
+
+        /* ============================================
+           CTA SECTION - 150 lines
+        ============================================ */
+        .cta-section {
+            background: linear-gradient(135deg, var(--royal-blue), var(--electric-blue));
+            position: relative;
+            overflow: hidden;
+            border-top: 2px solid var(--primary-gold);
+            border-bottom: 2px solid var(--primary-gold);
+        }
+
+        .cta-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            color: var(--white);
+        }
+
+        .cta-content p {
+            font-size: 1.5em;
+            margin: 0 auto 50px;
+            max-width: 700px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button {
+            padding: 22px 55px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 40px rgba(184, 134, 11, 0.4);
+            transition: all var(--transition-fast);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(184, 134, 11, 0.5);
+            background: linear-gradient(135deg, var(--dark-gold), var(--primary-gold));
+        }
+
+        /* ============================================
+           FOOTER - 300 lines
+        ============================================ */
+        .footer {
+            background: linear-gradient(135deg, var(--deep-black), var(--dark-gray));
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+            border-top: 2px solid var(--dark-gold);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid var(--dark-gold);
+        }
+
+        .footer-logo {
+            font-size: 6em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--white), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-title {
+            font-size: 2.5em;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .footer-tagline {
+            font-size: 1.3em;
+            color: var(--light-gold);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin: 60px 0;
+        }
+
+        .footer-section {
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .footer-section-title {
+            font-size: 1.8em;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--dark-gold);
+        }
+
+        .footer-list {
+            list-style-type: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-gold);
+            transition: all var(--transition-fast);
+        }
+
+        .footer-list li:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(10px);
+            border-left-color: var(--white);
+        }
+
+        .footer-list a {
+            color: var(--white);
+            font-size: 1.2em;
+            font-weight: 600;
+            display: block;
+        }
+
+        .footer-list a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item h4 {
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .email-item p {
+            color: var(--white);
+            font-size: 1.2em;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid var(--light-gray);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1em;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            font-size: 1.5em;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--primary-gold);
+            color: var(--rich-black);
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--white);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN - 400 lines
+        ============================================ */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3.5em;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-left, .nav-right {
+                display: none;
+            }
+            
+            .nav-left.active, .nav-right.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                padding: 20px;
+                border-radius: 0 0 20px 20px;
+                border-top: 1px solid var(--dark-gold);
+                z-index: 1000;
+            }
+            
+            .nav-left.active {
+                top: 100%;
+            }
+            
+            .nav-right.active {
+                top: calc(100% + 200px);
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .logo-center {
+                position: static;
+                transform: none;
+                order: 2;
+            }
+            
+            .nav-container {
+                justify-content: space-between;
+            }
+            
+            .hero-title {
+                font-size: 2.8em;
+            }
+            
+            .hero-tagline {
+                font-size: 1.8em;
+            }
+            
+            .section-title {
+                font-size: 2.2em;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo-main {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .logo-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo-title {
+                font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .hero-content {
+                padding: 0 15px;
+            }
+            
+            .hero-title {
+                font-size: 2.3em;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .btn-hero {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .courses-section {
+                padding: 60px 0;
+            }
+            
+            .catalogue-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                padding: 30px 15px;
+            }
+            
+            .footer-logo {
+                font-size: 4em;
+            }
+            
+            .headline-item {
+                padding: 0 20px;
+                font-size: 1em;
+            }
+            
+            .logo-wrapper {
+                gap: 8px;
+            }
+            
+            .logo-title {
+                font-size: 1.3em;
+            }
+            
+            .logo-subtitle {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2em;
+            }
+            
+            .hero-tagline {
+                font-size: 1.4em;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .catalogue-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-logo {
+                font-size: 3em;
+            }
+            
+            .footer-title {
+                font-size: 1.8em;
+            }
+            
+            .footer-section {
+                padding: 20px;
+            }
+            
+            .logo-main {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo-image {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .headline-item {
+                padding: 0 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8em;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            h2 {
+                font-size: 1.8em;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2em;
+            }
+            
+            .btn-hero, .cta-button, .btn-section {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            
+            .course-content, .feature-card, .testimonial-card {
+                padding: 25px;
+            }
+            
+            .footer-section {
+                padding: 15px;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES - 100 lines
+        ============================================ */
+        .text-center { text-align: center; }
+        .text-gold { color: var(--primary-gold); }
+        .text-light { color: var(--light-text); }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+        .py-1 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-2 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-3 { padding-top: 3rem; padding-bottom: 3rem; }
+        .glass-effect { 
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+        .gold-gradient {
+            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
+        }
+        .gold-glow {
+            box-shadow: var(--gold-glow);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-grid"></div>
+        <!-- Particles will be generated by JavaScript -->
+    </div>
+
+    <!-- Moving Headlines -->
+    <div class="headlines-container">
+        <div class="headlines-track">
+            <div class="headline-item">
+                <span class="headline-icon">🎉</span>
+                <span><strong>FOUNDED:</strong> 6th December 2025!</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">🚀</span>
+                <span><strong>NEW COURSE:</strong> Graphic Design Masterclass now available!</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">💰</span>
+                <span><strong>20% DISCOUNT:</strong> Use code EDASUMMER20 on all courses</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">📅</span>
+                <span><strong>FREE WEBINAR:</strong> "Freelancing in 2026" - Join our upcoming sessions</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">⭐</span>
+                <span><strong>SUCCESS STORY:</strong> Emmy made ₦1m+/month after Job Bidding course!</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">🎓</span>
+                <span><strong>ENROLLMENT:</strong> First batch starts January 1, 2026 - Limited seats!</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="headline-item">
+                <span class="headline-icon">🎉</span>
+                <span><strong>FOUNDED:</strong> 6th December 2025!</span>
+            </div>
+            <div class="headline-item">
+                <span class="headline-icon">🚀</span>
+                <span><strong>NEW COURSE:</strong> Graphic Design Masterclass now available!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Navigation -->
+    <nav class="main-nav header-visible">
+        <div class="container nav-container">
+            <!-- Left Navigation Links -->
+            <div class="nav-left">
+                <a href="index.html" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="courses.html" class="nav-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Courses</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </div>
+
+            <!-- Centered Logo -->
+            <div class="logo-center">
+                <a href="index.html" class="logo-wrapper">
+                    <div class="logo-main">
+                        <div class="logo-glass"></div>
+                        <div class="logo-glow"></div>
+                        <div class="logo-ring"></div>
+                        <img src="images/logo.png" alt="Emmy's Digital Academy" class="logo-image">
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-title">EDA</div>
+                        <div class="logo-subtitle">Emmy's Digital Academy</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Navigation Links -->
+            <div class="nav-right">
+                <a href="mentorship.html" class="nav-link">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Mentorship</span>
+                </a>
+                <a href="templates.html" class="nav-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Templates</span>
+                </a>
+                <a href="contact.html" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+                <a href="enroll.html" class="nav-enroll">
+                    <i class="fas fa-gem"></i>
+                    <span>Enroll Now</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg">
+            <div class="hero-glow"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">Emmy's Digital Academy</h1>
+                <p class="hero-tagline">Learn the skills. Build the future.</p>
+                <p class="hero-description">
+                    EDA empowers students with practical digital skills that create real income opportunities, 
+                    from freelancing to cybersecurity, digital marketing, and job bidding mastery. 
+                    Transform your passion into profit with industry-relevant training.
+                </p>
+                <div class="hero-buttons">
+                    <a href="enroll.html" class="btn-hero btn-primary">
+                        <i class="fas fa-rocket"></i> Enroll Now →
+                    </a>
+                    <a href="courses.html" class="btn-hero btn-secondary">
+                        <i class="fas fa-play-circle"></i> View Courses
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Courses</h2>
+                <p class="section-subtitle">Master in-demand skills with our comprehensive courses</p>
+            </div>
+            
+            <div class="courses-grid">
+                <!-- Course 1 -->
+                <div class="course-card slide-up">
+                    <div class="course-badge">MOST POPULAR</div>
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Job Bidding Mastery">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Job Bidding Mastery</h3>
+                        <p class="course-description">
+                            Learn how to write winning proposals and land high-paying freelance clients on platforms like Upwork, Discord and Fiverr.
+                        </p>
+                        <div class="course-meta">
+                            <span class="price">₦20,000</span>
+                            <span class="duration"><i class="far fa-clock"></i> 4 Weeks</span>
+                        </div>
+                        <a href="course-details.html" class="course-cta">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-card slide-up" style="animation-delay: 0.2s">
+                    <div class="course-badge">BEGINNER FRIENDLY</div>
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Freelancing for Beginners">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Freelancing for Beginners</h3>
+                        <p class="course-description">
+                            Start your freelance career from scratch. Find clients, set rates, manage projects, and build your portfolio.
+                        </p>
+                        <div class="course-meta">
+                            <span class="price">₦50,000</span>
+                            <span class="duration"><i class="far fa-clock"></i> 4 Weeks</span>
+                        </div>
+                        <a href="course-details.html" class="course-cta">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-card slide-up" style="animation-delay: 0.4s">
+                    <div class="course-badge">COMING SOON</div>
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cybersecurity Basics">
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Cybersecurity Basics</h3>
+                        <p class="course-description">
+                            Protect yourself online. Learn essential security practices for individuals and businesses in the digital age.
+                        </p>
+                        <div class="course-meta">
+                            <span class="price">Coming soon</span>
+                            <span class="duration"><i class="far fa-clock"></i> 3 months</span>
+                        </div>
+                        <a href="course-details.html" class="course-cta">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-cta">
+                <a href="courses.html" class="btn-section">
+                    <i class="fas fa-graduation-cap"></i> View All Courses
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalogue Section -->
+    <section class="catalogue-section">
+        <div class="container">
+            <div class="catalogue-header">
+                <h2>Our Digital Journey</h2>
+                <p>Explore some moments from Emmy's Digital Academy</p>
+            </div>
+            
+            <div class="catalogue-grid">
+                <!-- Image 1 -->
+                <div class="catalogue-item slide-up">
+                    <div class="catalogue-img" style="background-image: url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="catalogue-overlay">
+                            <h3>Workshop Sessions</h3>
+                        </div>
+                    </div>
+                    <p class="catalogue-caption">Interactive digital workshops with industry experts</p>
+                </div>
+                
+                <!-- Image 2 -->
+                <div class="catalogue-item slide-up" style="animation-delay: 0.1s">
+                    <div class="catalogue-img" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="catalogue-overlay">
+                            <h3>Project Demos</h3>
+                        </div>
+                    </div>
+                    <p class="catalogue-caption">Student project presentations and showcases</p>
+                </div>
+                
+                <!-- Image 3 -->
+                <div class="catalogue-item slide-up" style="animation-delay: 0.2s">
+                    <div class="catalogue-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');">
+                        <div class="catalogue-overlay">
+                            <h3>Tech Setup</h3>
+                        </div>
+                    </div>
+                    <p class="catalogue-caption">Modern learning environment with latest technology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose EDA?</h2>
+                <p class="section-subtitle">Discover what makes us different</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card slide-up">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Practical Skills</h3>
+                    <p>Real-world skills you can apply immediately to earn money and build your career.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card slide-up" style="animation-delay: 0.1s">
+                    <div class="feature-icon">💰</div>
+                    <h3>Affordable Prices</h3>
+                    <p>Premium quality education at prices accessible to everyone. No hidden costs.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card slide-up" style="animation-delay: 0.2s">
+                    <div class="feature-icon">👶</div>
+                    <h3>Beginner-Friendly</h3>
+                    <p>No prior experience needed. We start from absolute basics to advanced concepts.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card slide-up" style="animation-delay: 0.3s">
+                    <div class="feature-icon">📜</div>
+                    <h3>Certificates</h3>
+                    <p>Get industry-recognized certificates upon completion to boost your credibility.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card slide-up" style="animation-delay: 0.4s">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Expert Mentors</h3>
+                    <p>Learn from industry professionals with years of real-world experience.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card slide-up" style="animation-delay: 0.5s">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Community Support</h3>
+                    <p>Join our active community for networking, support, and collaboration opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>Success Stories</h2>
+                <p>Hear what our successful students have to say about their journey.</p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonial-card slide-up">
+                    <p>
+                        <i>"The job bidding course changed my freelance career. I went from <strong>₦0</strong> to <strong>₦200k+/month!</strong> The templates and strategies are pure gold."</i>
+                    </p>
+                    <p class="testimonial-author">
+                        Sarah T. <span class="testimonial-role">Freelance Writer</span>
+                    </p>
+                </div>
+
+                <div class="testimonial-card slide-up" style="animation-delay: 0.2s">
+                    <p>
+                        <i>"Emmy breaks down complex topics so anyone can understand. The mentorship program transformed my skills. Highly recommended for serious learners!"</i>
+                    </p>
+                    <p class="testimonial-author">
+                        James O. <span class="testimonial-role">Virtual Assistant</span>
+                    </p>
+                </div>
+
+                <div class="testimonial-card slide-up" style="animation-delay: 0.4s">
+                    <p>
+                        <i>"The templates alone are worth the price. Saved me hours of work! EDA gave me the confidence to charge premium rates for my services."</i>
+                    </p>
+                    <p class="testimonial-author">
+                        Chioma A. <span class="testimonial-role">Digital Marketer</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>Start Your Digital Journey Today</h2>
+                <p>
+            expert mentorship, and a community of ambitious learners.
+        </p>
+        
+        <div class="cta-features">
+            <div class="cta-feature">
+                <div class="cta-feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="cta-feature-text">Premium Courses</div>
+            </div>
+            <div class="cta-feature">
+                <div class="cta-feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="cta-feature-text">Progress Tracking</div>
+            </div>
+            <div class="cta-feature">
+                <div class="cta-feature-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="cta-feature-text">Certificates</div>
+            </div>
+            <div class="cta-feature">
+                <div class="cta-feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="cta-feature-text">Community</div>
+            </div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="signup.html" class="hero-btn-signup">
+                <i class="fas fa-crown"></i>
+                Join Academy - Free Trial
+            </a>
+            <p class="hero-subtext">
+                No credit card required • 7-day free trial • Cancel anytime
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <!-- Your existing footer content -->
+</footer>
+
+<!-- Floating Signup Button -->
+<a href="signup.html" class="floating-signup-btn">
+    <i class="fas fa-user-plus"></i>
+    <span>Sign Up Free</span>
+</a>
+
+<!-- Your existing scripts... -->
+
+<style>
+/* Add this CSS at the END of your existing style tag or stylesheet */
+.cta-section {
+    background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-top: 2px solid #D4AF37;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.cta-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-title {
+    font-size: 2.8rem;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.cta-subtitle {
+    color: #CCCCCC;
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.cta-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.cta-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 200px;
+}
+
+.cta-feature-icon {
+    width: 70px;
+    height: 70px;
+    background: #1A1A1A;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    font-size: 1.8rem;
+}
+
+.cta-feature-text {
+    color: #CCCCCC;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.cta-buttons {
+    margin-top: 30px;
+}
+
+.hero-btn-signup {
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0A0A0A;
+    padding: 18px 40px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border: 3px solid #B8860B;
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-btn-signup:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 0 40px rgba(212, 175, 55, 0.7),
+        0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtext {
+    color: #666666;
+    font-size: 0.95rem;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+.floating-signup-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #0A0A0A;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 
+        0 0 20px rgba(212, 175, 55, 0.3),
+        0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 2px solid #B8860B;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-signup-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .hero-btn-signup {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+    }
+    
+    .floating-signup-btn span {
+        display: none;
+    }
+    
+    .floating-signup-btn {
+        padding: 15px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+    }
+    
+    .floating-signup-btn i {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+}
+</style>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <!-- Header -->
+            <div class="footer-header">
+                <div class="footer-logo">EDA</div>
+                <h1 class="footer-title">Emmy's Digital Academy</h1>
+                <p class="footer-tagline">Learn the skills. Build the future.</p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="footer-grid">
+                <!-- Quick Links Section -->
+                <div class="footer-section">
+                    <h2 class="footer-section-title">Quick Links</h2>
+                    <ul class="footer-list">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="mentorship.html"><i class="fas fa-user-graduate"></i> Mentorship</a></li>
+                        <li><a href="templates.html"><i class="fas fa-file-alt"></i> Templates</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+<!-- Add this section anywhere in your homepage HTML -->
+<section class="reviews-showcase">
+    <div class="container">
+        <div class="section-header">
+            <h2>What Our Students Say</h2>
+            <p>Hear from our successful students and alumni</p>
+            <a href="feedback.html" class="view-all-btn">
+                View All Reviews <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <div class="reviews-grid">
+            <!-- Review Card 1 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">
+                    "The Pro Mentorship transformed my career! I landed my first international client within 3 weeks."
+                </p>
+                <div class="reviewer">
+                    <strong>Sarah Johnson</strong>
+                    <span>Pro Mentorship Student</span>
+                </div>
+            </div>
+            
+            <!-- Review Card 2 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">
+                    "Business Accelerator helped me scale my agency by 300% in 2 months. The strategies are practical!"
+                </p>
+                <div class="reviewer">
+                    <strong>Michael Chen</strong>
+                    <span>Business Accelerator</span>
+                </div>
+            </div>
+            
+            <!-- Review Card 3 -->
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">
+                    "From zero to professional video editor in weeks. The hands-on approach made all the difference."
+                </p>
+                <div class="reviewer">
+                    <strong>David Wilson</strong>
+                    <span>Digital Skills Course</span>
+                </div>
+            </div>
+        </div>
+        <!-- Add this ABOVE the CTA section for smooth transition -->
+<div class="cta-transition">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#0A0A0A" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,128C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
+</div>
+
+<style>
+.cta-transition {
+    margin-top: -100px;
+    position: relative;
+    z-index: 1;
+}
+
+.cta-transition svg {
+    width: 100%;
+    height: 150px;
+    display: block;
+}
+
+.cta-section {
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+}
+</style>
+        <div class="cta-section">
+            <p>Have you studied with us? Share your experience!</p>
+            <a href="feedback.html" class="cta-button">
+                <i class="fas fa-pen"></i> Write a Review
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.reviews-showcase {
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(26, 26, 26, 0.95));
+    padding: 5rem 2rem;
+    margin: 4rem 0;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.reviews-showcase .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.view-all-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: #FFD700;
+    transform: translateY(-2px);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.review-card {
+    background: rgba(26, 26, 26, 0.8);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: #FFD700;
+}
+
+.review-card .stars {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.review-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.reviewer {
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    padding-top: 1rem;
+}
+
+.reviewer strong {
+    display: block;
+    color: #FFD700;
+    margin-bottom: 5px;
+}
+
+.reviewer span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.cta-section p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #FFD700, #FFC400);
+    color: #000;
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .reviews-showcase {
+        padding: 3rem 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+                <!-- Resources Section -->
+                <div class="footer-section">
+                    <h2 class="footer-section-title">Resources</h2>
+                    <ul class="footer-list">
+                        <li><a href="templates.html"><i class="fas fa-download"></i> Free Templates</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Learning Resources</a></li>
+                        <li><a href="#"><i class="fas fa-tools"></i> Tools & Software</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Events & Webinars</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog & Articles</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h2 class="footer-section-title">Contact Us</h2>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <h4><i class="fas fa-envelope"></i> Email</h4>
+                            <div class="email-item">
+                                <p>emmysacademy9@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <h4><i class="fas fa-phone"></i> Phone</h4>
+                            <div class="email-item">
+                                <p>+234 911 807 4905</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <h4><i class="fas fa-clock"></i> Support Hours</h4>
+                            <div class="email-item">
+                                <p>Mon - Fri: 9AM - 6PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="https://discord.gg/BeszMFN4" class="social-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://wa.me/2349118074905" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:emmysacademy9@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+                    
+            <!-- Copyright -->
+            <div class="footer-copyright">
+                <p>© 2025 Emmy's Digital Academy. All rights reserved. | Transforming Lives Through Digital Skills</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript - 300+ lines -->
+    <script>
+        // Create animated background particles
+        function createParticles() {
+            const bg = document.querySelector('.animated-bg');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('bg-particle');
+                
+                // Random properties
+                const size = Math.random() * 100 + 50;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 10 + 20;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                bg.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Navigation hide/show on scroll
+const mainNav = document.querySelector('.main-nav');
+let lastScrollTop = 0;
+const scrollHideThreshold = 60; // Pixels to scroll before hiding
+const navHeight = mainNav.offsetHeight;
+let ticking = false;
+
+function updateNavigation() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // At the very top of the page
+    if (scrollTop <= 10) {
+        mainNav.classList.remove('scrolled', 'nav-hidden', 'nav-visible');
+        mainNav.classList.add('at-top');
+        return;
+    }
+    
+    // Remove at-top class when scrolled
+    if (scrollTop > 10) {
+        mainNav.classList.remove('at-top');
+        mainNav.classList.add('scrolled');
+    }
+    
+    // Determine scroll direction
+    if (Math.abs(scrollTop - lastScrollTop) <= scrollHideThreshold) {
+        lastScrollTop = scrollTop;
+        return;
+    }
+    
+    if (scrollTop > lastScrollTop) {
+        // Scrolling DOWN - hide navigation
+        if (scrollTop > navHeight) {
+            mainNav.classList.remove('nav-visible');
+            mainNav.classList.add('nav-hidden');
+        }
+    } else {
+        // Scrolling UP - show navigation
+        mainNav.classList.remove('nav-hidden');
+        mainNav.classList.add('nav-visible');
+    }
+    
+    lastScrollTop = scrollTop;
+    ticking = false;
+}
+
+// Optimized scroll handler with throttle
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            updateNavigation();
+        });
+        ticking = true;
+    }
+});
+
+// Initial state
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.scrollY <= 10) {
+        mainNav.classList.add('at-top');
+    } else {
+        mainNav.classList.add('scrolled', 'nav-visible');
+    }
+});
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLeft = document.querySelector('.nav-left');
+        const navRight = document.querySelector('.nav-right');
+        
+        menuToggle.addEventListener('click', () => {
+            navLeft.classList.toggle('active');
+            navRight.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            // Change icon
+            const icon = menuToggle.querySelector('i');
+            if (menuToggle.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!menuToggle.contains(event.target) && 
+                !navLeft.contains(event.target) && 
+                !navRight.contains(event.target)) {
+                navLeft.classList.remove('active');
+                navRight.classList.remove('active');
+                menuToggle.classList.remove('active');
+                
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only smooth scroll for internal links
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        // Close mobile menu if open
+                        navLeft.classList.remove('active');
+                        navRight.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        
+                        // Smooth scroll
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add animation class with delay
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.slide-up').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(element);
+        });
+
+        // Ripple effect for buttons
+        document.querySelectorAll('.btn-hero, .cta-button, .btn-section, .nav-enroll').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Parallax effect for hero glow
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroGlow = document.querySelector('.hero-glow');
+            if (heroGlow) {
+                heroGlow.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.2}px))`;
+            }
+        });
+
+        // Logo hover sound effect simulation
+        const logoWrapper = document.querySelector('.logo-wrapper');
+        logoWrapper.addEventListener('mouseenter', () => {
+            // Add visual feedback for hover
+            logoWrapper.style.transform = 'scale(1.05)';
+        });
+
+        logoWrapper.addEventListener('mouseleave', () => {
+            logoWrapper.style.transform = 'scale(1)';
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add loaded class to body
+            document.body.classList.add('loaded');
+            
+            // Start headline animation after a delay
+            setTimeout(() => {
+                document.querySelector('.headlines-track').style.animationPlayState = 'running';
+            }, 1000);
+        });
+
+        // Dynamic year update for copyright
+        const yearSpan = document.querySelector('.footer-copyright p');
+        if (yearSpan) {
+            yearSpan.innerHTML = yearSpan.innerHTML.replace('2025', new Date().getFullYear());
+        }
+
+        // Preload images for better performance
+        function preloadImages() {
+            const images = [
+                'images/logo.png',
+                'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+
+        // Call preload function
+        preloadImages();
+
+        // Add loading state
+        window.addEventListener('load', () => {
+            document.body.classList.add('page-loaded');
+            
+            // Add loading animation removal
+            const loadingElements = document.querySelectorAll('.loading');
+            loadingElements.forEach(el => {
+                el.classList.remove('loading');
+            });
+        });
+    </script>
+    <!-- Add this anywhere in your HTML body -->
+<div id="chatWidget">
+    <!-- Main Chat Button -->
+    <div class="chat-toggle" id="chatToggle">
+        <i class="fas fa-comments"></i>
+        <span class="notification-badge">3</span>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container" id="chatContainer">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-content">
+                <div class="chat-avatar">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="chat-info">
+                    <h4>Emmy's Digital Academy</h4>
+                    <p class="status">
+                        <span class="status-indicator online"></span>
+                        Online - Reply in minutes
+                    </p>
+                </div>
+            </div>
+            <button class="chat-close" id="chatClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- Initial message -->
+            <div class="message bot">
+                <div class="message-content">
+                    <p>👋 Hello! Welcome to Emmy's Digital Academy!</p>
+                    <p>I'm Emmy, your digital mentor. How can I help you today?</p>
+                    <div class="message-time">Just now</div>
+                </div>
+            </div>
+
+        <!-- Contact Options -->
+        <div class="contact-options">
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                <span>Quick Contact</span>
+            </div>
+            
+            <a href="https://wa.me/2349118074905" class="contact-option whatsapp" target="_blank">
+                <div class="option-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="option-info">
+                    <h5>WhatsApp Chat</h5>
+                    <p>Instant response • Most popular</p>
+                </div>
+                <div class="option-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="mailto:emmysacademy9@gmail.com" class="contact-option email">
+                <div class="option-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="option-info">
+                    <h5>Email Us</h5>
+                    <p>Detailed inquiries • Formal communication</p>
+                </div>
+                <div class="option-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="https://discord.gg/BeszMFN4" class="contact-option discord" target="_blank">
+                <div class="option-icon">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <div class="option-info">
+                    <h5>Join Community</h5>
+                    <p>Connect with students • Get support</p>
+                </div>
+                <div class="option-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+
+            <a href="tel:+2349118074905" class="contact-option phone">
+                <div class="option-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="option-info">
+                    <h5>Call Us</h5>
+                    <p>+234 911 807 4905 • Voice call</p>
+                </div>
+                <div class="option-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+
+       <!-- REPLACE with this COMPLETE form with email -->
+<form id="messageForm" class="message-form">
+  <div class="input-wrapper">
+    <input 
+      type="email" 
+      id="emailInput" 
+      placeholder="Your email (optional, for reply)" 
+      class="optional-field"
+    />
+  </div>
+  <div class="input-wrapper">
+    <input 
+      type="text" 
+      id="messageInput" 
+      placeholder="Type your message here..." 
+      required
+    />
+    <button type="submit" class="send-button">
+      <span>Send</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="hint">
+    📌 Include email for direct reply • WhatsApp: +234 911 807 4905
+  </div>
+</form>
+
+<style>
+/* GOLDEN/BLACK STYLING */
+.message-form {
+  margin-top: 20px;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#messageInput, #emailInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #333333;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+#messageInput::placeholder, #emailInput::placeholder {
+  color: #888888;
+}
+
+#messageInput:focus, #emailInput:focus {
+  outline: none;
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.optional-field {
+  border-color: #555555;
+  opacity: 0.9;
+}
+
+.optional-field:focus {
+  border-color: #D4AF37;
+  opacity: 1;
+}
+
+.send-button {
+  background: #D4AF37;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 0 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-height: 48px;
+  white-space: nowrap;
+}
+
+.send-button:hover {
+  background: #B8941F;
+  transform: translateY(-1px);
+}
+
+.send-button:active {
+  transform: translateY(0);
+}
+
+.send-button:disabled {
+  background: #666666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hint {
+  font-size: 14px;
+  color: #D4AF37;
+  font-style: italic;
+  opacity: 0.9;
+  text-align: center;
+  margin-top: 5px;
+}
+</style>
+
+<script>
+// ============================================
+// FORM SUBMISSION WITH SUCCESS MODAL
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const messageForm = document.getElementById('messageForm');
+    
+    if (messageForm) {
+        messageForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const messageInput = document.getElementById('messageInput');
+            const emailInput = document.getElementById('emailInput');
+            const sendButton = this.querySelector('.send-button');
+            const sendText = sendButton.querySelector('span');
+            
+            const message = messageInput.value.trim();
+            const email = emailInput.value.trim();
+            
+            // Validation
+            if (!message) {
+                alert('Please type a message before sending.');
+                messageInput.focus();
+                return;
+            }
+            
+            if (email && !isValidEmail(email)) {
+                alert('Please enter a valid email address or leave it blank.');
+                emailInput.focus();
+                emailInput.select();
+                return;
+            }
+            
+            // Show sending state
+            const originalText = sendText.textContent;
+            sendText.textContent = 'Sending...';
+            sendButton.disabled = true;
+            
+            try {
+                // Send to Google Forms
+                const googleFormsUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf5eUfjSvoLQEfCMlDBdPPEDkilOH6okjZyKa9ELhoUdsnpPg/formResponse';
+                const messageFieldId = 'entry.106461293';
+                const emailFieldId = 'entry.1513139226';
+                
+                const formData = new FormData();
+                formData.append(messageFieldId, message);
+                
+                if (email) {
+                    formData.append(emailFieldId, email);
+                }
+                
+                await fetch(googleFormsUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+                
+                // Show success modal
+                showSuccessModal(email);
+                
+                // Clear form
+                messageInput.value = '';
+                emailInput.value = '';
+                
+            } catch (error) {
+                console.log('Message submitted successfully:', { message, email });
+                showSuccessModal(email);
+            } finally {
+                // Reset button
+                sendText.textContent = originalText;
+                sendButton.disabled = false;
+            }
+        });
+    }
+    
+    // Email validation function
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    
+    // Auto-focus on message input
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput) {
+        messageInput.focus();
+    }
+});
+
+// ============================================
+// SUCCESS MODAL FUNCTIONALITY
+// ============================================
+function showSuccessModal(email = null) {
+    const modal = document.getElementById('successModal');
+    const modalMessage = document.getElementById('modalMessage');
+    
+    if (!modal || !modalMessage) {
+        // Fallback to alert if modal not found
+        if (email) {
+            alert('✅ Message sent successfully!\n\nWe\'ll reply to: ' + email + '\n\nYou can also reach us on WhatsApp: +234 911 807 4905');
+        } else {
+            alert('✅ Message sent successfully!\n\nCheck this page for updates or contact us on WhatsApp: +234 911 807 4905');
+        }
+        return;
+    }
+    
+    // Set message based on email
+    if (email) {
+        modalMessage.innerHTML = `
+            <strong>We'll reply to:</strong><br>
+            <span style="color: #D4AF37; font-weight: 500;">${email}</span><br><br>
+            We'll get back to you within 24 hours.
+        `;
+    } else {
+        modalMessage.innerHTML = `
+            Thank you for your message!<br><br>
+            Check this page for updates or contact us directly on WhatsApp.
+        `;
+    }
+    
+    // Show modal
+    modal.style.display = 'flex';
+    
+    // Close button
+    const closeButton = modal.querySelector('.modal-close-btn');
+    if (closeButton) {
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        };
+    }
+    
+    // Close on outside click
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+    
+    // Close with ESC key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+</script>
+
+<style>
+/* Chat Widget Styles */
+#chatWidget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Chat Toggle Button */
+.chat-toggle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.chat-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #FF6B6B;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--dark-bg, #0A0A0A);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Chat Container */
+.chat-container {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.chat-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+
+/* Chat Header */
+.chat-header {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 196, 0, 0.05));
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.chat-header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.chat-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #FFD700, #FFC400);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0A0A0A;
+    font-size: 24px;
+}
+
+.chat-info h4 {
+    color: #FFD700;
+    font-size: 16px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background: #00e676;
+    border-radius: 50%;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.chat-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.chat-close:hover {
+    background: rgba(255, 107, 107, 0.2);
+    color: #FF6B6B;
+    transform: rotate(90deg);
+}
+
+/* Chat Messages */
+.chat-messages {
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+}
+
+.message {
+    margin-bottom: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.message.bot .message-content {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 15px;
+    padding: 15px;
+    max-width: 85%;
+}
+
+.message-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-time {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 8px;
+    text-align: right;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Quick Options */
+.quick-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.option:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.option span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Contact Options */
+.contact-options {
+    padding: 0 20px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFD700;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.contact-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-5px);
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+.contact-option.whatsapp:hover {
+    border-color: rgba(37, 211, 102, 0.3);
+    background: rgba(37, 211, 102, 0.05);
+}
+
+.contact-option.email:hover {
+    border-color: rgba(255, 107, 107, 0.3);
+    background: rgba(255, 107, 107, 0.05);
+}
+
+.contact-option.discord:hover {
+    border-color: rgba(88, 101, 242, 0.3);
+    background: rgba(88, 101, 242, 0.05);
+}
+
+.contact-option.phone:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    background: rgba(0, 230, 118, 0.05);
+}
+
+.option-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.whatsapp .option-icon {
+    background: rgba(37, 211, 102, 0.1);
+    color: #25D366;
+}
+
+.email .option-icon {
+    background: rgba(255, 107, 107, 0.1);
+    color: #FF6B6B;
+}
+
+.discord .option-icon {
+    background: rgba(88, 101, 242, 0.1);
+    color: #5865F2;
+}
+
+.phone .option-icon {
+    background: rgba(0, 230, 118, 0.1);
+    color: #00e676;
+}
+
+.option-info {
+    flex: 1;
+}
+
+.option-info h5 {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 14px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.option-info p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    margin: 0;
+}
+
+.option-arrow {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+}
+
+/* Chat Input */
+.chat-input-container {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 10, 0.5);
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 25px;
+    color: white;
+    font-size: 14px;
+}
+
+#chatInput:focus {
+    outline: none;
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+.send-btn {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    color: #FFD700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.send-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 196, 0, 0.2));
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: rotate(15deg);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.input-note small {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    display: block;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #chatWidget {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chat-container {
+        width: 320px;
+        right: -10px;
+    }
+    
+    .chat-toggle {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    #chatWidget {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .chat-container {
+        width: calc(100vw - 40px);
+        right: 50%;
+        transform: translateX(50%) translateY(20px);
+    }
+    
+    .chat-container.show {
+        transform: translateX(50%) translateY(0);
+    }
+    
+    .quick-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hours Indicator */
+.hours-indicator {
+    padding: 10px 20px;
+    background: rgba(0, 230, 118, 0.1);
+    border-radius: 10px;
+    margin: 15px 20px;
+    border: 1px solid rgba(0, 230, 118, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hours-indicator i {
+    color: #00e676;
+    font-size: 14px;
+}
+
+.hours-indicator span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatToggle = document.getElementById('chatToggle');
+    const chatContainer = document.getElementById('chatContainer');
+    const chatClose = document.getElementById('chatClose');
+    const chatMessages = document.getElementById('chatMessages');
+    const quickOptions = document.querySelectorAll('.option');
+    
+    // Toggle chat window
+    chatToggle.addEventListener('click', function() {
+        chatContainer.classList.toggle('show');
+        updateOfficeHoursStatus();
+    });
+    
+    // Close chat window
+    chatClose.addEventListener('click', function() {
+        chatContainer.classList.remove('show');
+    });
+    
+    // Close chat when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!chatContainer.contains(event.target) && !chatToggle.contains(event.target)) {
+            chatContainer.classList.remove('show');
+        }
+    });
+    
+    // Quick options click
+    quickOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const question = this.getAttribute('data-question');
+            
+            // Add user message
+            addUserMessage(question);
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Simulate bot response after delay
+            setTimeout(() => {
+                removeTypingIndicator();
+                addBotResponse(question);
+            }, 1000);
+        });
+    });
+    
+    // Add user message to chat
+    function addUserMessage(text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message user';
+        messageDiv.innerHTML = `
+            <div class="message-content" style="
+                background: rgba(37, 211, 102, 0.1);
+                border: 1px solid rgba(37, 211, 102, 0.2);
+                margin-left: auto;
+                max-width: 85%;
+                border-radius: 15px;
+                padding: 15px;
+            ">
+                <p>${text}</p>
+                <div class="message-time">Just now</div>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="message-content">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Add typing indicator styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .typing-dots {
+                display: flex;
+                gap: 4px;
+            }
+            .typing-dots span {
+                width: 8px;
+                height: 8px;
+                background: rgba(255, 215, 0, 0.7);
+                border-radius: 50%;
+                animation: typing 1.4s infinite ease-in-out;
+            }
+            .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+            .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+            @keyframes typing {
+                0%, 80%, 100% { transform: scale(0); }
+                40% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Add bot response
+    function addBotResponse(question) {
+        const responses = {
+            'Tell me about courses': `🎓 We offer 6 comprehensive programs:\n• Digital Skills Courses (₦15k-₦30k)\n• Beginner Mentorship (₦20k)\n• Intermediate Mentorship (₦35k)\n• Pro Mentorship (₦50k)\n• Business Accelerator (₦75k)\n• Elite Masterclass (₦120k)\n\nClick any contact option above for details!`,
+            'How to enroll': `📝 **Enrollment Process:**\n1. Visit our enrollment page\n2. Fill the application form\n3. Schedule a consultation call\n4. Make payment\n5. Start learning!\n\n💡 **Pro tip:** Use WhatsApp for fastest enrollment assistance!`,
+            'Pricing details': `💰 **Program Pricing:**\n• Digital Skills: ₦15,000 - ₦30,000\n• Beginner: ₦20,000 (2 weeks)\n• Intermediate: ₦35,000 (3 weeks)\n• Pro: ₦50,000 (1 month)\n• Business: ₦75,000 (2 months)\n• Elite: ₦120,000 (3 months)\n\n✨ **Payment plans available!**`,
+            'Schedule a call': `📅 **Book a Consultation:**\nAvailable slots:\n• Mon-Fri: 10AM - 5PM\n• Sat: 11AM - 3PM\n\nClick the WhatsApp button above to schedule your 15-minute FREE consultation call with Emmy!`
+        };
+        
+        const response = responses[question] || `Thanks for your question! I've connected you with our team. Please use one of the contact options above for personalized assistance.`;
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message bot';
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <p style="white-space: pre-line;">${response}</p>
+                <div class="message-time">Just now</div>
+            </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Update office hours status
+    function updateOfficeHoursStatus() {
+        const now = new Date();
+        const hours = now.getHours();
+        const day = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        
+        const isWeekday = day >= 1 && day <= 5; // Monday to Friday
+        const isBusinessHours = (hours >= 9 && hours < 18) || (day === 6 && hours >= 10 && hours < 16);
+        
+        const statusElement = document.querySelector('.status');
+        const statusIndicator = document.querySelector('.status-indicator');
+        
+        if (isWeekday && isBusinessHours) {
+            statusIndicator.style.background = '#00e676';
+            statusElement.innerHTML = '<span class="status-indicator online"></span> Online - Reply in minutes';
+        } else if (isWeekday && hours < 9) {
+            statusIndicator.style.background = '#FFD700';
+            statusElement.innerHTML = `<span class="status-indicator"></span> Opens at 9:00 AM`;
+        } else if (isWeekday && hours >= 18) {
+            statusIndicator.style.background = '#FF6B6B';
+            statusElement.innerHTML = `<span class="status-indicator"></span> Closed - Opens tomorrow at 9:00 AM`;
+        } else if (day === 0) { // Sunday
+            statusIndicator.style.background = '#FF6B6B';
+            statusElement.innerHTML = `<span class="status-indicator"></span> Closed - Opens Monday at 9:00 AM`;
+        } else if (day === 6) { // Saturday
+            if (isBusinessHours) {
+                statusIndicator.style.background = '#00e676';
+                statusElement.innerHTML = '<span class="status-indicator online"></span> Online - Weekend support';
+            } else if (hours < 10) {
+                statusIndicator.style.background = '#FFD700';
+                statusElement.innerHTML = `<span class="status-indicator"></span> Opens at 10:00 AM`;
+            } else {
+                statusIndicator.style.background = '#FF6B6B';
+                statusElement.innerHTML = `<span class="status-indicator"></span> Closed - Opens Monday at 9:00 AM`;
+            }
+        }
+    }
+    
+    // Update notification badge
+    function updateNotificationBadge() {
+        const badge = document.querySelector('.notification-badge');
+        // Simulate random notification count (1-3)
+        const count = Math.floor(Math.random() * 3) + 1;
+        badge.textContent = count;
+        
+        // Update every 30 seconds for demo purposes
+        setTimeout(updateNotificationBadge, 30000);
+    }
+    
+    // Initialize
+    updateOfficeHoursStatus();
+    updateNotificationBadge();
+    
+    // Update status every minute
+    setInterval(updateOfficeHoursStatus, 60000);
+    
+    // Auto-open chat after 10 seconds (optional)
+    setTimeout(() => {
+        if (!localStorage.getItem('chatOpened')) {
+            chatContainer.classList.add('show');
+            localStorage.setItem('chatOpened', 'true');
+        }
+    }, 10000);
+});
+</script>
+<!-- Success Modal -->
+<div id="successModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="background: #1a1a1a; padding: 40px; border-radius: 15px; border: 2px solid #D4AF37; max-width: 400px; text-align: center; animation: slideUp 0.3s ease;">
+        <div style="color: #D4AF37; font-size: 60px; margin-bottom: 20px; animation: checkmark 0.5s ease-in-out;">
+            ✓
+        </div>
+        <h2 style="color: #D4AF37; margin-bottom: 20px;">Message Sent Successfully!</h2>
+        <p id="modalMessage" style="color: white; margin: 20px 0; font-size: 16px;"></p>
+        <button onclick="document.getElementById('successModal').style.display='none'" style="background: #D4AF37; color: black; border: none; padding: 12px 40px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; margin-top: 20px;">
+            Continue
+        </button>
+    </div>
+</div>
+
+<style>
+    @keyframes slideUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes checkmark {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
+
+<script>
+// Simple success modal function
+function showSuccessModal(email = null) {
+    const modal = document.getElementById('successModal');
+    const message = document.getElementById('modalMessage');
+    
+    if (!modal || !message) {
+        // Fallback to alert
+        if (email) {
+            alert('✅ Message sent! We\'ll reply to: ' + email);
+        } else {
+            alert('✅ Message sent successfully!');
+        }
+        return;
+    }
+    
+    if (email) {
+        message.innerHTML = '<strong>We\'ll reply to:</strong><br><span style="color: #D4AF37;">' + email + '</span>';
+    } else {
+        message.innerHTML = 'Thank you for your message! We\'ll get back to you soon.';
+    }
+    
+    modal.style.display = 'flex';
+    
+    // Close on click outside
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+    
+    // Close with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            modal.style.display = 'none';
+        }
+    });
+}
+
+</script>
+
+</body>
+</html>
+

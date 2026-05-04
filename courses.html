@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Courses - Emmy's Digital Academy</title>
+    <style>
+        /* Variables */
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #FFC400;
+            --black: #0A0A0A;
+            --dark-bg: #1A1A1A;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --glass-bg: rgba(255, 215, 0, 0.1);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Marquee Ticker */
+        .marquee-container {
+            background: linear-gradient(90deg, var(--black), var(--dark-bg));
+            border-bottom: 2px solid var(--gold);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .marquee-item span {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            position: relative;
+            animation: logoGlow 3s infinite alternate;
+            text-decoration: none;
+        }
+
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            100% { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+        }
+
+        .logo-full {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: revealText 2s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        @keyframes revealText {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--gold), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--gold);
+        }
+
+        .course-card.featured::before {
+            content: 'Featured';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .course-header {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+        }
+
+        .course-level {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--black);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .course-content {
+            padding: 2rem;
+        }
+
+        .course-category {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .course-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        /* Glass Golden Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 196, 0, 0.2));
+            border-color: var(--gold);
+            transform: scale(1.05);
+            box-shadow: var(--glow);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+            color: var(--black);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: var(--radius);
+            margin: 4rem auto;
+            max-width: 1000px;
+            border: 2px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter */
+        .newsletter-input {
+            padding: 0.8rem;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .category-filter {
+                gap: 0.5rem;
+            }
+
+            .category-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .marquee-item span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .course-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .cta-section {
+                padding: 3rem 1rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Performance Optimizations */
+        .course-grid {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 1200px;
+        }
+        
+        .course-card {
+            will-change: transform, box-shadow;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">
+                <span class="marquee-icon">🎯</span>
+                <span>Transform Your Skills | Limited Slots Available</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">💰</span>
+                <span>Earn in Dollars | Start Your Freelancing Journey</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🚀</span>
+                <span>1000+ Students Trained | Join Our Success Stories</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">EDA</a>
+                <div class="logo-full">Emmy's Digital Academy</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="mentorship.html" class="nav-link">Mentorship</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Master Digital Skills</h1>
+            <p class="hero-subtitle">Choose a skill. Start learning. Build your future with our industry-leading courses.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Courses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Students</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active">All Courses</button>
+            <button class="category-btn">Freelancing</button>
+            <button class="category-btn">Design</button>
+            <button class="category-btn">Marketing</button>
+            <button class="category-btn">Business</button>
+                    </div>
+
+        <!-- Course Grid -->
+        <div class="course-grid">
+            <!-- Course 1 -->
+            <div class="course-card featured">
+                <div class="course-header">
+                    <span class="course-level">Beginner - Advanced</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Freelancing</span>
+                    <h3>Freelancing Mastery</h3>
+                    <p>Learn how to build a powerful freelancing brand, find clients, write winning proposals, set your pricing, and scale your income from anywhere in the world.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 8 Weeks</span>
+                        <a href="freelancing-mastery.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <span class="course-level">Intermediate</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Business</span>
+                    <h3>Job Bidding & Proposal Writing</h3>
+                    <p>A complete guide to dominating Upwork, Fiverr, LinkedIn, and job-bidding platforms. Learn proposal psychology, client targeting, deal closing, and retention.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 4 Weeks</span>
+                        <a href="job-bidding-proposal-writing.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <span class="course-level">Beginner</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Business</span>
+                    <h3>Virtual Assistance Training</h3>
+                    <p>Master the skills needed to become a high-earning virtual assistant: communication, email handling, scheduling, task automation, and client management.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 4 Weeks</span>
+                        <a href="virtual-assistance-training.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <span class="course-level">Intermediate</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Marketing</span>
+                    <h3>Social Media Management</h3>
+                    <p>Learn how to grow brands, create content strategies, manage pages, run ads, engage audiences, and deliver real business results through social media.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 4 Weeks</span>
+                        <a href="social-media-management.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="course-card featured">
+                <div class="course-header">
+                    <span class="course-level">Beginner - Pro</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Design</span>
+                    <h3>Graphics Design (Beginner to Pro)</h3>
+                    <p>Learn Photoshop, Canva, design theory, branding, and real-project design workflows. Perfect for creatives and aspiring brand designers.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 4 Weeks</span>
+                        <a href="graphics-design.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <span class="course-level">All Levels</span>
+                </div>
+                <div class="course-content">
+                    <span class="course-category">Marketing</span>
+                    <h3>Content Creation & Monetization</h3>
+                    <p>Learn scripting, editing, niche selection, brand building, and monetization strategies for YouTube, TikTok, Instagram, and more.</p>
+                    <div class="course-meta">
+                        <span class="course-duration">⏱️ 4 Weeks</span>
+                        <a href="content-creation-monetization.html" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Add this after your courses section header but before the courses grid -->
+<div class="pricing-cta fade-in">
+    <div class="cta-wrapper">
+        <div class="pricing-sparkle">
+            <i class="fas fa-star"></i>
+        </div>
+        <h3 class="pricing-title">
+            Ready to Invest in Your Future?
+            <span class="title-glow"></span>
+        </h3>
+        <p class="pricing-subtitle">
+            Get transparent pricing for all our courses and mentorship programs
+        </p>
+        <a href="pricing.html" class="btn-pricing">
+            <span class="btn-content">
+                <i class="fas fa-gem"></i>
+                <span>View All Pricing Plans</span>
+            </span>
+            <span class="btn-glow"></span>
+            <span class="btn-sparkle">✨</span>
+        </a>
+        <div class="pricing-extra">
+            <div class="extra-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Money-Back Guarantee</span>
+            </div>
+            <div class="extra-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Certificate Included</span>
+            </div>
+            <div class="extra-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Income-Focused</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add these styles to your CSS -->
+<style>
+    /* Pricing CTA Section */
+    .pricing-cta {
+        background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 42, 42, 0.9));
+        padding: 50px 30px;
+        border-radius: 25px;
+        margin: 40px 0 60px;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 
+            var(--glass-shadow),
+            inset 0 0 60px rgba(255, 215, 0, 0.05);
+        transition: all var(--transition-medium);
+    }
+
+    .pricing-cta:hover {
+        border-color: rgba(255, 215, 0, 0.35);
+        box-shadow: 
+            0 20px 50px rgba(0, 0, 0, 0.5),
+            inset 0 0 80px rgba(255, 215, 0, 0.08);
+        transform: translateY(-5px);
+    }
+
+    .cta-wrapper {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .pricing-sparkle {
+        font-size: 2.5rem;
+        color: var(--primary-gold);
+        margin-bottom: 25px;
+        text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        animation: sparklePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes sparklePulse {
+        0%, 100% { 
+            transform: scale(1); 
+            opacity: 0.8;
+        }
+        50% { 
+            transform: scale(1.1); 
+            opacity: 1;
+        }
+    }
+
+    .pricing-title {
+        font-size: 2.2rem;
+        color: var(--primary-gold);
+        margin-bottom: 15px;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+
+    .title-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 70%);
+        filter: blur(20px);
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    .pricing-subtitle {
+        font-size: 1.2rem;
+        color: var(--light-gold);
+        margin-bottom: 35px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.8;
+        opacity: 0.9;
+    }
+
+    /* Pricing Button Styles */
+    .btn-pricing {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all var(--transition-medium);
+        background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+        padding: 3px;
+        margin-bottom: 35px;
+        box-shadow: 
+            0 15px 35px rgba(184, 134, 11, 0.4),
+            0 0 30px rgba(255, 215, 0, 0.2);
+    }
+
+    .btn-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+        color: var(--rich-black);
+        padding: 18px 45px;
+        border-radius: 50px;
+        font-weight: 800;
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+        position: relative;
+        z-index: 2;
+        transition: all var(--transition-medium);
+    }
+
+    .btn-pricing:hover .btn-content {
+        background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        transform: scale(0.98);
+    }
+
+    .btn-pricing:hover {
+        transform: translateY(-5px);
+        box-shadow: 
+            0 25px 50px rgba(184, 134, 11, 0.6),
+            0 0 40px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, 
+            transparent 30%, 
+            rgba(255, 255, 255, 0.1) 50%, 
+            transparent 70%);
+        transform: rotate(45deg);
+        transition: all 0.8s ease;
+        opacity: 0;
+    }
+
+    .btn-pricing:hover .btn-glow {
+        opacity: 1;
+        animation: btnShine 0.8s ease;
+    }
+
+    @keyframes btnShine {
+        0% { transform: rotate(45deg) translateX(-100%); }
+        100% { transform: rotate(45deg) translateX(100%); }
+    }
+
+    .btn-sparkle {
+        position: absolute;
+        font-size: 1.5rem;
+        opacity: 0;
+        transition: all var(--transition-medium);
+    }
+
+    .btn-pricing:hover .btn-sparkle {
+        animation: sparkleFly 1s ease-out forwards;
+    }
+
+    @keyframes sparkleFly {
+        0% {
+            opacity: 0;
+            transform: translate(0, 0) scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-20px, -20px) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-40px, -40px) scale(0);
+        }
+    }
+
+    .pricing-extra {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .extra-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 215, 0, 0.08);
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 215, 0, 0.15);
+        backdrop-filter: blur(10px);
+        transition: all var(--transition-fast);
+    }
+
+    .extra-item:hover {
+        background: rgba(255, 215, 0, 0.12);
+        border-color: var(--primary-gold);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(184, 134, 11, 0.2);
+    }
+
+    .extra-item i {
+        color: var(--primary-gold);
+        font-size: 1.1rem;
+    }
+
+    .extra-item span {
+        color: var(--light-text);
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    /* Background Elements */
+    .pricing-cta::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite alternate;
+    }
+
+    .pricing-cta::after {
+        content: '';
+        position: absolute;
+        bottom: -80px;
+        left: -80px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(184, 134, 11, 0.08), transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translate(30px, 30px) scale(1.1);
+            opacity: 0.4;
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .pricing-cta {
+            padding: 40px 20px;
+            margin: 30px 0 50px;
+        }
+        
+        .pricing-title {
+            font-size: 1.8rem;
+        }
+        
+        .pricing-subtitle {
+            font-size: 1.1rem;
+            padding: 0 10px;
+        }
+        
+        .btn-content {
+            padding: 16px 35px;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-extra {
+            gap: 15px;
+        }
+        
+        .extra-item {
+            padding: 10px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pricing-title {
+            font-size: 1.6rem;
+        }
+        
+        .btn-content {
+            padding: 14px 30px;
+            font-size: 1rem;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .pricing-extra {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .extra-item {
+            width: 100%;
+            max-width: 250px;
+            justify-content: center;
+        }
+    }
+
+    /* Ripple Effect for Button */
+    .btn-pricing {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-pricing .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s linear;
+    }
+
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+</style>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Transform Your Career?</h2>
+            <p>Join thousands of successful digital professionals who started their journey with EDA. Your future in the digital economy begins here.</p>
+            <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Empowering aspiring digital professionals with practical, high-demand skills for the global digital economy.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="mentorship.html">Mentorship</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div> 
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: emmysacademy9@gmail.com</p>
+                <p>WhatsApp: +2349118074905</p>
+                <p>Discord: https://discord.gg/BeszMFN4</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new courses and offers.</p>
+                <input type="email" placeholder="Your Email" class="newsletter-input">
+                <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Duplicate marquee for continuous scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const marquee = document.querySelector('.marquee');
+            if (marquee) {
+                marquee.innerHTML += marquee.innerHTML;
+            }
+            
+            // Category filter functionality
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.textContent;
+                    
+                    // Simple filtering logic (can be expanded)
+                    if (category === 'All Courses') {
+                        document.querySelectorAll('.course-card').forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else {
+                        document.querySelectorAll('.course-card').forEach(card => {
+                            const categoryText = card.querySelector('.course-category').textContent.toLowerCase();
+                            if (categoryText.includes(category.toLowerCase())) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Add scroll animations for course cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+            
+            // Animate course cards
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

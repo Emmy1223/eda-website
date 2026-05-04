@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates | Emmy's Digital Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --medium-gold: #DAA520;
+            --glow-gold: #FFEC8B;
+            
+            --rich-black: #0A0A0A;
+            --deep-black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #3A3A3A;
+            --soft-gray: #4A4A4A;
+            
+            --emerald: #00e676;
+            --royal-blue: #1a237e;
+            --electric-blue: #283593;
+            --purple: #764ba2;
+            
+            --white: #F5F5F5;
+            --off-white: #E8E8E8;
+            --light-text: #CCCCCC;
+            --medium-text: #999999;
+            
+            --glass-bg: rgba(26, 26, 26, 0.85);
+            --glass-border: rgba(255, 215, 0, 0.25);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gold-glow: 0 0 25px rgba(255, 215, 0, 0.3);
+            --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            
+            --transition-fast: 0.3s ease;
+            --transition-medium: 0.5s ease;
+            --transition-slow: 0.8s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--rich-black);
+            color: var(--white);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(184, 134, 11, 0.02) 0%, transparent 50%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .template-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 215, 0, 0.02) 20px,
+                    rgba(255, 215, 0, 0.02) 21px
+                );
+            z-index: -1;
+            pointer-events: none;
+            animation: patternMove 40s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(20px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-decoration: none;
+            text-shadow: var(--gold-glow);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            transition: width var(--transition-medium);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--primary-gold);
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Hero Section */
+        .hero {
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05), transparent 60%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            position: relative;
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            animation: titlePulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            0% {
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+            }
+            100% {
+                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
+            }
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--light-gold);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .btn-hero {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all var(--transition-medium);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-hero:hover::before {
+            left: 100%;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(184, 134, 11, 0.5);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .categories h2 {
+            font-size: 2.8em;
+            color: var(--primary-gold);
+            margin-bottom: 50px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+        }
+
+        .categories h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .category-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid var(--glass-border);
+            color: var(--light-text);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--primary-gold);
+            transform: translateY(-3px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.2);
+        }
+
+        /* Templates Section */
+        .templates {
+            padding: 60px 0;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 30px;
+            margin-bottom: 60px;
+            box-shadow: var(--glass-shadow);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .templates h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: var(--primary-gold);
+            margin-bottom: 60px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        .templates h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
+        }
+
+        .template-card {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all var(--transition-medium);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .template-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 30px 60px rgba(184, 134, 11, 0.3),
+                inset 0 0 40px rgba(255, 215, 0, 0.05);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rich-black);
+            font-size: 3.5em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .template-content {
+            padding: 30px;
+        }
+
+        .template-card h3 {
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+
+        .template-card p {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+
+        .btn-template {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition-medium);
+            box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-template::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-template:hover::before {
+            left: 100%;
+        }
+
+        .btn-template:hover {
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+        }
+
+        .template-category {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--primary-gold);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 60px 0;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 30px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .instructions h2 {
+            text-align: center;
+            font-size: 2.8em;
+            color: var(--primary-gold);
+            margin-bottom: 50px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        .instructions h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .instructions ul {
+            max-width: 900px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .instructions li {
+            background: rgba(255, 215, 0, 0.08);
+            padding: 25px 35px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-gold);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            transition: all var(--transition-medium);
+            font-size: 1.15em;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .instructions li strong {
+            color: var(--primary-gold);
+        }
+
+        .instructions li:hover {
+            transform: translateX(15px);
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(58, 58, 58, 0.9));
+            color: var(--white);
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08), transparent 50%);
+            animation: ctaGlow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes ctaGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            color: var(--primary-gold);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--light-gold);
+            line-height: 1.8;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all var(--transition-medium);
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .cta .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .cta .btn:hover::before {
+            left: 100%;
+        }
+
+        .cta .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(184, 134, 11, 0.5);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            color: var(--white);
+            padding: 50px 20px;
+            margin-top: 60px;
+            border-top: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 4em;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-gold), var(--light-gold), var(--primary-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer p {
+            color: var(--light-gold);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .footer-copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            color: var(--medium-text);
+            font-size: 0.95em;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .template-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1em;
+            }
+            
+            .categories h2,
+            .templates h2,
+            .instructions h2,
+            .cta h2 {
+                font-size: 2.2em;
+            }
+            
+            .category-list {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructions li {
+                padding: 20px;
+                font-size: 1.05em;
+            }
+            
+            .footer-logo {
+                font-size: 3em;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+            border-radius: 5px;
+            border: 2px solid var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Selection */
+        ::selection {
+            background-color: var(--primary-gold);
+            color: var(--rich-black);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Pattern -->
+    <div class="template-pattern"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar fade-in">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html">EDA</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="templates.html" class="nav-link active">Templates</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="enroll.html" class="btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="container">
+            <h1>Download & Use Our Ready-Made Templates</h1>
+            <p>Accelerate your projects with professionally designed templates for freelancing, social media, content creation, and branding. Save time and deliver professional results instantly.</p>
+            <a href="#templates" class="btn-hero">
+                <i class="fas fa-download"></i>
+                <span>Browse All Templates</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories fade-in">
+        <div class="container">
+            <h2>Template Categories</h2>
+            <div class="category-list">
+                <button class="category-btn active" data-filter="all">All Templates</button>
+                <button class="category-btn" data-filter="freelancing">Freelancing</button>
+                <button class="category-btn" data-filter="va">Virtual Assistance</button>
+                <button class="category-btn" data-filter="social">Social Media</button>
+                <button class="category-btn" data-filter="graphics">Graphics Design</button>
+                <button class="category-btn" data-filter="content">Content Creation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="templates fade-in">
+        <div class="container">
+            <h2>Our Premium Templates</h2>
+            <div class="template-grid">
+                
+                <!-- Freelance Proposal Template -->
+                <div class="template-card slide-up" data-category="freelancing">
+                    <div class="template-category">Freelancing</div>
+                    <div class="template-preview">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Freelance Proposal Template</h3>
+                        <p>Professional proposal template to win clients on Upwork, Fiverr, and LinkedIn. Includes pricing tables, project timelines, and client questionnaires.</p>
+                        <a href="templates/freelance-proposal.pdf" class="btn-template" download>
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Download PDF</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- VA Scheduling Template -->
+                <div class="template-card slide-up" data-category="va" style="animation-delay: 0.1s">
+                    <div class="template-category">Virtual Assistance</div>
+                    <div class="template-preview">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>VA Scheduling Template</h3>
+                        <p>Organize client tasks, meetings, and deadlines efficiently with this comprehensive virtual assistant scheduling system.</p>
+                        <a href="templates/va-schedule.xlsx" class="btn-template" download>
+                            <i class="fas fa-file-excel"></i>
+                            <span>Download Excel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Media Post Template -->
+                <div class="template-card slide-up" data-category="social" style="animation-delay: 0.2s">
+                    <div class="template-category">Social Media</div>
+                    <div class="template-preview">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Social Media Post Template</h3>
+                        <p>Create stunning posts for Instagram, Facebook, and TikTok with pre-designed Canva templates and content calendars.</p>
+                        <a href="templates/social-post.canva" class="btn-template" download>
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Download Canva</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Logo Design Template -->
+                <div class="template-card slide-up" data-category="graphics" style="animation-delay: 0.3s">
+                    <div class="template-category">Graphics Design</div>
+                    <div class="template-preview">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Logo Design Template</h3>
+                        <p>Professional logo template to kickstart brand identity projects. Includes vector files and brand style guide.</p>
+                        <a href="templates/logo-template.ai" class="btn-template" download>
+                            <i class="fas fa-drafting-compass"></i>
+                            <span>Download AI</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Video Script Template -->
+                <div class="template-card slide-up" data-category="content" style="animation-delay: 0.4s">
+                    <div class="template-category">Content Creation</div>
+                    <div class="template-preview">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Video Script Template</h3>
+                        <p>Plan, structure, and script your content for YouTube, TikTok, or Instagram. Includes hooks, CTAs, and SEO optimization.</p>
+                        <a href="templates/video-script.docx" class="btn-template" download>
+                            <i class="fas fa-file-word"></i>
+                            <span>Download DOCX</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Client Contract Template -->
+                <div class="template-card slide-up" data-category="freelancing" style="animation-delay: 0.5s">
+                    <div class="template-category">Freelancing</div>
+                    <div class="template-preview">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Client Contract Template</h3>
+                        <p>Professional freelance contract with payment terms, deliverables, and legal protection for your projects.</p>
+                        <a href="templates/client-contract.pdf" class="btn-template" download>
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Download PDF</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Content Calendar Template -->
+                <div class="template-card slide-up" data-category="content" style="animation-delay: 0.6s">
+                    <div class="template-category">Content Creation</div>
+                    <div class="template-preview">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Content Calendar Template</h3>
+                        <p>Monthly content planning calendar with scheduling, platform optimization, and performance tracking.</p>
+                        <a href="templates/content-calendar.xlsx" class="btn-template" download>
+                            <i class="fas fa-file-excel"></i>
+                            <span>Download Excel</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Invoice Template -->
+                <div class="template-card slide-up" data-category="freelancing" style="animation-delay: 0.7s">
+                    <div class="template-category">Freelancing</div>
+                    <div class="template-preview">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="template-content">
+                        <h3>Professional Invoice Template</h3>
+                        <p>Create professional invoices with payment tracking, tax calculations, and client billing information.</p>
+                        <a href="templates/invoice-template.pdf" class="btn-template" download>
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Download PDF</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions fade-in">
+        <div class="container">
+            <h2>How to Use Our Templates</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-download" style="color: var(--primary-gold); font-size: 1.5em;"></i>
+                    <strong>Download</strong> the template in your preferred format (PDF, Canva, Excel, Word)
+                </li>
+                <li>
+                    <i class="fas fa-paint-brush" style="color: var(--primary-gold); font-size: 1.5em;"></i>
+                    <strong>Customize</strong> it according to your brand colors, logo, and specific project needs
+                </li>
+                <li>
+                    <i class="fas fa-briefcase" style="color: var(--primary-gold); font-size: 1.5em;"></i>
+                    <strong>Use</strong> for client work, personal projects, or practice exercises to build your portfolio
+                </li>
+                <li>
+                    <i class="fas fa-rocket" style="color: var(--primary-gold); font-size: 1.5em;"></i>
+                    <strong>Combine</strong> with our full courses for maximum results and skill development
+                </li>
+                <li>
+                    <i class="fas fa-chart-line" style="color: var(--primary-gold); font-size: 1.5em;"></i>
+                    <strong>Scale</strong> your business by saving hours of work with our professional templates
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta fade-in">
+        <div class="container">
+            <h2>Want More Premium Templates?</h2>
+            <p>Enroll in our full courses to access premium templates, resources, project-ready files, and step-by-step guidance to accelerate your skills and income.</p>
+            <a href="courses.html" class="btn">
+                <i class="fas fa-graduation-cap"></i>
+                <span>View All Courses</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">EDA</div>
+            <p>Emmy's Digital Academy</p>
+            <p>Learn the skills. Build the future.</p>
+            <div class="footer-copyright">
+                © 2025 Emmy's Digital Academy. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Template Filtering Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.category-btn');
+            const cards = document.querySelectorAll('.template-card');
+            
+            // Add click event to category buttons
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Show/hide cards based on filter
+                    cards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0) scale(1)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px) scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Smooth scroll for hero button
+            document.querySelector('.btn-hero').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('#templates').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Add hover effects to template cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all var(--transition-medium)';
+                });
+            });
+            
+            // Add download click effects
+            document.querySelectorAll('.btn-template').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.4);
+                        transform: scale(0);
+                        animation: rippleEffect 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Add ripple animation style
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rippleEffect {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Page load animation
+            window.addEventListener('load', () => {
+                document.body.classList.add('loaded');
+                
+                // Start pattern animation
+                const pattern = document.querySelector('.template-pattern');
+                if (pattern) {
+                    pattern.style.animationPlayState = 'running';
+                }
+                
+                // Stagger template card animations
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+            
+            // Update copyright year
+            const copyrightElement = document.querySelector('.footer-copyright');
+            if (copyrightElement) {
+                const currentYear = new Date().getFullYear();
+                copyrightElement.innerHTML = copyrightElement.innerHTML.replace('2025', currentYear);
+            }
+        });
+    </script>
+</body>
+</html>

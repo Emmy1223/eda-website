@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentorship Program — Emmy's Digital Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --medium-gold: #DAA520;
+            --glow-gold: #FFEC8B;
+            
+            --rich-black: #0A0A0A;
+            --deep-black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #3A3A3A;
+            --soft-gray: #4A4A4A;
+            
+            --emerald: #00e676;
+            --royal-blue: #1a237e;
+            --electric-blue: #283593;
+            --purple: #764ba2;
+            
+            --white: #F5F5F5;
+            --off-white: #E8E8E8;
+            --light-text: #CCCCCC;
+            --medium-text: #999999;
+            
+            --glass-bg: rgba(26, 26, 26, 0.85);
+            --glass-border: rgba(255, 215, 0, 0.25);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gold-glow: 0 0 25px rgba(255, 215, 0, 0.3);
+            --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            
+            --transition-fast: 0.3s ease;
+            --transition-medium: 0.5s ease;
+            --transition-slow: 0.8s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--rich-black);
+            color: var(--white);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(184, 134, 11, 0.03) 0%, transparent 50%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .mentor-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255, 215, 0, 0.02) 0px,
+                    rgba(255, 215, 0, 0.02) 1px,
+                    transparent 1px,
+                    transparent 40px
+                );
+            z-index: -1;
+            pointer-events: none;
+            animation: patternSlide 30s linear infinite;
+        }
+
+        @keyframes patternSlide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        /* Navigation */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-shadow: var(--gold-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+            padding: 0.8rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            transition: width var(--transition-medium);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05), transparent 60%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            animation: titlePulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            0% {
+                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+            }
+            100% {
+                filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--light-gold);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 215, 0, 0.08);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
+            min-width: 150px;
+            transition: all var(--transition-medium);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: -80px auto 4rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .section-subtitle {
+            color: var(--light-text);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Program Overview */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .overview-card {
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: all var(--transition-medium);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .overview-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .overview-card:hover::before {
+            opacity: 1;
+        }
+
+        .overview-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-gold);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            transition: transform var(--transition-medium);
+        }
+
+        .overview-card:hover .overview-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .overview-card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .overview-card p {
+            color: var(--light-text);
+            line-height: 1.7;
+        }
+
+        /* Mentorship Tracks */
+        .tracks-section {
+            margin-bottom: 5rem;
+        }
+
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 3rem;
+        }
+
+        .track-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition-medium);
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .track-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .track-card.featured {
+            border: 2px solid var(--primary-gold);
+            transform: scale(1.02);
+        }
+
+        .track-card.featured:hover {
+            transform: scale(1.02) translateY(-15px);
+        }
+
+        .track-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 10px 40px;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .track-header {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(58, 58, 58, 0.9));
+            color: var(--white);
+            padding: 2.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .track-level {
+            font-size: 0.9rem;
+            color: var(--primary-gold);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .track-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .track-price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--emerald);
+            text-shadow: 0 0 25px rgba(0, 230, 118, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .track-content {
+            padding: 2.5rem;
+        }
+
+        .track-content > p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .track-duration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-gold);
+            margin: 1.5rem 0;
+            font-weight: 600;
+        }
+
+        .track-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .track-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--light-text);
+            font-size: 1.05rem;
+        }
+
+        .track-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-check {
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all var(--transition-medium);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.5);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* How It Works */
+        .timeline {
+            max-width: 800px;
+            margin: 4rem auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-gold), var(--dark-gold), transparent);
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-medium);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: var(--light-text);
+            line-height: 1.8;
+        }
+
+        .timeline-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            border: 3px solid var(--rich-black);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(58, 58, 58, 0.9));
+            color: var(--white);
+            padding: 4rem;
+            border-radius: 25px;
+            text-align: center;
+            margin: 5rem 0;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05), transparent 50%);
+            animation: ctaGlow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes ctaGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.4;
+            }
+        }
+
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-gold);
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--light-gold);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--light-gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            color: var(--medium-text);
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .tracks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .track-card.featured {
+                transform: none;
+            }
+            
+            .track-card.featured:hover {
+                transform: translateY(-15px);
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 70px;
+            }
+            
+            .timeline-number {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+                padding: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+            border-radius: 5px;
+            border: 2px solid var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Selection */
+        ::selection {
+            background-color: var(--primary-gold);
+            color: var(--rich-black);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Pattern -->
+    <div class="mentor-pattern"></div>
+
+    <!-- Navigation -->
+    <header class="header fade-in">
+        <div class="nav-container">
+            <a href="index.html" class="logo">EDA</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="courses.html">Courses</a>
+                <a href="#mentorship">Mentorship</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="hero-content">
+            <h1>Personalized Mentorship Program</h1>
+            <p class="hero-subtitle">Where passion meets structure. Transform raw talent into professional mastery with our guided mentorship program designed for real-world success.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Mentees Trained</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1:1</span>
+                    <span class="stat-label">Personal Sessions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Program Overview -->
+        <section class="section-header fade-in">
+            <h2>What You'll Experience</h2>
+            <p class="section-subtitle">Our mentorship program combines personalized guidance with practical, hands-on learning for measurable growth.</p>
+        </section>
+
+        <div class="overview-grid">
+            <div class="overview-card slide-up">
+                <div class="overview-icon">🎯</div>
+                <h3>Personalized Guidance</h3>
+                <p>One-on-one sessions tailored to your specific goals, skills, and learning pace.</p>
+            </div>
+            <div class="overview-card slide-up" style="animation-delay: 0.2s">
+                <div class="overview-icon">💻</div>
+                <h3>Real Projects</h3>
+                <p>Work on actual client-style projects that build your portfolio and confidence.</p>
+            </div>
+            <div class="overview-card slide-up" style="animation-delay: 0.4s">
+                <div class="overview-icon">🚀</div>
+                <h3>Career Growth</h3>
+                <p>Strategic roadmap for freelancing, job placement, or business development.</p>
+            </div>
+            <div class="overview-card slide-up" style="animation-delay: 0.6s">
+                <div class="overview-icon">📈</div>
+                <h3>Accountability</h3>
+                <p>Weekly check-ins and progress tracking to keep you motivated and on track.</p>
+            </div>
+        </div>
+
+        <!-- Mentorship Tracks -->
+        <section class="tracks-section">
+            <div class="section-header fade-in">
+                <h2>Choose Your Mentorship Track</h2>
+                <p class="section-subtitle">Select the program that matches your current level and ambitions.</p>
+            </div>
+
+            <div class="tracks-grid">
+                <!-- Beginner Track -->
+                <div class="track-card slide-up">
+                    <div class="track-header">
+                        <div class="track-level">BEGINNER TRACK</div>
+                        <div class="track-name">Starter Mentorship</div>
+                        <div class="track-price">₦20,000</div>
+                    </div>
+                    <div class="track-content">
+                        <p>Perfect for students and beginners who need structured guidance to build a solid foundation in digital skills.</p>
+                        <div class="track-duration">
+                            <i class="far fa-clock"></i>
+                            <span>Duration: 2 Weeks</span>
+                        </div>
+                        <ul class="track-features">
+                            <li><span class="feature-check">✓</span> 4 Personal Sessions</li>
+                            <li><span class="feature-check">✓</span> Fundamental Training</li>
+                            <li><span class="feature-check">✓</span> Mini Weekly Tasks</li>
+                            <li><span class="feature-check">✓</span> Beginner-Friendly Feedback</li>
+                            <li><span class="feature-check">✓</span> Access to Starter Resources</li>
+                        </ul>
+                        <a href="starter-mentorship.html" class="btn">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Join Starter Program</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Intermediate Track -->
+                <div class="track-card featured slide-up" style="animation-delay: 0.2s">
+                    <div class="track-badge">Most Popular</div>
+                    <div class="track-header">
+                        <div class="track-level">INTERMEDIATE TRACK</div>
+                        <div class="track-name">Growth Mentorship</div>
+                        <div class="track-price">₦40,000</div>
+                    </div>
+                    <div class="track-content">
+                        <p>Designed for learners who know the basics and want to upgrade skills, build confidence, and prepare for freelancing.</p>
+                        <div class="track-duration">
+                            <i class="far fa-clock"></i>
+                            <span>Duration: 3 Weeks</span>
+                        </div>
+                        <ul class="track-features">
+                            <li><span class="feature-check">✓</span> 6-9 Personal Sessions</li>
+                            <li><span class="feature-check">✓</span> Portfolio Building Guidance</li>
+                            <li><span class="feature-check">✓</span> Mid-Level Project Simulations</li>
+                            <li><span class="feature-check">✓</span> Detailed Performance Reviews</li>
+                            <li><span class="feature-check">✓</span> Freelancing Preparation</li>
+                        </ul>
+                        <a href="growth-mentorship.html" class="btn">
+                            <i class="fas fa-rocket"></i>
+                            <span>Start Growth Program</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Advanced Track -->
+                <div class="track-card slide-up" style="animation-delay: 0.4s">
+                    <div class="track-header">
+                        <div class="track-level">ADVANCED TRACK</div>
+                        <div class="track-name">Pro Mentorship</div>
+                        <div class="track-price">₦50,000</div>
+                    </div>
+                    <div class="track-content">
+                        <p>For creators ready to transform skills, build a personal brand, land clients, and scale towards real income.</p>
+                        <div class="track-duration">
+                            <i class="far fa-clock"></i>
+                            <span>Duration: 1 Month</span>
+                        </div>
+                        <ul class="track-features">
+                            <li><span class="feature-check">✓</span> 12+ Personal Sessions</li>
+                            <li><span class="feature-check">✓</span> Real Client-Style Projects</li>
+                            <li><span class="feature-check">✓</span> Portfolio Optimization</li>
+                            <li><span class="feature-check">✓</span> Ongoing WhatsApp Support</li>
+                            <li><span class="feature-check">✓</span> Career & Earning Strategy</li>
+                        </ul>
+                        <a href="pro-mentorship.html" class="btn">
+                            <i class="fas fa-gem"></i>
+                            <span>Apply for Pro Program</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section-header fade-in">
+            <h2>How Our Mentorship Works</h2>
+            <p class="section-subtitle">A structured process designed for maximum learning and growth</p>
+        </section>
+
+        <div class="timeline">
+            <div class="timeline-item slide-up">
+                <div class="timeline-number">1</div>
+                <div class="timeline-content">
+                    <h3>Initial Assessment</h3>
+                    <p>We evaluate your current skills, goals, and learning style to create a personalized mentorship plan.</p>
+                </div>
+            </div>
+            <div class="timeline-item slide-up" style="animation-delay: 0.2s">
+                <div class="timeline-number">2</div>
+                <div class="timeline-content">
+                    <h3>Weekly Sessions</h3>
+                    <p>Regular 45-60 minute sessions via Zoom/Google Meet with hands-on practice and real-time feedback.</p>
+                </div>
+            </div>
+            <div class="timeline-item slide-up" style="animation-delay: 0.4s">
+                <div class="timeline-number">3</div>
+                <div class="timeline-content">
+                    <h3>Practical Assignments</h3>
+                    <p>Real-world tasks and projects that build your portfolio and develop market-ready skills.</p>
+                </div>
+            </div>
+            <div class="timeline-item slide-up" style="animation-delay: 0.6s">
+                <div class="timeline-number">4</div>
+                <div class="timeline-content">
+                    <h3>Progress Review</h3>
+                    <p>Regular check-ins to track progress, adjust strategies, and ensure you're on the right path.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section slide-up" style="animation-delay: 0.8s">
+            <h2>Ready to Transform Your Career?</h2>
+            <p>Join hundreds of successful digital professionals who started with EDA mentorship. Your journey to mastery begins here.</p>
+            <div class="cta-buttons">
+                <a href="mailto:emmysacademy9@gmail.com" class="btn">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email Us Now</span>
+                </a>
+                <a href="contact.html" class="btn btn-secondary">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Schedule a Call</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Transforming aspiring professionals into digital masters through personalized mentorship.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                    <li><a href="#mentorship"><i class="fas fa-user-graduate"></i> Mentorship</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope"></i> emmysacademy9@gmail.com</p>
+                <p><i class="fab fa-whatsapp"></i> +234 911 807 4905</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Stay updated with our latest programs and success stories.</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate all slide-up elements
+        document.querySelectorAll('.slide-up').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(element);
+        });
+
+        // Stagger animations for overview cards
+        document.querySelectorAll('.overview-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.15}s`;
+        });
+
+        // Stagger animations for track cards
+        document.querySelectorAll('.track-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Add hover sound effects simulation
+        const hoverElements = document.querySelectorAll('.overview-card, .track-card, .timeline-content, .stat-item');
+        
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transition = 'all var(--transition-medium)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: scale(0);
+                    animation: rippleEffect 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleEffect {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Start pattern animation
+            const pattern = document.querySelector('.mentor-pattern');
+            if (pattern) {
+                pattern.style.animationPlayState = 'running';
+            }
+        });
+
+        // Update copyright year
+        const copyrightElement = document.querySelector('.copyright p');
+        if (copyrightElement) {
+            const currentYear = new Date().getFullYear();
+            copyrightElement.innerHTML = copyrightElement.innerHTML.replace('2025', currentYear);
+        }
+    </script>
+</body>
+</html>

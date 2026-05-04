@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback & Reviews - Emmy's Digital Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #FFC400;
+            --black: #0A0A0A;
+            --dark-bg: #1A1A1A;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --glass-bg: rgba(255, 215, 0, 0.1);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            --success: #00e676;
+            --warning: #FFD700;
+            --danger: #FF6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            position: relative;
+            animation: logoGlow 3s infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            100% { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        /* Rating Stats */
+        .stats-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .overall-rating {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .rating-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .stars-large {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .stars-large i {
+            font-size: 2.5rem;
+            color: var(--gold);
+        }
+
+        .total-reviews {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        .rating-bars {
+            margin-top: 2rem;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .star-label {
+            width: 60px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        .bar-count {
+            width: 40px;
+            text-align: right;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Review Form */
+        .form-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Star Rating Input */
+        .rating-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 1rem 0 2rem;
+        }
+
+        .rating-star {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .rating-star.active {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .rating-star:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .rating-text {
+            text-align: center;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            min-height: 24px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            border: none;
+            border-radius: 10px;
+            color: var(--black);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 2rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Reviews Display */
+        .reviews-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-info {
+            flex: 1;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .reviewer-program {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 5px;
+        }
+
+        .review-rating i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .review-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .review-content {
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+        }
+
+        .review-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .review-tag {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--gold);
+        }
+
+        .page-btn.active {
+            background: var(--gold);
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(0, 230, 118, 0.1);
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            color: var(--success);
+        }
+
+        .error-message {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: var(--danger);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .stats-card,
+            .form-card {
+                padding: 2rem;
+            }
+
+            .rating-number {
+                font-size: 3.5rem;
+            }
+
+            .stars-large i {
+                font-size: 2rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .rating-star {
+                font-size: 2rem;
+            }
+
+            .form-title,
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <div class="logo">EDA</div>
+                <div class="logo-full">Emmy's Digital Academy</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="mentorship.html" class="nav-link">Mentorship</a>
+                <a href="enroll.html" class="nav-link">Enroll</a>
+                <a href="feedback.html" class="nav-link">Reviews</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Student Feedback & Reviews</h1>
+            <p class="hero-subtitle">Share your experience and see what others are saying about Emmy's Digital Academy</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Rating Statistics -->
+        <div class="stats-container">
+            <div class="stats-card fade-in">
+                <div class="overall-rating">
+                    <div class="rating-number" id="averageRating">4.8</div>
+                    <div class="stars-large">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="total-reviews">
+                        Based on <span id="totalReviews">127</span> reviews
+                    </div>
+                </div>
+
+                <div class="rating-bars">
+                    <div class="rating-bar">
+                        <div class="star-label">5 Stars</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="bar5" style="width: 85%"></div>
+                        </div>
+                        <div class="bar-count" id="count5">108</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="star-label">4 Stars</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="bar4" style="width: 10%"></div>
+                        </div>
+                        <div class="bar-count" id="count4">13</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="star-label">3 Stars</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="bar3" style="width: 3%"></div>
+                        </div>
+                        <div class="bar-count" id="count3">4</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="star-label">2 Stars</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="bar2" style="width: 1%"></div>
+                        </div>
+                        <div class="bar-count" id="count2">1</div>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="star-label">1 Star</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="bar1" style="width: 1%"></div>
+                        </div>
+                        <div class="bar-count" id="count1">1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card fade-in" style="animation-delay: 0.2s">
+                <h3 style="color: var(--gold); margin-bottom: 1.5rem; text-align: center;">Recent Feedback</h3>
+                <div style="color: rgba(255, 255, 255, 0.9); line-height: 1.8;">
+                    <p>🎯 <strong>Most mentioned benefits:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Practical, hands-on learning</li>
+                        <li>Personalized mentorship</li>
+                        <li>Freelancing opportunities</li>
+                        <li>Supportive community</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;">⏱️ <strong>Average results timeline:</strong> 2-4 weeks</p>
+                    <p style="margin-top: 1rem;">💼 <strong>Top programs:</strong> Pro Mentorship & Business Accelerator</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Form -->
+        <div class="form-card fade-in" style="animation-delay: 0.4s">
+            <h2 class="form-title">Share Your Experience</h2>
+            
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="program">Program Attended *</label>
+                    <select id="program" name="program" required>
+                        <option value="">Select program</option>
+                        <option value="digital-skills">Digital Skills Courses</option>
+                        <option value="beginner-mentorship">Beginner Mentorship</option>
+                        <option value="intermediate-mentorship">Intermediate Mentorship</option>
+                        <option value="pro-mentorship">Pro Mentorship</option>
+                        <option value="business-accelerator">Business Accelerator</option>
+                        <option value="elite-masterclass">Elite Masterclass</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Rating *</label>
+                    <div class="rating-input">
+                        <i class="fas fa-star rating-star" data-value="1"></i>
+                        <i class="fas fa-star rating-star" data-value="2"></i>
+                        <i class="fas fa-star rating-star" data-value="3"></i>
+                        <i class="fas fa-star rating-star" data-value="4"></i>
+                        <i class="fas fa-star rating-star" data-value="5"></i>
+                    </div>
+                    <div class="rating-text" id="ratingText">Select a rating</div>
+                    <input type="hidden" id="rating" name="rating" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="review">Your Review *</label>
+                    <textarea id="review" name="review" rows="5" 
+                              placeholder="Share your experience: What did you like most? How has the program helped you? Any suggestions for improvement?" 
+                              required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="achievements">Key Achievements</label>
+                    <textarea id="achievements" name="achievements" rows="3" 
+                              placeholder="What skills did you gain? Any income generated? Portfolio projects completed?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Would you recommend us? *</label>
+                    <div style="display: flex; gap: 2rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="radio" name="recommend" value="yes" required>
+                            <span>Yes, definitely!</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="radio" name="recommend" value="maybe">
+                            <span>Maybe</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="radio" name="recommend" value="no">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span id="btnText">Submit Review</span>
+                    <span id="btnSpinner" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Submitting...
+                    </span>
+                </button>
+
+                <div id="successMessage" class="message success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Thank you for your feedback! Your review has been submitted and will appear shortly.</span>
+                </div>
+
+                <div id="errorMessage" class="message error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>There was an error submitting your review. Please try again or contact us.</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reviews Display -->
+    <section class="reviews-section">
+        <h2 class="section-title fade-in">What Our Students Say</h2>
+
+        <div class="filters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+            <button class="filter-btn active" data-filter="all">All Reviews</button>
+            <button class="filter-btn" data-filter="5">5 Stars</button>
+            <button class="filter-btn" data-filter="4">4 Stars</button>
+            <button class="filter-btn" data-filter="3">3 Stars</button>
+            <button class="filter-btn" data-filter="pro-mentorship">Pro Mentorship</button>
+            <button class="filter-btn" data-filter="business-accelerator">Business</button>
+        </div>
+
+        <div class="reviews-grid" id="reviewsContainer">
+            <!-- Reviews will be loaded here -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be generated here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <i class="fas fa-comment-slash"></i>
+            <h3>No reviews yet</h3>
+            <p>Be the first to share your experience with Emmy's Digital Academy!</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Your feedback helps us improve and helps others make informed decisions.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><span style="color: var(--gold);">📧 Email:</span> emmysacademy9@gmail.com</p>
+                <p><span style="color: var(--gold);">📱 WhatsApp:</span> +234 911 807 4905</p>
+                <p><span style="color: var(--gold);">💬 Discord:</span> https://discord.gg/BeszMFN4</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5);">
+                All reviews are verified from actual students. We value honest feedback.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample reviews data - In production, this would come from a database
+        let reviewsData = [
+            {
+                id: 1,
+                name: "Sarah Johnson",
+                program: "Pro Mentorship",
+                rating: 5,
+                review: "The Pro Mentorship program transformed my career! Within 3 weeks, I landed my first international client and made $500. The personalized guidance was exactly what I needed.",
+                achievements: "Landed 2 international clients, Built professional portfolio, Earned $1,200 in first month",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Career Change", "Freelancing", "Portfolio"]
+            },
+            {
+                id: 2,
+                name: "Michael Chen",
+                program: "Business Accelerator",
+                rating: 5,
+                review: "The Business Accelerator helped me structure my digital marketing agency. The strategies taught are practical and results-driven. My revenue increased by 300% in 2 months!",
+                achievements: "Scale business revenue, Hire 2 team members, Systematized operations",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Business Growth", "Scaling", "Strategy"]
+            },
+            {
+                id: 3,
+                name: "Amina Bello",
+                program: "Beginner Mentorship",
+                rating: 4,
+                review: "As a complete beginner, this program gave me the confidence to start. The step-by-step approach and weekly feedback were incredibly helpful. I wish it was longer though!",
+                achievements: "Mastered Canva, Created first portfolio, Landed first small project",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Beginner Friendly", "Hands-on", "Supportive"]
+            },
+            {
+                id: 4,
+                name: "David Wilson",
+                program: "Digital Skills Courses",
+                rating: 5,
+                review: "The video editing course was comprehensive and practical. I went from zero to creating professional videos for local businesses. The certificate helped me land more clients.",
+                achievements: "Video editing mastery, 5 local business clients, YouTube channel growth",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Skill Development", "Certification", "Practical"]
+            },
+            {
+                id: 5,
+                name: "Jennifer Park",
+                program: "Elite Masterclass",
+                rating: 5,
+                review: "The Elite Masterclass is worth every penny! The networking opportunities alone were invaluable. I've connected with industry leaders and secured a partnership that doubled my income.",
+                achievements: "Industry connections, Strategic partnerships, 2x income increase",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Networking", "Premium", "Life-changing"]
+            },
+            {
+                id: 6,
+                name: "Robert Kim",
+                program: "Intermediate Mentorship",
+                rating: 4,
+                review: "Great program for taking skills to the next level. The portfolio optimization advice helped me increase my rates by 50%. The community support is amazing.",
+                achievements: "Increased rates 50%, Improved portfolio, Better client negotiations",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Portfolio", "Rate Increase", "Community"]
+            },
+            {
+                id: 7,
+                name: "Emma Thompson",
+                program: "Pro Mentorship",
+                rating: 5,
+                review: "I was stuck at $20/hour. After the Pro Mentorship, I now charge $75/hour and have a waiting list of clients. The bidding strategy training was game-changing.",
+                achievements: "3.75x rate increase, Client waiting list, Consistent $3k+/month",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Rate Increase", "Bidding Strategy", "High Income"]
+            },
+            {
+                id: 8,
+                name: "James Rodriguez",
+                program: "Business Accelerator",
+                rating: 4,
+                review: "The business frameworks are solid. Helped me systemize my freelance work into a proper agency. Some concepts were advanced but the mentor support helped me through.",
+                achievements: "Agency setup, Team building, Process automation",
+                recommend: "yes",
+                date: "2026-01-01",
+                tags: ["Agency Building", "Systems", "Growth"]
+            }
+        ];
+
+        // Current state
+        let currentPage = 1;
+        const reviewsPerPage = 6;
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReviews();
+            setupStarRating();
+            setupFilters();
+            updateStatistics();
+        });
+
+        // Setup star rating interaction
+        function setupStarRating() {
+            const stars = document.querySelectorAll('.rating-star');
+            const ratingText = document.getElementById('ratingText');
+            const ratingInput = document.getElementById('rating');
+            
+            const ratingTexts = {
+                1: "Poor - Not satisfied",
+                2: "Fair - Could be better",
+                3: "Good - Met expectations",
+                4: "Very Good - Exceeded expectations",
+                5: "Excellent - Life-changing!"
+            };
+
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.dataset.value);
+                    ratingInput.value = value;
+                    
+                    // Update stars
+                    stars.forEach(s => {
+                        const sValue = parseInt(s.dataset.value);
+                        s.classList.toggle('active', sValue <= value);
+                    });
+                    
+                    // Update text
+                    ratingText.textContent = ratingTexts[value];
+                });
+
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.dataset.value);
+                    stars.forEach(s => {
+                        const sValue = parseInt(s.dataset.value);
+                        s.style.color = sValue <= value ? 'var(--gold)' : 'rgba(255, 255, 255, 0.2)';
+                    });
+                    ratingText.textContent = ratingTexts[value] || "Select a rating";
+                });
+
+                star.addEventListener('mouseout', function() {
+                    const currentValue = parseInt(ratingInput.value) || 0;
+                    stars.forEach(s => {
+                        const sValue = parseInt(s.dataset.value);
+                        s.style.color = sValue <= currentValue ? 'var(--gold)' : 'rgba(255, 255, 255, 0.2)';
+                    });
+                    ratingText.textContent = currentValue ? ratingTexts[currentValue] : "Select a rating";
+                });
+            });
+        }
+
+        // Setup filter buttons
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Apply filter
+                    currentFilter = this.dataset.filter;
+                    currentPage = 1;
+                    loadReviews();
+                });
+            });
+        }
+
+        // Load and display reviews
+        function loadReviews() {
+            const container = document.getElementById('reviewsContainer');
+            const pagination = document.getElementById('pagination');
+            const emptyState = document.getElementById('emptyState');
+            
+            // Filter reviews
+            let filteredReviews = reviewsData;
+            if (currentFilter !== 'all') {
+                if (['5', '4', '3', '2', '1'].includes(currentFilter)) {
+                    filteredReviews = reviewsData.filter(review => review.rating === parseInt(currentFilter));
+                } else {
+                    filteredReviews = reviewsData.filter(review => review.program === currentFilter);
+                }
+            }
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
+            const startIndex = (currentPage - 1) * reviewsPerPage;
+            const endIndex = startIndex + reviewsPerPage;
+            const pageReviews = filteredReviews.slice(startIndex, endIndex);
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            // Show empty state if no reviews
+            if (pageReviews.length === 0) {
+                emptyState.style.display = 'block';
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            // Display reviews
+            pageReviews.forEach(review => {
+                const reviewCard = createReviewCard(review);
+                container.appendChild(reviewCard);
+            });
+            
+            // Create pagination
+            createPagination(totalPages);
+        }
+
+        // Create review card HTML
+        function createReviewCard(review) {
+            const card = document.createElement('div');
+            card.className = 'review-card fade-in';
+            
+            // Format date
+            const date = new Date(review.date);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            // Create stars HTML
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHTML += `<i class="fas ${i <= review.rating ? 'fa-star' : 'fa-star'} ${i <= review.rating ? '' : 'far'}" 
+                              style="${i <= review.rating ? 'color: var(--gold)' : 'color: rgba(255, 255, 255, 0.3)'}"></i>`;
+            }
+            
+            // Create tags HTML
+            let tagsHTML = '';
+            if (review.tags && review.tags.length > 0) {
+                tagsHTML = '<div class="review-tags">';
+                review.tags.forEach(tag => {
+                    tagsHTML += `<span class="review-tag">${tag}</span>`;
+                });
+                tagsHTML += '</div>';
+            }
+            
+            card.innerHTML = `
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-name">${review.name}</div>
+                        <div class="reviewer-program">${review.program}</div>
+                        <div class="review-date">${formattedDate}</div>
+                    </div>
+                    <div class="review-rating">
+                        ${starsHTML}
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>${review.review}</p>
+                    ${review.achievements ? `<p style="margin-top: 1rem; color: var(--gold);"><strong>Achievements:</strong> ${review.achievements}</p>` : ''}
+                </div>
+                ${tagsHTML}
+                ${review.recommend === 'yes' ? '<div style="margin-top: 1rem; color: var(--success); font-weight: 600;">✓ Recommends this program</div>' : ''}
+            `;
+            
+            return card;
+        }
+
+        // Create pagination controls
+        function createPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                paginationHTML += `
+                    <button class="page-btn" onclick="changePage(${currentPage - 1})">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                `;
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHTML += `
+                        <button class="page-btn ${i === currentPage ? 'active' : ''}" 
+                                onclick="changePage(${i})">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHTML += `<span class="page-btn" style="background: transparent; border: none;">...</span>`;
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                paginationHTML += `
+                    <button class="page-btn" onclick="changePage(${currentPage + 1})">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                `;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Change page
+        function changePage(page) {
+            currentPage = page;
+            loadReviews();
+            window.scrollTo({
+                top: document.querySelector('.reviews-section').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            // Calculate statistics
+            const totalReviews = reviewsData.length;
+            const averageRating = (reviewsData.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1);
+            
+            // Count stars
+            const starCounts = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
+            reviewsData.forEach(review => {
+                starCounts[review.rating]++;
+            });
+            
+            // Update UI
+            document.getElementById('averageRating').textContent = averageRating;
+            document.getElementById('totalReviews').textContent = totalReviews;
+            
+            // Update bars and counts
+            for (let i = 1; i <= 5; i++) {
+                const percentage = (starCounts[i] / totalReviews) * 100;
+                document.getElementById(`bar${i}`).style.width = `${percentage}%`;
+                document.getElementById(`count${i}`).textContent = starCounts[i];
+            }
+        }
+
+        // Form submission
+        document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline';
+            
+            try {
+                // Get form data
+                const formData = {
+                    id: reviewsData.length + 1,
+                    name: document.getElementById('name').value,
+                    program: document.getElementById('program').value,
+                    rating: parseInt(document.getElementById('rating').value),
+                    review: document.getElementById('review').value,
+                    achievements: document.getElementById('achievements').value,
+                    recommend: document.querySelector('input[name="recommend"]:checked').value,
+                    date: new Date().toISOString().split('T')[0],
+                    tags: [] // You could add tag generation logic here
+                };
+                
+                // Add to reviews data
+                reviewsData.unshift(formData);
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Update UI
+                updateStatistics();
+                loadReviews();
+                
+                // Reset form
+                this.reset();
+                
+                // Reset stars
+                document.querySelectorAll('.rating-star').forEach(star => {
+                    star.classList.remove('active');
+                    star.style.color = 'rgba(255, 255, 255, 0.2)';
+                });
+                document.getElementById('ratingText').textContent = 'Select a rating';
+                
+                // In production, send to backend:
+                /*
+                const response = await fetch('/api/reviews', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    const newReview = await response.json();
+                    reviewsData.unshift(newReview);
+                    updateStatistics();
+                    loadReviews();
+                }
+                */
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        // Add some animation to review cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe review cards after they're loaded
+        setTimeout(() => {
+            document.querySelectorAll('.review-card').forEach(card => {
+                observer.observe(card);
+            });
+        }, 100);
+    </script>
+</body>
+</html>

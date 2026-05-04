@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Bidding & Proposal Writing - Emmy's Digital Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --medium-gold: #DAA520;
+            --glow-gold: #FFEC8B;
+            
+            --rich-black: #0A0A0A;
+            --deep-black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #3A3A3A;
+            --soft-gray: #4A4A4A;
+            
+            --emerald: #00e676;
+            --royal-blue: #1a237e;
+            --electric-blue: #283593;
+            --purple: #764ba2;
+            
+            --white: #F5F5F5;
+            --off-white: #E8E8E8;
+            --light-text: #CCCCCC;
+            --medium-text: #999999;
+            
+            --glass-bg: rgba(26, 26, 26, 0.85);
+            --glass-border: rgba(255, 215, 0, 0.25);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gold-glow: 0 0 25px rgba(255, 215, 0, 0.3);
+            --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            
+            --transition-fast: 0.3s ease;
+            --transition-medium: 0.5s ease;
+            --transition-slow: 0.8s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--rich-black);
+            color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(184, 134, 11, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(218, 165, 32, 0.02) 0%, transparent 50%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .golden-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
+            animation: gridMove 40s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            color: var(--primary-gold);
+            font-size: 1.1em;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-fast);
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Header Styles */
+        .module-header {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 70px 50px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 50px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .module-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite alternate;
+        }
+
+        .module-header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(184, 134, 11, 0.08), transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        .module-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: var(--gold-glow);
+        }
+
+        .module-subtitle {
+            font-size: 1.3em;
+            color: var(--light-gold);
+            margin-bottom: 30px;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .module-tagline {
+            font-size: 1.4em;
+            font-weight: 500;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+            border-left: 4px solid var(--primary-gold);
+            color: var(--light-gold);
+            box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        /* Section Styles */
+        .section {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: var(--primary-gold);
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 2px;
+        }
+
+        .overview-text {
+            font-size: 1.2em;
+            color: var(--light-text);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        /* Learning Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background: rgba(42, 42, 42, 0.6);
+            border-radius: 15px;
+            padding: 35px;
+            transition: all var(--transition-medium);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-gold);
+            box-shadow: 
+                0 25px 50px rgba(184, 134, 11, 0.2),
+                inset 0 0 40px rgba(255, 215, 0, 0.05);
+        }
+
+        .module-card:hover::before {
+            opacity: 1;
+        }
+
+        .module-card-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-gold);
+            color: var(--rich-black);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3em;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .module-card h4 {
+            font-size: 1.5em;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            font-weight: 600;
+            padding-right: 60px;
+        }
+
+        .module-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .module-card li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            color: var(--light-text);
+            line-height: 1.7;
+        }
+
+        .module-card li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Earning Potential Section */
+        .earning-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 42, 42, 0.9));
+            border: 1px solid var(--glass-border);
+        }
+
+        .earning-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .earning-level {
+            background: rgba(255, 215, 0, 0.08);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .earning-level::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .earning-level:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.2);
+        }
+
+        .earning-level:hover::before {
+            opacity: 1;
+        }
+
+        .earning-level h4 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+        }
+
+        .earning-amount {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            color: var(--emerald);
+            text-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+        }
+
+        .earning-description {
+            color: var(--light-text);
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Outcome Section */
+        .outcome-section {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.9), rgba(58, 58, 58, 0.9));
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .outcome-item {
+            background: rgba(255, 215, 0, 0.08);
+            padding: 35px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all var(--transition-medium);
+        }
+
+        .outcome-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--primary-gold);
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.2);
+        }
+
+        .outcome-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--primary-gold);
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+        }
+
+        .outcome-item h4 {
+            font-size: 1.3em;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .outcome-item p {
+            color: var(--light-text);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* Practical Projects */
+        .projects-section {
+            background: rgba(42, 42, 42, 0.7);
+            border: 2px dashed var(--primary-gold);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 35px;
+        }
+
+        .project-item {
+            background: rgba(255, 215, 0, 0.08);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            transition: all var(--transition-fast);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-item:hover {
+            background: rgba(255, 215, 0, 0.12);
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 30px rgba(184, 134, 11, 0.2);
+        }
+
+        .project-item h4 {
+            font-size: 1.3em;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .project-item p {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            font-size: 1.3em;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 22px 50px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            margin-top: 40px;
+            box-shadow: 
+                0 15px 35px rgba(184, 134, 11, 0.4),
+                0 0 30px rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 25px 50px rgba(184, 134, 11, 0.5),
+                0 0 40px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Why Different Section */
+        .different-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 30px;
+        }
+
+        .different-list li {
+            margin-bottom: 20px;
+            padding: 20px 25px 20px 70px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+
+        .different-list li:hover {
+            background: rgba(255, 215, 0, 0.12);
+            transform: translateX(10px);
+            border-color: var(--primary-gold);
+        }
+
+        .different-list li strong {
+            color: var(--primary-gold);
+            font-size: 1.1em;
+        }
+
+        .different-list li::before {
+            content: '★';
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-gold);
+            font-size: 1.8em;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .module-title {
+                font-size: 2.8rem;
+            }
+            
+            .modules-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .section {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .module-header {
+                padding: 50px 30px;
+            }
+            
+            .module-title {
+                font-size: 2.3rem;
+            }
+            
+            .module-tagline {
+                font-size: 1.2em;
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 35px 25px;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .earning-levels {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .outcome-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .module-title {
+                font-size: 2rem;
+            }
+            
+            .module-header {
+                padding: 40px 25px;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
+            
+            .cta-button {
+                width: 100%;
+                padding: 20px 30px;
+                font-size: 1.1em;
+            }
+            
+            .back-button {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--light-gold), var(--primary-gold));
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Grid -->
+    <div class="golden-grid"></div>
+
+    <div class="container">
+        <a href="courses.html" class="back-button fade-in">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Courses</span>
+        </a>
+
+        <div class="module-header fade-in">
+            <h1 class="module-title">Job Bidding & Proposal Writing</h1>
+            <p class="module-subtitle">Master the Art of Winning High-Paying Freelance Projects</p>
+            <p class="module-tagline">Freelancing isn't just about having skills, it's about selling those skills effectively</p>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Overview Section -->
+            <div class="section slide-up">
+                <h2 class="section-title">Module Overview</h2>
+                <p class="overview-text">
+                    This module is a complete, step-by-step roadmap to mastering the art of job bidding and proposal writing on leading freelance platforms such as Upwork, Fiverr, LinkedIn, and other high-paying job marketplaces.
+                </p>
+                <p class="overview-text">
+                    Whether you're a beginner just starting out or an intermediate freelancer looking to level up, this course will equip you with the knowledge, strategies, and practical skills needed to consistently land clients, negotiate deals, and build long-term freelance success.
+                </p>
+                <p class="overview-text">
+                    This module dives deep into the psychology of clients, the art of crafting compelling proposals, and the strategies that turn opportunities into consistent, dollar-earning projects.
+                </p>
+            </div>
+
+            <!-- What You Will Learn Section -->
+            <div class="section slide-up" style="animation-delay: 0.2s">
+                <h2 class="section-title">What You Will Learn</h2>
+                <div class="modules-grid">
+                    <!-- Module 1 -->
+                    <div class="module-card">
+                        <div class="module-card-number">1</div>
+                        <h4>Understanding Job Bidding Platforms</h4>
+                        <ul>
+                            <li>Platform mechanics: How major freelance marketplaces function</li>
+                            <li>Client landscape: Who hires and what they're looking for</li>
+                            <li>Profile optimization: Creating a professional, credible presence</li>
+                            <li>Market research: Analyzing trends and opportunities</li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="module-card">
+                        <div class="module-card-number">2</div>
+                        <h4>Proposal Psychology & Strategy</h4>
+                        <ul>
+                            <li>Client mindset: What motivates hiring decisions</li>
+                            <li>Winning proposal structure and formatting</li>
+                            <li>Hook techniques: Capturing attention immediately</li>
+                            <li>Avoiding common proposal mistakes</li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="module-card">
+                        <div class="module-card-number">3</div>
+                        <h4>Client Targeting & Niche Selection</h4>
+                        <ul>
+                            <li>Finding high-value, high-paying clients</li>
+                            <li>Positioning yourself as a niche expert</li>
+                            <li>Client vetting for quality and reliability</li>
+                            <li>Customizing pitches for different industries</li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="module-card">
+                        <div class="module-card-number">4</div>
+                        <h4>Deal Closing & Negotiation</h4>
+                        <ul>
+                            <li>Pricing confidently in dollars</li>
+                            <li>Professional negotiation techniques</li>
+                            <li>Securing repeat business strategies</li>
+                            <li>Contracts and agreement structuring</li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="module-card">
+                        <div class="module-card-number">5</div>
+                        <h4>Long-Term Client Retention</h4>
+                        <ul>
+                            <li>Professional communication etiquette</li>
+                            <li>Upselling and service expansion</li>
+                            <li>Reputation building for reviews and referrals</li>
+                            <li>Efficient project management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practical Projects Section -->
+            <div class="section projects-section slide-up" style="animation-delay: 0.3s">
+                <h2 class="section-title">Practical Projects & Exercises</h2>
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <h4><i class="fas fa-pen-alt"></i> Real Proposal Writing</h4>
+                        <p>Write proposals for simulated client projects with expert feedback</p>
+                    </div>
+                    <div class="project-item">
+                        <h4><i class="fas fa-gavel"></i> Mock Bidding Practice</h4>
+                        <p>Bid on realistic projects to increase win rates before going live</p>
+                    </div>
+                    <div class="project-item">
+                        <h4><i class="fas fa-handshake"></i> Negotiation Simulations</h4>
+                        <p>Practice pricing discussions and deal closing in risk-free scenarios</p>
+                    </div>
+                    <div class="project-item">
+                        <h4><i class="fas fa-bullseye"></i> Client Acquisition Plan</h4>
+                        <p>Develop a personalized strategy to secure your first 1–3 clients</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earning Potential Section -->
+            <div class="section earning-section slide-up" style="animation-delay: 0.4s">
+                <h2 class="section-title">Earning Potential in Dollars</h2>
+                <div class="earning-levels">
+                    <div class="earning-level">
+                        <h4><i class="fas fa-seedling"></i> Beginner Level</h4>
+                        <div class="earning-amount">$50 – $200 / project</div>
+                        <p class="earning-description">Perfect for starting out while building experience and portfolio</p>
+                    </div>
+                    <div class="earning-level">
+                        <h4><i class="fas fa-chart-line"></i> Intermediate Level</h4>
+                        <div class="earning-amount">$500 – $1,500 / month</div>
+                        <p class="earning-description">Consistent earnings with advanced bidding strategies</p>
+                    </div>
+                    <div class="earning-level">
+                        <h4><i class="fas fa-crown"></i> Advanced Level</h4>
+                        <div class="earning-amount">$2,000+ / month</div>
+                        <p class="earning-description">Scaled earnings through client retention and niche mastery</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Different Section -->
+            <div class="section slide-up" style="animation-delay: 0.5s">
+                <h2 class="section-title">Why This Module is Different</h2>
+                <ul class="different-list">
+                    <li>
+                        <strong>Results-oriented strategies</strong> - Focused on practical outcomes, not just theory
+                    </li>
+                    <li>
+                        <strong>Immediate earning potential</strong> - Start applying techniques from day one
+                    </li>
+                    <li>
+                        <strong>Comprehensive coverage</strong> - Psychology, strategy, and execution all in one
+                    </li>
+                    <li>
+                        <strong>Dollar-earning focus</strong> - Designed for sustainable international freelancing
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Outcome Section -->
+            <div class="section outcome-section slide-up" style="animation-delay: 0.6s">
+                <h2 class="section-title">Module Outcome</h2>
+                <p class="overview-text" style="color: var(--light-gold); margin-bottom: 40px;">
+                    By the end of this module, learners will have the skills and confidence to:
+                </p>
+                <div class="outcome-grid">
+                    <div class="outcome-item">
+                        <div class="outcome-icon">🎯</div>
+                        <h4>Clear Roadmap</h4>
+                        <p>A proven strategy for winning projects on multiple platforms</p>
+                    </div>
+                    <div class="outcome-item">
+                        <div class="outcome-icon">✍️</div>
+                        <h4>Proposal Mastery</h4>
+                        <p>Confidence in writing proposals that attract high-paying clients</p>
+                    </div>
+                    <div class="outcome-item">
+                        <div class="outcome-icon">🤝</div>
+                        <h4>Professional Negotiation</h4>
+                        <p>Skills to negotiate deals and manage projects effectively</p>
+                    </div>
+                    <div class="outcome-item">
+                        <div class="outcome-icon">💼</div>
+                        <h4>Sustainable Career</h4>
+                        <p>Foundation for building a dollar-earning freelance business</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="section slide-up" style="text-align: center; animation-delay: 0.7s">
+                <h2 class="section-title">Master the Art of Winning Clients</h2>
+                <p class="overview-text" style="margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Join the freelancers who have transformed their bidding strategy and are now consistently landing high-paying projects.
+                </p>
+                <button class="cta-button" onclick="window.location.href='enroll.html?course=job-bidding'">
+                    <i class="fas fa-gem"></i>
+                    <span>Enroll in This Module →</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animation classes
+        document.querySelectorAll('.slide-up').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(element);
+        });
+
+        // Add hover effects for cards
+        document.querySelectorAll('.module-card, .earning-level, .outcome-item, .project-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('module-card') ? 'translateY(-10px) scale(1.02)' : 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('hovered')) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+
+        // Add ripple effect to CTA button
+        const ctaButton = document.querySelector('.cta-button');
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.4);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                    window.location.href = 'enroll.html?course=job-bidding';
+                }, 600);
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Stagger animations
+            document.querySelectorAll('.module-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

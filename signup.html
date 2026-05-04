@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Emmys Digital Academy</title>
+    <link rel="stylesheet" href="premium-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="premium-container">
+        <div class="premium-card">
+            <div class="gold-top-bar"></div>
+            
+            <!-- Left Panel -->
+            <div class="premium-left">
+                <div class="left-ornament">
+                    <i class="fas fa-star"></i>
+                </div>
+                
+                <div class="academy-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h1 class="academy-title">Join Our Academy</h1>
+                    <p class="academy-subtitle">Begin Your Journey</p>
+                </div>
+                
+                <div class="premium-features">
+                    <h3 class="feature-title">Premium Benefits</h3>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <i class="fas fa-rocket"></i>
+                            <span class="feature-text">Accelerated Learning Path</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span class="feature-text">Industry Expert Mentors</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span class="feature-text">Career Placement Support</span>
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-award"></i>
+                            <span class="feature-text">Globally Recognized Certificates</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="premium-social">
+                    <p class="social-title">Connect With Community</p>
+                    <div class="social-icons-premium">
+                        <a href="https://t.me/emmysdigitalacademy" class="social-icon-premium" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://discord.gg/BeszMFN4" class="social-icon-premium" target="_blank">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://chat.whatsapp.com/HW0CQKNN1JEKZIYokiMwhr" class="social-icon-premium" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel -->
+            <div class="premium-right">
+                <a href="index.html" class="back-home">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Join our premium learning community in minutes</p>
+                </div>
+                
+                <form class="premium-form" id="signupForm">
+                    <div class="form-group-premium">
+                        <label for="fullName">
+                            <i class="fas fa-user"></i> Full Name
+                        </label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            class="premium-input" 
+                            placeholder="Enter your full name"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group-premium">
+                        <label for="signupEmail">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            id="signupEmail" 
+                            class="premium-input" 
+                            placeholder="your.email@example.com"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group-premium">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i> Phone Number
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            class="premium-input" 
+                            placeholder="+234 800 000 0000"
+                        >
+                    </div>
+                    
+                    <div class="form-group-premium">
+                        <label for="course">
+                            <i class="fas fa-book-open"></i> Select Course
+                        </label>
+                        <select id="course" class="premium-input" required>
+                            <option value="">Choose your course</option>
+                            <option value="web-dev">Freelancing Mastery</option>
+                            <option value="data-science">Job Bidding and Proposal Writing</option>
+                            <option value="digital-marketing">Virtual Assistance Training</option>
+                            <option value="design">Social Media Management</option>
+                            <option value="business">Graphics Design</option>
+                            <option value="marketing">Content Creation and Monetization</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group-premium">
+                        <label for="signupPassword">
+                            <i class="fas fa-lock"></i> Create Password
+                        </label>
+                        <div class="password-container">
+                            <input 
+                                type="password" 
+                                id="signupPassword" 
+                                class="premium-input" 
+                                placeholder="Minimum 8 characters"
+                                required
+                            >
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group-premium">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i> Confirm Password
+                        </label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            class="premium-input" 
+                            placeholder="Re-enter your password"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-options-premium">
+                        <label class="remember-premium">
+                            <input type="checkbox" id="terms" required>
+                            <span>I agree to the <a href="termsandconditions.html" style="color: var(--gold);">Terms & Conditions</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="premium-btn">
+                        <i class="fas fa-user-plus"></i>
+                        Create Premium Account
+                    </button>
+                    
+                    <div class="premium-divider">
+                        <span>Already have an account?</span>
+                    </div>
+                    
+                    <a href="login.html" class="secondary-link">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login to Your Account
+                    </a>
+                </form>
+                
+                <div class="premium-footer">
+                    <p>By signing up, you agree to our Privacy Policy and Terms of Service</p>
+                    <p>Need help? <a href="mailto:emmysacademy9@gmail.com">Contact Admissions</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="premiumToast" class="premium-toast"></div>
+    
+    <script src="premium-script.js"></script>
+</body>
+</html>

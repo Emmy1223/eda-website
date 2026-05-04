@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pro Mentorship Program - EDA</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        color: #333;
+        padding: 4rem 2rem;
+        text-align: center;
+        border-radius: 0 0 20px 20px;
+        margin-bottom: 3rem;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: inline-block;
+        background: #333;
+        color: #ffd700;
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .price-tag {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 1rem 0;
+        color: #333;
+      }
+
+      .section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      h2 {
+        color: #ffd700;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        color: #ffed4e;
+        margin: 1.5rem 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      li {
+        margin-bottom: 0.8rem;
+        padding-left: 0.5rem;
+      }
+
+      .highlight {
+        background: rgba(255, 215, 0, 0.1);
+        border-left: 4px solid #ffd700;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #ffd700;
+      }
+
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .result-item {
+        text-align: center;
+        padding: 1rem;
+        background: rgba(255, 215, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .result-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #ffd700;
+        display: block;
+      }
+
+      .btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        color: #333;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 1rem;
+        transition: transform 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .section {
+          padding: 1.5rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="badge">ADVANCED TRACK</div>
+      <h1>Pro Mentorship Program</h1>
+      <p class="price-tag">₦50,000</p>
+      <p>
+        Elite mentorship for serious creators ready to build a sustainable
+        digital business
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <h2>🏆 Program Overview</h2>
+        <p>
+          This 1-month elite mentorship is designed for serious creators who
+          want to transform their skills into a sustainable business. You'll
+          receive VIP treatment, work on high-value projects, and build systems
+          that generate consistent income.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>💎 VIP Package Includes</h2>
+
+        <div class="highlight">
+          <h3>Elite Mentorship Features:</h3>
+          <ul>
+            <li><strong>12+ Personal Sessions</strong> (60-90 minutes each)</li>
+            <li><strong>24/7 WhatsApp Priority Support</strong></li>
+            <li>
+              <strong>High-Value Client Projects</strong> with real budgets
+            </li>
+            <li>
+              <strong>Business Development Strategy</strong> and scaling plan
+            </li>
+            <li><strong>Personal Brand Optimization</strong></li>
+          </ul>
+        </div>
+
+        <h3>Monthly Breakdown:</h3>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h4>Week 1-2: Mastery & Positioning</h4>
+            <ul>
+              <li>Advanced skill refinement</li>
+              <li>Premium portfolio development</li>
+              <li>Personal brand strategy</li>
+              <li>High-ticket service design</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h4>Week 3-4: Business Building</h4>
+            <ul>
+              <li>Client acquisition systems</li>
+              <li>Contract and legal framework</li>
+              <li>Team building (if needed)</li>
+              <li>Scaling strategies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>🎯 Expected Results</h2>
+        <div class="results-grid">
+          <div class="result-item">
+            <span class="result-number">80%</span>
+            <span>Land first high-ticket client</span>
+          </div>
+          <div class="result-item">
+            <span class="result-number">2-3x</span>
+            <span>Increase in earning potential</span>
+          </div>
+          <div class="result-item">
+            <span class="result-number">100%</span>
+            <span>Business system setup</span>
+          </div>
+          <div class="result-item">
+            <span class="result-number">VIP</span>
+            <span>Network access</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>👑 VIP Benefits</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Priority Access</h4>
+            <p>Jump to the front of the line for all support and feedback</p>
+          </div>
+          <div class="feature-card">
+            <h4>Direct Mentor Access</h4>
+            <p>Unlimited WhatsApp access to your mentor</p>
+          </div>
+          <div class="feature-card">
+            <h4>Portfolio Makeover</h4>
+            <p>Professional redesign of your portfolio and profiles</p>
+          </div>
+          <div class="feature-card">
+            <h4>Client Introduction</h4>
+            <p>Direct introductions to potential clients (when ready)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>💼 Business Development Focus</h2>
+        <ul>
+          <li>High-ticket service package creation</li>
+          <li>Advanced pricing strategies</li>
+          <li>Contract and proposal templates</li>
+          <li>Client onboarding systems</li>
+          <li>Payment and invoicing setup</li>
+          <li>Legal considerations for freelancers</li>
+          <li>Team management basics</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>👥 Who This Is For</h2>
+        <ul>
+          <li>Experienced freelancers ready to scale</li>
+          <li>Professionals transitioning to full-time digital work</li>
+          <li>Entrepreneurs building digital agencies</li>
+          <li>Those earning but want to systemize</li>
+          <li>Anyone serious about 6-7 figure digital income</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>📅 Program Schedule</h2>
+        <ul>
+          <li><strong>Duration:</strong> 1 month intensive</li>
+          <li>
+            <strong>Sessions:</strong> 3 sessions per week + daily check-ins
+          </li>
+          <li><strong>Projects:</strong> 5-7 high-value portfolio pieces</li>
+          <li><strong>Support:</strong> 24/7 WhatsApp priority support</li>
+          <li><strong>Start:</strong> By application only</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>💰 Investment Return</h2>
+        <p>
+          Pro program students typically see a return on investment within the
+          first month, with many securing high-ticket clients during the program
+          itself.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>🎖️ Application Process</h2>
+        <p>
+          Due to the intensive nature of this program, enrollment is by
+          application only. We accept only serious individuals committed to
+          transforming their careers.
+        </p>
+
+        <div class="highlight">
+          <h3>Application Requirements:</h3>
+          <ul>
+            <li>Previous experience or completed beginner training</li>
+            <li>Clear goals and commitment to the process</li>
+            <li>Availability for intensive 1-month program</li>
+            <li>Interview with mentor</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>✅ Apply Now</h2>
+        <p>
+          Ready to transform your career and build a sustainable digital
+          business? Apply for our elite Pro Mentorship Program.
+        </p>
+        <a
+          href="mailto:emmysacademy9@gmail.com?subject=Pro Mentorship Application"
+          class="btn"
+          >Apply for Pro Program</a
+        >
+        <a
+          href="mentorship.html"
+          class="btn"
+          style="
+            background: transparent;
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            margin-left: 1rem;
+          "
+          >Back to Programs</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Emmy's Digital Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================================
+           IMPORT HOMEPAGE STYLES
+        ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors - Gold Theme */
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --light-gold: #FFF8DC;
+            --medium-gold: #DAA520;
+            --glow-gold: #FFEC8B;
+            
+            /* Black & Dark Theme */
+            --rich-black: #0A0A0A;
+            --deep-black: #000000;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #3A3A3A;
+            --soft-gray: #4A4A4A;
+            
+            /* Accent Colors */
+            --emerald: #00e676;
+            --royal-blue: #1a237e;
+            --electric-blue: #283593;
+            --purple: #764ba2;
+            
+            /* Text Colors */
+            --white: #F5F5F5;
+            --off-white: #E8E8E8;
+            --light-text: #CCCCCC;
+            --medium-text: #999999;
+            
+            /* Effects */
+            --glass-bg: rgba(26, 26, 26, 0.7);
+            --glass-border: rgba(255, 215, 0, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition-fast: 0.3s ease;
+            --transition-medium: 0.5s ease;
+            --transition-slow: 0.8s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--rich-black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-gold), var(--dark-gold));
+            border-radius: 5px;
+            border: 2px solid var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: var(--primary-gold);
+            color: var(--rich-black);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ============================================
+           DASHBOARD LAYOUT
+        ============================================ */
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .dashboard-sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--deep-black), var(--dark-gray));
+            border-right: 2px solid var(--dark-gold);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .sidebar-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rich-black);
+            font-size: 2.5rem;
+            border: 3px solid var(--dark-gray);
+            box-shadow: var(--gold-glow);
+        }
+
+        .sidebar-title {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-subtitle {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* User Profile */
+        .user-profile {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .user-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary-gold);
+            overflow: hidden;
+            background: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+        }
+
+        .user-info h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .user-plan {
+            display: inline-block;
+            padding: 6px 15px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Navigation Menu */
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 30px;
+            color: var(--light-text);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary-gold);
+            border-left-color: var(--primary-gold);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--primary-gold);
+            border-left-color: var(--primary-gold);
+        }
+
+        .nav-icon {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-text {
+            flex: 1;
+        }
+
+        .nav-badge {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Social Links */
+        .sidebar-social {
+            padding: 30px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .social-title {
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--dark-gray);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .social-icon:hover {
+            background: var(--primary-gold);
+            color: var(--rich-black);
+            transform: translateY(-3px);
+            box-shadow: var(--gold-glow);
+        }
+
+        /* Logout Button */
+        .sidebar-footer {
+            padding: 30px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            border-radius: 10px;
+            color: #F44336;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .logout-btn:hover {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .dashboard-main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 20px;
+            background: var(--rich-black);
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message h1 {
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .welcome-message p {
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 12px 20px 12px 45px;
+            background: var(--dark-gray);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--white);
+            width: 300px;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-gold);
+        }
+
+        .notification-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--dark-gray);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            cursor: pointer;
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+
+        .notification-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--primary-gold);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #F44336;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rich-black);
+            font-size: 1.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+
+        .stat-progress {
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--dark-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        /* Sections */
+        .dashboard-section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-all {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--transition-fast);
+        }
+
+        .view-all:hover {
+            gap: 10px;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-medium);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .course-header {
+            padding: 25px 25px 15px;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .course-instructor {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .course-progress {
+            margin: 20px 0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-text {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .progress-percent {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .course-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            gap: 10px;
+        }
+
+        .course-btn {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            border-radius: 8px;
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .course-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .course-btn.primary {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            font-weight: 600;
+        }
+
+        .course-btn.primary:hover {
+            background: linear-gradient(135deg, var(--light-gold), var(--primary-gold));
+        }
+
+        /* Assignments List */
+        .assignments-list {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+        }
+
+        .assignment-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all var(--transition-fast);
+        }
+
+        .assignment-item:last-child {
+            border-bottom: none;
+        }
+
+        .assignment-item:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .assignment-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            font-size: 1.3rem;
+            margin-right: 15px;
+        }
+
+        .assignment-details {
+            flex: 1;
+        }
+
+        .assignment-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .assignment-meta {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .assignment-due {
+            color: #FF9800;
+            font-weight: 600;
+        }
+
+        .assignment-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            transition: all var(--transition-medium);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            box-shadow: var(--gold-glow);
+        }
+
+        .achievement-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--rich-black);
+            font-size: 2rem;
+        }
+
+        .achievement-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            color: var(--light-text);
+            font-size: 0.85rem;
+        }
+
+        /* Live Timer */
+        .live-timer {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: var(--gold-glow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .live-timer i {
+            font-size: 1.2rem;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        /* Daily Goal */
+        .daily-goal {
+            position: fixed;
+            bottom: 85px;
+            right: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            z-index: 1000;
+            min-width: 200px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .goal-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .goal-bar {
+            flex: 1;
+            height: 6px;
+            background: var(--dark-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .goal-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        /* Mobile Toggle */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-black);
+            border: none;
+            border-radius: 8px;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--gold-glow);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+        ============================================ */
+        @media (max-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .search-input {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .dashboard-sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .dashboard-main {
+                margin-left: 0;
+            }
+            
+            .sidebar-toggle {
+                display: block;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-input {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-main {
+                padding: 15px;
+            }
+            
+            .dashboard-header {
+                padding: 20px;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+                align-items: stretch;
+            }
+            
+            .header-actions {
+                justify-content: space-between;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .live-timer, .daily-goal {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-footer {
+                flex-direction: column;
+            }
+            
+            .assignment-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .assignment-icon {
+                margin-right: 0;
+            }
+            
+            .assignment-actions {
+                width: 100%;
+            }
+            
+            .assignment-actions .course-btn {
+                flex: 1;
+            }
+        }
+
+        /* ============================================
+           ANIMATIONS
+        ============================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Toggle -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <!-- Header -->
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2 class="sidebar-title">EDA Dashboard</h2>
+                <p class="sidebar-subtitle">Student Portal</p>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">
+                    <!-- Avatar initials will be set by JS -->
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">Loading...</h3>
+                    <p class="user-email" id="userEmail">student@emmysacademy.com</p>
+                    <span class="user-plan" id="userPlan">Premium Plan</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" data-section="overview">
+                        <span class="nav-icon"><i class="fas fa-home"></i></span>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="courses.html" class="nav-link" data-section="courses">
+                        <span class="nav-icon"><i class="fas fa-book-open"></i></span>
+                        <span class="nav-text">My Courses</span>
+                        <span class="nav-badge" id="courseCount">5</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-section="assignments">
+                        <span class="nav-icon"><i class="fas fa-tasks"></i></span>
+                        <span class="nav-text">Assignments</span>
+                        <span class="nav-badge" id="assignmentCount">3</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-section="progress">
+                        <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="nav-text">Progress</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-section="achievements">
+                        <span class="nav-icon"><i class="fas fa-trophy"></i></span>
+                        <span class="nav-text">Achievements</span>
+                        <span class="nav-badge" id="achievementCount">12</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-section="resources">
+                        <span class="nav-icon"><i class="fas fa-folder"></i></span>
+                        <span class="nav-text">Resources</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-section="community">
+                        <span class="nav-icon"><i class="fas fa-users"></i></span>
+                        <span class="nav-text">Community</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="contact.html" class="nav-link" data-section="support">
+                        <span class="nav-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="nav-text">Support</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Social Links -->
+            <div class="sidebar-social">
+                <p class="social-title">Connect With Us</p>
+                <div class="social-icons">
+                    <a href="https://t.me/emmysdigitalacademy" class="social-icon" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://discord.gg/BeszMFN4" class="social-icon" target="_blank">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="https://chat.whatsapp.com/HW0CQKNN1JEKZIYokiMwhr" class="social-icon" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-top">
+                    <div class="welcome-message">
+                        <h1 id="greetingTitle">Welcome back, <span id="greetingName">Student</span>! 👋</h1>
+                        <p>Track your progress, complete assignments, and achieve your learning goals.</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" class="search-input" placeholder="Search courses, assignments...">
+                        </div>
+                        <div class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card slide-up">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="overallProgress">78%</div>
+                                <div class="stat-label">Overall Progress</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="overallProgressFill" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card slide-up" style="animation-delay: 0.1s">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="courseCountValue">5</div>
+                                <div class="stat-label">Active Courses</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card slide-up" style="animation-delay: 0.2s">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="hoursSpent">0h 0m</div>
+                                <div class="stat-label">Time Spent Today</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="timeProgressFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card slide-up" style="animation-delay: 0.3s">
+    <div class="stat-header">
+        <div>
+            <div class="stat-value" id="streakDays">0</div>
+            <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-icon">
+            <i class="fas fa-fire"></i>
+        </div>
+    </div>
+    <div class="stat-progress">
+        <div class="progress-bar">
+            <div class="progress-fill" id="streakProgressFill" style="width: 0%"></div>
+        </div>
+    </div>
+</div>
+               </header>
+
+            <!-- Courses Section -->
+            <section class="dashboard-section" id="overviewSection">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-book-open"></i>
+                        My Courses
+                    </h2>
+                    <a href="#" class="view-all">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="courses-grid" id="courseGrid">
+                    <!-- Courses will be loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Assignments Section -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-tasks"></i>
+                        Upcoming Assignments
+                    </h2>
+                    <a href="#" class="view-all">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="assignments-list" id="assignmentsList">
+                    <!-- Assignments will be loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-trophy"></i>
+                        Recent Achievements
+                    </h2>
+                    <a href="#" class="view-all">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Achievements will be loaded by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Live Time Tracker -->
+    <div class="live-timer" id="liveTimer">
+        <i class="fas fa-clock"></i>
+        <span id="liveTimerText">00:00</span>
+    </div>
+
+    <!-- Daily Goal Tracker -->
+    <div class="daily-goal" id="dailyGoal">
+        <div class="goal-progress">
+            <span>Daily Goal</span>
+            <div class="goal-bar">
+                <div class="goal-fill" id="goalFill"></div>
+            </div>
+            <span id="goalText">0/120m</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ============================================
+        // DASHBOARD INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initDashboard();
+            loadUserData();
+            loadCourses();
+            loadAssignments();
+            loadAchievements();
+            setupEventListeners();
+            checkLoginStatus();
+            
+            // Start real-time tracking
+            initTimeTracking();
+        });
+
+        // ============================================
+        // REAL-TIME TIME TRACKING SYSTEM
+        // ============================================
+        let learningTimer = {
+            startTime: null,
+            totalSecondsToday: 0,
+            intervalId: null,
+            isActive: false,
+            dailyGoal: 120 * 60 // 120 minutes in seconds
+        };
+
+        function initTimeTracking() {
+            // Load saved time
+            loadSavedTime();
+            
+            // Start tracking
+            startTimeTracking();
+            
+            // Setup visibility tracking
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            
+            // Save before unload
+            window.addEventListener('beforeunload', saveCurrentTime);
+            
+            // Update display every second
+            setInterval(updateTimeDisplay, 1000);
+            
+            // Update UI every minute
+            setInterval(updateTimeUI, 60000);
+        }
+
+        function loadSavedTime() {
+            const today = new Date().toDateString();
+            const savedData = JSON.parse(localStorage.getItem('learningTimeData') || '{}');
+            
+            if (savedData.date === today) {
+                learningTimer.totalSecondsToday = savedData.totalSeconds || 0;
+            } else {
+                learningTimer.totalSecondsToday = 0;
+                saveTimeData();
+            }
+            
+            updateTimeUI();
+        }
+
+        function startTimeTracking() {
+            if (!learningTimer.isActive) {
+                learningTimer.startTime = Date.now();
+                learningTimer.isActive = true;
+                
+                learningTimer.intervalId = setInterval(() => {
+                    if (learningTimer.isActive) {
+                        learningTimer.totalSecondsToday++;
+                        
+                        // Save every 30 seconds
+                        if (learningTimer.totalSecondsToday % 30 === 0) {
+                            saveTimeData();
+                        }
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimeTracking() {
+            if (learningTimer.isActive) {
+                learningTimer.isActive = false;
+                clearInterval(learningTimer.intervalId);
+                saveTimeData();
+            }
+        }
+
+        function handleVisibilityChange() {
+            if (document.hidden) {
+                pauseTimeTracking();
+            } else {
+                startTimeTracking();
+            }
+        }
+
+        function saveTimeData() {
+            const today = new Date().toDateString();
+            const timeData = {
+                date: today,
+                totalSeconds: learningTimer.totalSecondsToday,
+                lastUpdated: Date.now()
+            };
+            
+            localStorage.setItem('learningTimeData', JSON.stringify(timeData));
+        }
+
+        function saveCurrentTime() {
+            saveTimeData();
+        }
+
+        function updateTimeDisplay() {
+            const hours = Math.floor(learningTimer.totalSecondsToday / 3600);
+            const minutes = Math.floor((learningTimer.totalSecondsToday % 3600) / 60);
+            const seconds = learningTimer.totalSecondsToday % 60;
+            
+            // Update live timer
+            const liveTimer = document.getElementById('liveTimerText');
+            if (liveTimer) {
+                liveTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            // Show/hide based on activity
+            const liveTimerContainer = document.getElementById('liveTimer');
+            if (learningTimer.isActive && learningTimer.totalSecondsToday > 0) {
+                liveTimerContainer.style.display = 'flex';
+            } else {
+                liveTimerContainer.style.display = 'none';
+            }
+        }
+
+        function updateTimeUI() {
+            const hours = Math.floor(learningTimer.totalSecondsToday / 3600);
+            const minutes = Math.floor((learningTimer.totalSecondsToday % 3600) / 60);
+            const seconds = learningTimer.totalSecondsToday % 60;
+            
+            // Update hours spent display
+            const hoursElement = document.getElementById('hoursSpent');
+            if (hoursElement) {
+                hoursElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            // Update progress bar
+            const timeProgressFill = document.getElementById('timeProgressFill');
+            if (timeProgressFill) {
+                // Cap at 8 hours (28800 seconds) for 100%
+                const maxDailySeconds = 28800;
+                const progressPercent = Math.min((learningTimer.totalSecondsToday / maxDailySeconds) * 100, 100);
+                timeProgressFill.style.width = `${progressPercent}%`;
+            }
+            
+            // Update daily goal
+            updateDailyGoal();
+            
+            // Show motivational messages at milestones
+            const totalMinutes = Math.floor(learningTimer.totalSecondsToday / 60);
+            showTimeMilestones(totalMinutes);
+            
+            // Update learning streak
+            updateLearningStreak();
+        }
+
+        function updateDailyGoal() {
+            const goalText = document.getElementById('goalText');
+            const goalFill = document.getElementById('goalFill');
+            const totalMinutes = Math.floor(learningTimer.totalSecondsToday / 60);
+            
+            if (goalText && goalFill) {
+                const dailyGoal = 120; // 120 minutes
+                const percentage = Math.min((totalMinutes / dailyGoal) * 100, 100);
+                goalFill.style.width = `${percentage}%`;
+                goalText.textContent = `${totalMinutes}/${dailyGoal}m`;
+                
+                // Change color based on progress
+                if (percentage >= 100) {
+                    goalFill.style.background = '#00e676';
+                } else if (percentage >= 50) {
+                    goalFill.style.background = 'linear-gradient(90deg, #FF9800, #FFD700)';
+                } else {
+                    goalFill.style.background = 'linear-gradient(90deg, var(--primary-gold), var(--dark-gold))';
+                }
+            }
+        }
+
+        function showTimeMilestones(totalMinutes) {
+            const milestones = [15, 30, 60, 120, 180, 240, 360, 480];
+            const milestoneReached = milestones.find(m => totalMinutes === m);
+            
+            if (milestoneReached) {
+                const messages = {
+                    15: "Great start! Keep the momentum going! 🚀",
+                    30: "30 minutes of focused learning! You're on fire! 🔥",
+                    60: "1 hour milestone! Your dedication is inspiring! ⭐",
+                    120: "2 hours! You're crushing your daily goal! 🎯",
+                    180: "3 hours! You're a learning machine! 🤖",
+                    240: "4 hours! Incredible focus and dedication! 🏆",
+                    360: "6 hours! You're unstoppable! 💪",
+                    480: "8 hours! Legendary learning session! 👑"
+                };
+                
+                showToast(messages[milestoneReached], 'success');
+            }
+        }
+
+        function updateLearningStreak() {
+            const streakData = JSON.parse(localStorage.getItem('learningStreak') || '{}');
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+            
+            // Update streak data
+            if (!streakData.lastActiveDate) {
+                streakData.currentStreak = 1;
+                streakData.lastActiveDate = today;
+            } else if (streakData.lastActiveDate === today) {
+                // Already active today
+            } else if (streakData.lastActiveDate === yesterday) {
+                // Consecutive day
+                streakData.currentStreak++;
+                streakData.lastActiveDate = today;
+            } else {
+                // Streak broken
+                streakData.currentStreak = 1;
+                streakData.lastActiveDate = today;
+            }
+            
+            localStorage.setItem('learningStreak', JSON.stringify(streakData));
+            
+            // Update UI
+            const streakElement = document.getElementById('streakDays');
+            const streakProgressFill = document.getElementById('streakProgressFill');
+            
+            if (streakElement) {
+                streakElement.textContent = streakData.currentStreak;
+            }
+            
+            if (streakProgressFill) {
+                // 30 days for 100% progress
+                const progressPercent = Math.min((streakData.currentStreak / 30) * 100, 100);
+                streakProgressFill.style.width = `${progressPercent}%`;
+            }
+        }
+
+        // ============================================
+        // DASHBOARD FUNCTIONALITY
+        // ============================================
+        function initDashboard() {
+            // Sidebar toggle
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('dashboardSidebar');
+            
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    this.innerHTML = sidebar.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 992) {
+                    if (!sidebar.contains(event.target) && 
+                        !sidebarToggle.contains(event.target) && 
+                        sidebar.classList.contains('active')) {
+                        sidebar.classList.remove('active');
+                        sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+            
+            // Set greeting based on time
+            setGreeting();
+        }
+
+        function loadUserData() {
+            const userName = sessionStorage.getItem('userName') || localStorage.getItem('rememberedName') || 'Student';
+            const userEmail = sessionStorage.getItem('userEmail') || localStorage.getItem('rememberedEmail') || 'student@emmysacademy.com';
+            
+            // Update UI
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('userEmail').textContent = userEmail;
+            document.getElementById('greetingName').textContent = userName.split(' ')[0];
+            
+            // Generate avatar
+            generateUserAvatar(userName);
+        }
+
+        function generateUserAvatar(name) {
+            const avatar = document.getElementById('userAvatar');
+            const initials = name.split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+            
+            // Set background gradient
+            const gradients = [
+                'linear-gradient(135deg, #FFD700, #FFC400)',
+                'linear-gradient(135deg, #00e676, #00C853)',
+                'linear-gradient(135deg, #2196F3, #1976D2)',
+                'linear-gradient(135deg, #9C27B0, #7B1FA2)',
+                'linear-gradient(135deg, #FF9800, #F57C00)'
+            ];
+            
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            avatar.style.background = randomGradient;
+            avatar.textContent = initials;
+        }
+
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            
+            if (hour < 12) greeting = 'Good Morning';
+            else if (hour < 18) greeting = 'Good Afternoon';
+            else greeting = 'Good Evening';
+            
+            const greetingElement = document.getElementById('greetingTitle');
+            if (greetingElement) {
+                const userName = document.getElementById('greetingName').textContent;
+                greetingElement.innerHTML = `${greeting}, <span id="greetingName">${userName}</span>! 👋`;
+            }
+        }
+
+        // ============================================
+        // LOGOUT FUNCTIONALITY
+        // ============================================
+        function setupEventListeners() {
+            // Setup logout button
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+        }
+
+        function logout() {
+            // Pause time tracking before logout
+            pauseTimeTracking();
+            
+            // Save current time data
+            saveTimeData();
+            
+            // Clear session storage (temporary login data)
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userName');
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('userRole');
+            
+            // Clear localStorage if user didn't opt to be remembered
+            if (!localStorage.getItem('rememberMe')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('rememberedName');
+                localStorage.removeItem('rememberedEmail');
+            }
+            
+            // Show success message
+            showToast('Logged out successfully. Redirecting...', 'success');
+            
+            // Redirect to login page after brief delay
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
+        }
+
+        // Toast notification helper
+        function showToast(message, type = 'info') {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#F44336' : '#2196F3'};
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Add toast animations to page
+        const toastStyles = document.createElement('style');
+        toastStyles.textContent = `
+            @keyframes slideIn {
+                from { 
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to { 
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from { 
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to { 
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(toastStyles);
+
+        function checkLoginStatus() {
+            // Verify user is logged in, redirect if not
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') || localStorage.getItem('isLoggedIn');
+            
+            if (!isLoggedIn) {
+                // User not logged in, redirect to login page
+                window.location.href = 'login.html';
+            }
+        }
+
+       // ============================================
+// HONEST DASHBOARD - REAL DATA STARTER
+// ============================================
+
+function loadCourses() {
+    const courses = [
+        {
+            id: 1,
+            title: 'Freelancing Mastery',
+            instructor: 'Expert Trainer',
+            progress: 0,  // Start at 0%
+            timeSpent: '0h',  // No time spent yet
+            status: 'Not Started'
+        },
+        {
+            id: 2,
+            title: 'Job Bidding & Proposal Writing',
+            instructor: 'Expert Trainer',
+            progress: 0,
+            timeSpent: '0h',
+            status: 'Not Started'
+        },
+        {
+            id: 3,
+            title: 'Virtual Assistance Training',
+            instructor: 'Expert Trainer',
+            progress: 0,
+            timeSpent: '0h',
+            status: 'Not Started'
+        },
+        {
+            id: 4,
+            title: 'Social Media Management',
+            instructor: 'Expert Trainer',
+            progress: 0,
+            timeSpent: '0h',
+            status: 'Not Started'
+        },
+        {
+            id: 5,
+            title: 'Graphics Design (Beginner to Pro)',
+            instructor: 'Expert Trainer',
+            progress: 0,
+            timeSpent: '0h',
+            status: 'Not Started'
+        },
+        {
+            id: 6,
+            title: 'Content Creation & Monetization',
+            instructor: 'Expert Trainer',
+            progress: 0,
+            timeSpent: '0h',
+            status: 'Not Started'
+        }
+    ];
+    
+    const courseGrid = document.getElementById('courseGrid');
+    if (!courseGrid) return;
+    
+    // Update course count
+    document.getElementById('courseCount').textContent = courses.length;
+    document.getElementById('courseCountValue').textContent = courses.length;
+    
+    // Overall progress starts at 0%
+    document.getElementById('overallProgress').textContent = '0%';
+    document.getElementById('overallProgressFill').style.width = '0%';
+    
+    // Render courses with "Start Learning" buttons
+    courseGrid.innerHTML = courses.map(course => `
+        <div class="course-card slide-up">
+            <div class="course-header">
+                <h3 class="course-title">${course.title}</h3>
+                <p class="course-instructor">Instructor: ${course.instructor}</p>
+                <div class="course-progress">
+                    <div class="progress-info">
+                        <span class="progress-text">Not started yet</span>
+                        <span class="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="course-footer">
+                <button class="course-btn" onclick="startCourse(${course.id})">
+                    <i class="fas fa-play"></i> Start Learning
+                </button>
+                <button class="course-btn primary" onclick="viewCourseDetails(${course.id})">
+                    <i class="fas fa-info-circle"></i> Course Info
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function loadAssignments() {
+    // Initially no assignments - they get added when courses are started
+    const assignments = [];
+    
+    const assignmentsList = document.getElementById('assignmentsList');
+    if (!assignmentsList) return;
+    
+    // Update assignment count
+    document.getElementById('assignmentCount').textContent = '0';
+    
+    // Show empty state message
+    assignmentsList.innerHTML = `
+        <div class="empty-state slide-up">
+            <div class="empty-icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h3>No Assignments Yet</h3>
+            <p>Start a course to see your assignments here.</p>
+            <button class="course-btn primary" onclick="scrollToCourses()">
+                <i class="fas fa-graduation-cap"></i> Browse Courses
+            </button>
+        </div>
+    `;
+}
+
+function loadAchievements() {
+    // Initially no achievements - they get unlocked through real progress
+    const achievements = [
+        {
+            id: 1,
+            title: 'Welcome!',
+            description: 'Start your first course',
+            unlocked: false
+        },
+        {
+            id: 2,
+            title: 'First Step',
+            description: 'Complete your first lesson',
+            unlocked: false
+        },
+        {
+            id: 3,
+            title: 'Consistent Learner',
+            description: 'Study for 7 consecutive days',
+            unlocked: false
+        },
+        {
+            id: 4,
+            title: 'Course Explorer',
+            description: 'Start 3 different courses',
+            unlocked: false
+        },
+        {
+            id: 5,
+            title: 'Time Master',
+            description: 'Spend 10+ hours learning',
+            unlocked: false
+        },
+        {
+            id: 6,
+            title: 'Assignment Ace',
+            description: 'Submit your first assignment',
+            unlocked: false
+        }
+    ];
+    
+    const achievementsGrid = document.getElementById('achievementsGrid');
+    if (!achievementsGrid) return;
+    
+    // Update achievement count
+    document.getElementById('achievementCount').textContent = '0';
+    
+    // Render achievements as locked
+    achievementsGrid.innerHTML = achievements.map(achievement => `
+        <div class="achievement-card slide-up locked">
+            <div class="achievement-icon locked">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3 class="achievement-title">${achievement.title}</h3>
+            <p class="achievement-desc">${achievement.description}</p>
+            <div class="progress-bar" style="margin-top: 10px;">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ============================================
+// REAL PROGRESS TRACKING FUNCTIONS
+// ============================================
+
+let enrolledCourses = [];
+let completedAssignments = [];
+let unlockedAchievements = [];
+
+function startCourse(courseId) {
+    const courseName = getCourseNameById(courseId);
+    
+    // Check if course already enrolled
+    if (!enrolledCourses.includes(courseId)) {
+        enrolledCourses.push(courseId);
+        
+        // Add course to enrolled list in localStorage
+        const userData = JSON.parse(localStorage.getItem('userProgress') || '{}');
+        if (!userData.enrolledCourses) userData.enrolledCourses = [];
+        userData.enrolledCourses.push(courseId);
+        localStorage.setItem('userProgress', JSON.stringify(userData));
+        
+        // Show success message
+        showToast(`Successfully enrolled in ${courseName}!`, 'success');
+    }
+    
+    // Start tracking time for this course
+    startCourseTracking(courseId);
+    
+    // Update course status
+    updateCourseProgress(courseId, 5); // Start with 5% progress
+    updateCourseStatus(courseId, 'In Progress');
+    
+    // Add initial assignments for this course
+    addCourseAssignments(courseId);
+    
+    // Check for "Welcome" achievement
+    checkAndUnlockAchievement(1);
+}
+
+function updateCourseProgress(courseId, progressPercent) {
+    // Update progress in localStorage
+    const userData = JSON.parse(localStorage.getItem('userProgress') || '{}');
+    if (!userData.courseProgress) userData.courseProgress = {};
+    userData.courseProgress[courseId] = progressPercent;
+    localStorage.setItem('userProgress', JSON.stringify(userData));
+    
+    // Update UI
+    const courseCards = document.querySelectorAll('.course-card');
+    courseCards.forEach(card => {
+        const btn = card.querySelector(`button[onclick*="${courseId}"]`);
+        if (btn) {
+            const progressElement = card.querySelector('.progress-percent');
+            const progressFill = card.querySelector('.progress-fill');
+            const statusElement = card.querySelector('.course-status');
+            
+            if (progressElement) progressElement.textContent = `${progressPercent}%`;
+            if (progressFill) progressFill.style.width = `${progressPercent}%`;
+            if (statusElement) statusElement.textContent = 'In Progress';
+        }
+    });
+    
+    // Recalculate overall progress
+    recalculateOverallProgress();
+}
+
+function addCourseAssignments(courseId) {
+    const courseName = getCourseNameById(courseId);
+    const assignments = getDefaultAssignments(courseId);
+    
+    // Add to local storage
+    const userData = JSON.parse(localStorage.getItem('userProgress') || '{}');
+    if (!userData.assignments) userData.assignments = [];
+    assignments.forEach(assignment => {
+        if (!userData.assignments.find(a => a.id === assignment.id)) {
+            userData.assignments.push({
+                ...assignment,
+                addedAt: new Date().toISOString()
+            });
+        }
+    });
+    localStorage.setItem('userProgress', JSON.stringify(userData));
+    
+    // Update UI
+    loadAssignments();
+}
+function getCourseNameById(courseId) {
+    const courses = {
+        1: 'Freelancing Mastery',
+        2: 'Job Bidding & Proposal Writing',
+        3: 'Virtual Assistance Training',
+        4: 'Social Media Management',
+        5: 'Graphics Design (Beginner to Pro)',
+        6: 'Content Creation & Monetization'
+    };
+    return courses[courseId] || 'Course';
+}
+function getDefaultAssignments(courseId) {
+    const assignmentsByCourse = {
+        1: [ // Freelancing Mastery
+            { id: 101, title: 'Create Your Freelancer Profile', course: 'Freelancing Mastery', dueDate: addDays(7), status: 'pending' },
+            { id: 102, title: 'Niche Identification Worksheet', course: 'Freelancing Mastery', dueDate: addDays(14), status: 'pending' },
+            { id: 103, title: 'Pricing Strategy Exercise', course: 'Freelancing Mastery', dueDate: addDays(21), status: 'pending' }
+        ],
+        2: [ // Job Bidding
+            { id: 201, title: 'Analyze 5 Winning Proposals', course: 'Job Bidding & Proposal Writing', dueDate: addDays(5), status: 'pending' },
+            { id: 202, title: 'Write Your First Proposal Template', course: 'Job Bidding & Proposal Writing', dueDate: addDays(10), status: 'pending' }
+        ],
+        3: [ // Virtual Assistance
+            { id: 301, title: 'Client Communication Exercise', course: 'Virtual Assistance Training', dueDate: addDays(3), status: 'pending' },
+            { id: 302, title: 'Task Management Setup', course: 'Virtual Assistance Training', dueDate: addDays(7), status: 'pending' }
+        ],
+        4: [ // Social Media
+            { id: 401, title: 'Platform Analysis Report', course: 'Social Media Management', dueDate: addDays(5), status: 'pending' },
+            { id: 402, title: 'Content Calendar Template', course: 'Social Media Management', dueDate: addDays(12), status: 'pending' }
+        ],
+        5: [ // Graphics Design
+            { id: 501, title: 'Design Principles Analysis', course: 'Graphics Design', dueDate: addDays(3), status: 'pending' },
+            { id: 502, title: 'Brand Mood Board Creation', course: 'Graphics Design', dueDate: addDays(10), status: 'pending' }
+        ],
+        6: [ // Content Creation
+            { id: 601, title: 'Niche Research Document', course: 'Content Creation', dueDate: addDays(5), status: 'pending' },
+            { id: 602, title: 'Content Strategy Outline', course: 'Content Creation', dueDate: addDays(15), status: 'pending' }
+        ]
+    };
+    
+    return assignmentsByCourse[courseId] || [];
+}
+
+function addDays(days) {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toISOString().split('T')[0];
+}
+
+function checkAndUnlockAchievement(achievementId) {
+    const achievements = {
+        1: { title: 'Welcome!', description: 'Start your first course' },
+        2: { title: 'First Step', description: 'Complete your first lesson' },
+        3: { title: 'Consistent Learner', description: 'Study for 7 consecutive days' },
+        4: { title: 'Course Explorer', description: 'Start 3 different courses' },
+        5: { title: 'Time Master', description: 'Spend 10+ hours learning' },
+        6: { title: 'Assignment Ace', description: 'Submit your first assignment' }
+    };
+    
+    if (!unlockedAchievements.includes(achievementId)) {
+        unlockedAchievements.push(achievementId);
+        
+        // Update localStorage
+        const userData = JSON.parse(localStorage.getItem('userProgress') || '{}');
+        if (!userData.achievements) userData.achievements = [];
+        userData.achievements.push(achievementId);
+        localStorage.setItem('userProgress', JSON.stringify(userData));
+        
+        // Show achievement unlocked notification
+        const achievement = achievements[achievementId];
+        showToast(`🏆 Achievement Unlocked: ${achievement.title}!`, 'success');
+        
+        // Update achievements UI
+        loadAchievements();
+    }
+}
+
+function recalculateOverallProgress() {
+    const userData = JSON.parse(localStorage.getItem('userProgress') || '{}');
+    const courseProgress = userData.courseProgress || {};
+    
+    let totalProgress = 0;
+    let courseCount = 0;
+    
+    Object.values(courseProgress).forEach(progress => {
+        totalProgress += progress;
+        courseCount++;
+    });
+    
+    const averageProgress = courseCount > 0 ? Math.round(totalProgress / courseCount) : 0;
+    
+    document.getElementById('overallProgress').textContent = `${averageProgress}%`;
+    document.getElementById('overallProgressFill').style.width = `${averageProgress}%`;
+}
+
+// ============================================
+// INITIALIZATION WITH REAL DATA
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Load user's real progress from localStorage
+    const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
+    
+    // Load enrolled courses
+    enrolledCourses = userProgress.enrolledCourses || [];
+    
+    // Load unlocked achievements
+    unlockedAchievements = userProgress.achievements || [];
+    
+    // Load completed assignments
+    completedAssignments = userProgress.completedAssignments || [];
+    
+    // Initialize dashboard with real data
+    if (enrolledCourses.length > 0) {
+        // User has started learning - show real progress
+        loadCoursesWithProgress(userProgress);
+        loadAssignmentsWithData(userProgress);
+        loadAchievementsWithUnlocks(userProgress);
+    } else {
+        // First-time user - show empty starter state
+        loadCourses();
+        loadAssignments();
+        loadAchievements();
+    }
+    
+    // Rest of initialization...
+});
+
+function loadCoursesWithProgress(userProgress) {
+    // This would load courses with actual progress from userProgress
+    // Real implementation would fetch from your backend
+}
+
+// Add CSS for empty states
+const emptyStateCSS = `
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 2px dashed rgba(255, 215, 0, 0.3);
+    }
+    
+    .empty-icon {
+        font-size: 3rem;
+        color: rgba(255, 215, 0, 0.5);
+        margin-bottom: 20px;
+    }
+    
+    .empty-state h3 {
+        color: var(--primary-gold);
+        margin-bottom: 10px;
+    }
+    
+    .empty-state p {
+        color: var(--light-text);
+        margin-bottom: 25px;
+    }
+    
+    .achievement-card.locked .achievement-icon {
+        background: var(--dark-gray);
+        color: var(--light-gray);
+    }
+    
+    .achievement-card.locked .achievement-title {
+        color: var(--light-gray);
+    }
+    
+    .achievement-card.locked .achievement-desc {
+        color: var(--medium-text);
+    }
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = emptyStateCSS;
+document.head.appendChild(styleSheet);
+
+        function checkLoginStatus() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') || localStorage.getItem('isLoggedIn');
+            
+            if (!isLoggedIn) {
+                showToast('Please login to access dashboard', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            }
+        }
+
+        function logout() {
+            // Clear session
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('userName');
+            
+            // Clear localStorage if not remembered
+            if (!localStorage.getItem('rememberedEmail')) {
+                localStorage.removeItem('isLoggedIn');
+            }
+            
+            // Pause time tracking
+            pauseTimeTracking();
+            saveTimeData();
+            
+            showToast('Logged out successfully', 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        function showNotifications() {
+            showToast('Notifications feature coming soon!', 'info');
+        }
+
+        function searchContent(query) {
+            if (query.length < 2) return;
+            
+            // In a real app, this would search through courses and assignments
+            console.log('Searching for:', query);
+        }
+
+        // ============================================
+        // HELPER FUNCTIONS
+        // ============================================
+        function continueCourse(courseId) {
+            showToast(`Starting course ${courseId}...`, 'info');
+            // In a real app, navigate to course player
+        }
+
+        function viewCourseDetails(courseId) {
+            showToast(`Viewing details for course ${courseId}...`, 'info');
+            // In a real app, navigate to course details
+        }
+
+        function submitAssignment(assignmentId) {
+            showToast(`Submitting assignment ${assignmentId}...`, 'info');
+            // In a real app, show submission modal
+        }
+
+        function showToast(message, type = 'info') {
+            // Remove existing toast
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Create toast
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="toast-close"><i class="fas fa-times"></i></button>
+            `;
+            
+            // Add styles
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#00e676' : type === 'error' ? '#F44336' : '#2196F3'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            // Close button
+            const closeBtn = toast.querySelector('.toast-close');
+            closeBtn.style.cssText = `
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            closeBtn.addEventListener('click', () => toast.remove());
+            
+            document.body.appendChild(toast);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+            
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Initialize animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-up').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(element);
+        });
+        // Add these security measures:
+function sanitizeInput(input) {
+    return input.replace(/[<>]/g, ''); // Basic XSS prevention
+}
+
+function validateSession() {
+    // Add session timeout
+    const lastActivity = localStorage.getItem('lastActivity');
+    const timeout = 30 * 60 * 1000; // 30 minutes
+    
+    if (Date.now() - lastActivity > timeout) {
+        logout();
+        showToast('Session expired. Please login again.', 'error');
+    }
+}
+// Debounce search to prevent excessive API calls
+const debouncedSearch = debounce((query) => {
+    searchContent(query);
+}, 300);
+
+// Lazy load course images
+const courseImages = document.querySelectorAll('.course-card img');
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

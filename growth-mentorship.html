@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growth Mentorship Program - EDA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-gold: #ffd700;
+        --dark-gold: #b8860b;
+        --light-gold: #fff8dc;
+        --rich-black: #0a0a0a;
+        --dark-gray: #1a1a1a;
+        --medium-gray: #2a2a2a;
+        --light-gray: #3a3a3a;
+        --white: #f5f5f5;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: var(--rich-black);
+        background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(184, 134, 11, 0.05) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(184, 134, 11, 0.05) 0%,
+            transparent 20%
+          );
+        color: var(--white);
+        line-height: 1.6;
+      }
+
+      /* Sliding Headline */
+      .headline-slider {
+        background: linear-gradient(
+          90deg,
+          var(--rich-black),
+          var(--dark-gray),
+          var(--rich-black)
+        );
+        color: var(--primary-gold);
+        padding: 14px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        border-bottom: 2px solid var(--dark-gold);
+        margin-bottom: 20px;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .headline-content {
+        display: inline-block;
+        animation: slide 25s linear infinite;
+        font-weight: 600;
+        font-size: 1.1em;
+        letter-spacing: 0.5px;
+      }
+
+      @keyframes slide {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .headline-content i {
+        margin: 0 20px;
+        color: var(--dark-gold);
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--rich-black) 0%,
+          var(--dark-gray) 100%
+        );
+        color: var(--primary-gold);
+        padding: 5rem 2rem 4rem;
+        text-align: center;
+        border-radius: 0 0 25px 25px;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--dark-gold);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+          inset 0 0 50px rgba(184, 134, 11, 0.1);
+      }
+
+      .header::before {
+        content: "MOST POPULAR";
+        position: absolute;
+        top: 20px;
+        right: -35px;
+        background: var(--primary-gold);
+        color: var(--rich-black);
+        padding: 12px 40px;
+        transform: rotate(45deg);
+        font-weight: 800;
+        font-size: 0.9rem;
+        z-index: 2;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 215, 0, 0.03) 0%,
+          transparent 70%
+        );
+        z-index: 1;
+      }
+
+      .header h1 {
+        font-size: 3.2rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          45deg,
+          var(--primary-gold),
+          var(--light-gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+      }
+
+      .badge {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        color: var(--rich-black);
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+      }
+
+      .price-tag {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin: 1.5rem 0;
+        color: var(--primary-gold);
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      }
+
+      .price-tag span {
+        font-size: 1.5rem;
+        color: var(--light-gold);
+        font-weight: 400;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        color: var(--light-gold);
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .section {
+        background: rgba(26, 26, 26, 0.8);
+        padding: 2.8rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        margin-bottom: 2.5rem;
+        border: 1px solid var(--light-gray);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+      }
+
+      h2 {
+        color: var(--primary-gold);
+        margin-bottom: 1.8rem;
+        font-size: 2rem;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 12px;
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+        border-radius: 2px;
+      }
+
+      h3 {
+        color: var(--light-gold);
+        margin: 1.8rem 0 1.2rem;
+        font-size: 1.4rem;
+      }
+
+      ul {
+        padding-left: 1.8rem;
+        margin: 1.2rem 0;
+      }
+
+      li {
+        margin-bottom: 1rem;
+        padding-left: 0.8rem;
+        color: #dddddd;
+        position: relative;
+      }
+
+      li::before {
+        content: "•";
+        color: var(--primary-gold);
+        font-weight: bold;
+        position: absolute;
+        left: -0.5rem;
+      }
+
+      .highlight {
+        background: rgba(42, 42, 42, 0.7);
+        border-left: 4px solid var(--primary-gold);
+        padding: 2rem;
+        border-radius: 12px;
+        margin: 2rem 0;
+        border: 1px solid var(--light-gray);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin: 2.5rem 0;
+      }
+
+      .feature-card {
+        background: rgba(42, 42, 42, 0.7);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 1px solid var(--light-gray);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-gold);
+        box-shadow: 0 15px 35px rgba(184, 134, 11, 0.2);
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-gold),
+          var(--dark-gold)
+        );
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary-gold);
+        display: inline-block;
+      }
+
+      .feature-card h4 {
+        color: var(--primary-gold);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .feature-card ul {
+        padding-left: 1.2rem;
+        margin: 1rem 0 0;
+      }
+
+      .feature-card li {
+        margin-bottom: 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      /* Glass Gold Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: rgba(184, 134, 11, 0.15);
+        color: var(--primary-gold);
+        padding: 1.2rem 2.8rem;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1em;
+        border: 2px solid rgba(255, 215, 0, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+          inset 0 0 20px rgba(255, 215, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 215, 0, 0.2),
+          transparent
+        );
+        transition: left 0.7s ease;
+      }
+
+      .btn:hover {
+        background: rgba(184, 134, 11, 0.25);
+        border-color: rgba(255, 215, 0, 0.8);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4),
+          inset 0 0 30px rgba(255, 215, 0, 0.15);
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--primary-gold);
+        border: 2px solid var(--primary-gold);
+      }
+
+      .btn-outline:hover {
+        background: rgba(255, 215, 0, 0.1);
+      }
+
+      .btn i {
+        font-size: 1.2em;
+      }
+
+      /* Contact Section */
+      .contact-section {
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          rgba(10, 10, 10, 0.9),
+          rgba(26, 26, 26, 0.9)
+        );
+        border: 2px solid var(--dark-gold);
+      }
+
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: var(--white);
+        text-decoration: none;
+        padding: 18px 30px;
+        background: rgba(42, 42, 42, 0.7);
+        border-radius: 15px;
+        border: 1px solid var(--light-gray);
+        transition: all 0.3s ease;
+        min-width: 250px;
+      }
+
+      .contact-item:hover {
+        background: rgba(58, 58, 58, 0.9);
+        border-color: var(--primary-gold);
+        transform: translateY(-5px);
+      }
+
+      .contact-item i {
+        color: var(--primary-gold);
+        font-size: 1.5em;
+      }
+
+      .contact-text {
+        text-align: left;
+      }
+
+      .contact-label {
+        font-weight: 600;
+        font-size: 1.1em;
+      }
+
+      .contact-detail {
+        font-size: 0.95em;
+        color: #aaaaaa;
+      }
+
+      /* EDA Animation */
+      .eda-header {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+
+      .eda-animation {
+        display: inline-block;
+        font-size: 3.5em;
+        font-weight: 900;
+        background: linear-gradient(
+          45deg,
+          var(--primary-gold),
+          var(--dark-gold),
+          #daa520,
+          var(--primary-gold)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 300% 300%;
+        animation: gradientShift 4s ease infinite;
+        margin-bottom: 10px;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .header h1 {
+          font-size: 2.5rem;
+        }
+
+        .price-tag {
+          font-size: 2.8rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .header {
+          padding: 4rem 1.5rem 3rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .section {
+          padding: 2rem 1.5rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .contact-item {
+          width: 100%;
+          max-width: 350px;
+        }
+
+        .headline-content {
+          font-size: 0.9em;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .price-tag {
+          font-size: 2.2rem;
+        }
+
+        h2 {
+          font-size: 1.6rem;
+        }
+
+        .btn {
+          padding: 1rem 2rem;
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sliding Headline -->
+    <div class="headline-slider">
+      <div class="headline-content">
+        <i class="fas fa-star"></i> 🚀 ENROLL NOW: Growth Mentorship Program -
+        Transform Basic Skills into Professional Income!
+        <i class="fas fa-star"></i> 💰 INVESTMENT: ₦40,000 Only - Limited Spots
+        Available! <i class="fas fa-star"></i> 🎓 3-WEEK INTENSIVE: 6-9 Personal
+        Mentorship Sessions + Portfolio Development
+        <i class="fas fa-star"></i> 📞 CONTACT: WhatsApp +2349118074905 |
+        Discord: https://discord.gg/BeszMFN4 <i class="fas fa-star"></i> 🚀
+        ENROLL NOW: Growth Mentorship Program - Transform Basic Skills into
+        Professional Income! <i class="fas fa-star"></i> 💰 INVESTMENT: ₦40,000
+        Only - Limited Spots Available!
+      </div>
+    </div>
+
+    <!-- Animated EDA Header -->
+    <div class="eda-header">
+      <div class="eda-animation">EDA</div>
+      <div
+        style="color: var(--light-gold); font-size: 1.1em; letter-spacing: 2px"
+      >
+        Emmy's Digital Academy
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="badge">INTERMEDIATE TRACK</div>
+      <h1>Growth Mentorship Program</h1>
+      <p class="price-tag">₦40,000 <span>/one-time</span></p>
+      <p>
+        Take your skills from basic to professional level and start earning
+        within 30 days
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <h2><i class="fas fa-rocket"></i> Program Overview</h2>
+        <p style="color: #dddddd; font-size: 1.1em">
+          This 3-week intensive program is designed for learners who have basic
+          knowledge and want to transition to professional level. You'll work on
+          real projects, build a strong portfolio, and learn how to monetize
+          your skills effectively with personalized guidance from industry
+          experts.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-gift"></i> What You'll Get</h2>
+
+        <div class="highlight">
+          <h3>Professional Growth Package:</h3>
+          <ul>
+            <li>
+              <strong>6-9 Personal Mentorship Sessions</strong> (60 minutes
+              each) with industry expert
+            </li>
+            <li>
+              <strong>Portfolio Development</strong> with 4-5 professional,
+              client-ready projects
+            </li>
+            <li>
+              <strong>Freelancing Preparation</strong> and proven client
+              acquisition strategies
+            </li>
+            <li>
+              <strong>Advanced Skill Development</strong> in your specialization
+              area
+            </li>
+            <li>
+              <strong>Lifetime Access</strong> to program materials and updates
+            </li>
+            <li>
+              <strong>Certificate of Completion</strong> for your LinkedIn
+              profile
+            </li>
+          </ul>
+        </div>
+
+        <h3>Weekly Breakdown:</h3>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h4>Week 1: Skill Enhancement</h4>
+            <ul>
+              <li>Advanced techniques in your field</li>
+              <li>Industry-standard tools mastery</li>
+              <li>Quality standards and best practices</li>
+              <li>First professional project completion</li>
+              <li>Feedback and improvement sessions</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💼</div>
+            <h4>Week 2: Professional Development</h4>
+            <ul>
+              <li>Portfolio building strategies</li>
+              <li>Personal brand development</li>
+              <li>Client communication skills</li>
+              <li>Pricing and proposal writing</li>
+              <li>Professional networking techniques</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h4>Week 3: Monetization Focus</h4>
+            <ul>
+              <li>Finding and winning clients</li>
+              <li>Contract and negotiation skills</li>
+              <li>Project management basics</li>
+              <li>Scaling your services</li>
+              <li>Creating passive income streams</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-graduation-cap"></i> Learning Outcomes</h2>
+        <ul>
+          <li>
+            Professional-grade skills in your chosen field ready for market
+          </li>
+          <li>4-5 portfolio projects that impress clients and employers</li>
+          <li>Ability to charge professional rates (₦20,000+ per project)</li>
+          <li>Confidence to bid on freelance platforms and win projects</li>
+          <li>Understanding of client management and project delivery</li>
+          <li>Personal brand development strategy for long-term success</li>
+          <li>Access to community of successful graduates for networking</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-users"></i> Who This Is For</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Beginners Ready for Pro</h4>
+            <p>
+              Learners with basic knowledge ready to go pro and start earning
+            </p>
+          </div>
+          <div class="feature-card">
+            <h4>Freelancers</h4>
+            <p>
+              Freelancers wanting to increase their rates and get better clients
+            </p>
+          </div>
+          <div class="feature-card">
+            <h4>Students</h4>
+            <p>Students preparing for professional work and side income</p>
+          </div>
+          <div class="feature-card">
+            <h4>Employees</h4>
+            <p>Employees seeking side income opportunities and career growth</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-crown"></i> Premium Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🛠️</div>
+            <h4>Project Simulations</h4>
+            <p>
+              Work on real client-style projects with detailed professional
+              feedback
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📁</div>
+            <h4>Portfolio Review</h4>
+            <p>
+              Professional critique and optimization of your portfolio for
+              maximum impact
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h4>Proposal Templates</h4>
+            <p>
+              Access to winning proposal templates and client negotiation
+              scripts
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎭</div>
+            <h4>Client Role-plays</h4>
+            <p>
+              Practice client negotiations and meetings in simulated scenarios
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-calendar-alt"></i> Program Schedule</h2>
+        <ul>
+          <li><strong>Duration:</strong> 3 weeks intensive program</li>
+          <li>
+            <strong>Sessions:</strong> 2-3 mentorship sessions per week (60 min
+            each)
+          </li>
+          <li><strong>Projects:</strong> 4-5 portfolio quality projects</li>
+          <li>
+            <strong>Support:</strong> Daily WhatsApp support and Q&A access
+          </li>
+          <li>
+            <strong>Start Dates:</strong> Flexible enrollment - join any Monday
+          </li>
+          <li>
+            <strong>Time Commitment:</strong> 10-15 hours per week recommended
+          </li>
+          <li>
+            <strong>Lifetime Access:</strong> All materials and future updates
+            included
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-chart-line"></i> Return on Investment</h2>
+        <p style="color: #dddddd; font-size: 1.1em; margin-bottom: 1.5rem">
+          Most students recover their investment within 1-2 months of completing
+          this program through freelance work or improved employment
+          opportunities. Our graduates typically see a 3-5x return on their
+          investment in the first year.
+        </p>
+        <div class="highlight">
+          <h4>Success Metrics (Based on Previous Graduates):</h4>
+          <ul>
+            <li>
+              <strong>83%</strong> secured their first paid project within 30
+              days
+            </li>
+            <li><strong>Average project value</strong> increased by 300%</li>
+            <li>
+              <strong>72%</strong> reported increased confidence in client
+              negotiations
+            </li>
+            <li><strong>Average ROI:</strong> 350% within first 3 months</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section contact-section">
+        <h2><i class="fas fa-headset"></i> Get In Touch</h2>
+        <p style="color: #dddddd; font-size: 1.1em; margin-bottom: 2rem">
+          Have questions about the program? Our team is ready to help you make
+          the right decision for your growth journey.
+        </p>
+
+        <div class="contact-links">
+          <a
+            href="https://wa.me/2349118074905"
+            target="_blank"
+            class="contact-item"
+          >
+            <i class="fab fa-whatsapp"></i>
+            <div class="contact-text">
+              <div class="contact-label">WhatsApp Support</div>
+              <div class="contact-detail">+234 911 807 4905</div>
+            </div>
+          </a>
+
+          <a
+            href="https://discord.gg/BeszMFN4"
+            target="_blank"
+            class="contact-item"
+          >
+            <i class="fab fa-discord"></i>
+            <div class="contact-text">
+              <div class="contact-label">Join Our Discord</div>
+              <div class="contact-detail">discord.gg/BeszMFN4</div>
+            </div>
+          </a>
+
+          <a href="mailto:emmysacademy9@gmail.com" class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div class="contact-text">
+              <div class="contact-label">Email Us</div>
+              <div class="contact-detail">emmysacademy9@gmail.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="section" style="text-align: center">
+        <h2><i class="fas fa-check-circle"></i> Next Steps</h2>
+        <p style="color: #dddddd; font-size: 1.1em; margin-bottom: 2.5rem">
+          Ready to transform your skills into sustainable income? Click below to
+          enroll in our most popular mentorship program and start your journey
+          to professional success.
+        </p>
+
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+          "
+        >
+          <a
+            href="mailto:emmysacademy9@gmail.com?subject=Growth%20Mentorship%20Enrollment%20Request&body=Hello%20EDA%20Team,%0A%0AI%20am%20interested%20in%20enrolling%20in%20the%20Growth%20Mentorship%20Program.%20Please%20send%20me%20payment%20details%20and%20next%20steps.%0A%0AName:%0AWhatsApp:%0ADesired%20Start%20Date:"
+            class="btn"
+          >
+            <i class="fas fa-paper-plane"></i> Enroll in Growth Program
+          </a>
+
+          <a href="mentorship.html" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Back to Programs
+          </a>
+        </div>
+
+        <p
+          style="margin-top: 2rem; color: var(--light-gold); font-size: 0.95em"
+        >
+          <i class="fas fa-shield-alt"></i> Secure payment options available |
+          7-day satisfaction guarantee
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add animation to feature cards on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+            }, index * 100);
+          }
+        });
+      }, observerOptions);
+
+      // Animate feature cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+        observer.observe(card);
+      });
+
+      // Add hover effect to contact items
+      document.querySelectorAll(".contact-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.querySelector("i").style.transform = "scale(1.2)";
+          this.querySelector("i").style.transition = "transform 0.3s ease";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.querySelector("i").style.transform = "scale(1)";
+        });
+      });
+
+      // Add click animation to buttons
+      document.querySelectorAll(".btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          // Add ripple effect
+          const ripple = document.createElement("span");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 215, 0, 0.4);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                `;
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Creation & Monetization - Emmy's Digital Academy</title>
+    <style>
+        /* Variables */
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #FFC400;
+            --black: #0A0A0A;
+            --dark-bg: #1A1A1A;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --glass-bg: rgba(255, 215, 0, 0.1);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Marquee Ticker */
+        .marquee-container {
+            background: linear-gradient(90deg, var(--black), var(--dark-bg));
+            border-bottom: 2px solid var(--gold);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .marquee-item span {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            position: relative;
+            animation: logoGlow 3s infinite alternate;
+            text-decoration: none;
+        }
+
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            100% { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+        }
+
+        .logo-full {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: revealText 2s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        @keyframes revealText {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Glass Golden Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 196, 0, 0.2));
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-gold), var(--gold));
+            color: var(--black);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(-5px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .module-hero {
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+            padding: 5rem 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border: 2px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .module-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--gold), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .module-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .module-tagline {
+            font-size: 1.2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-weight: 800;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            border-radius: 2px;
+        }
+
+        /* Overview Text */
+        .overview-text {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Platforms Grid */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .platform-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: var(--glow);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--gold);
+        }
+
+        .platform-name {
+            font-weight: 600;
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .platform-earning {
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .skill-number {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .skill-card h4 {
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            padding-right: 3rem;
+        }
+
+        .skill-card ul {
+            list-style-type: none;
+        }
+
+        .skill-card li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .skill-card li::before {
+            content: '🎬';
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        /* Monetization Grid */
+        .monetization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .monetization-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .monetization-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .monetization-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        .monetization-amount {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--gold);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .project-card h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* Earning Tiers */
+        .earning-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .earning-tier {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .earning-tier:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .tier-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .tier-amount {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin: 1.5rem 0;
+            color: var(--gold);
+        }
+
+        /* Different Points */
+        .different-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .different-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .different-card h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Outcome Grid */
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .outcome-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .outcome-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 196, 0, 0.05));
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius);
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .cta-section .section-title {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section .overview-text {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .module-title {
+                font-size: 2.5rem;
+            }
+            
+            .module-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .earning-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .platforms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .module-hero {
+                padding: 3rem 1.5rem;
+            }
+            
+            .cta-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .marquee-item span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .module-title {
+                font-size: 2rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .monetization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Performance Optimizations */
+        .content-wrapper {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 2000px;
+        }
+        
+        .platform-card, .skill-card, .monetization-card {
+            will-change: transform, border-color;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee Ticker -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">
+                <span class="marquee-icon">🎯</span>
+                <span>Content Creation Mastery | Earn in Dollars</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">💰</span>
+                <span>YouTube, TikTok, Instagram Monetization</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🚀</span>
+                <span>Build Your Brand | Grow Your Audience</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">EDA</a>
+                <div class="logo-full">Emmy's Digital Academy</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="mentorship.html" class="nav-link">Mentorship</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="enroll.html" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <a href="courses.html" class="back-btn">← Back to Courses</a>
+
+        <!-- Hero Section -->
+        <div class="module-hero">
+            <h1 class="module-title">Content Creation & Monetization</h1>
+            <p class="module-subtitle">Build Brands, Grow Audiences & Earn in Dollars from Your Content</p>
+            <p class="module-tagline">Transform creativity into sustainable income across YouTube, TikTok, Instagram, and beyond</p>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Overview Section -->
+            <div class="glass-card">
+                <h2 class="section-title">Course Overview</h2>
+                <p class="overview-text">
+                    This course is designed to turn beginners into skilled content creators capable of building strong personal or business brands and monetizing their content across platforms like YouTube, TikTok, Instagram, and more. Learners will gain practical skills in scripting, video editing, niche selection, audience engagement, and monetization strategies that generate real income in dollars.
+                </p>
+                <p class="overview-text">
+                    Whether your goal is to become a full-time creator, grow a personal brand, or offer content creation services as a freelancer, this module equips you with the tools and knowledge to succeed in today's digital content ecosystem.
+                </p>
+            </div>
+
+            <!-- Platforms Covered -->
+            <div class="glass-card">
+                <h2 class="section-title">Monetizable Platforms</h2>
+                <div class="platforms-grid">
+                    <div class="platform-card">
+                        <span class="platform-icon">📺</span>
+                        <div class="platform-name">YouTube</div>
+                        <div class="platform-earning">Ads, Memberships</div>
+                    </div>
+                    <div class="platform-card">
+                        <span class="platform-icon">🎵</span>
+                        <div class="platform-name">TikTok</div>
+                        <div class="platform-earning">Creator Fund, LIVE</div>
+                    </div>
+                    <div class="platform-card">
+                        <span class="platform-icon">📸</span>
+                        <div class="platform-name">Instagram</div>
+                        <div class="platform-earning">Brand Deals, Reels</div>
+                    </div>
+                    <div class="platform-card">
+                        <span class="platform-icon">📘</span>
+                        <div class="platform-name">Facebook</div>
+                        <div class="platform-earning">Ad Revenue, Pages</div>
+                    </div>
+                    <div class="platform-card">
+                        <span class="platform-icon">📝</span>
+                        <div class="platform-name">Blogs</div>
+                        <div class="platform-earning">Affiliate, Ads</div>
+                    </div>
+                    <div class="platform-card">
+                        <span class="platform-icon">💬</span>
+                        <div class="platform-name">Patreon</div>
+                        <div class="platform-earning">Subscriptions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What You Will Learn -->
+            <div class="glass-card">
+                <h2 class="section-title">What You Will Learn</h2>
+                <div class="skills-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-card">
+                        <div class="skill-number">1</div>
+                        <h4>Niche Selection & Brand Building</h4>
+                        <ul>
+                            <li>Identifying profitable niches with engagement potential</li>
+                            <li>Defining personal or business brand identity</li>
+                            <li>Creating content strategies that attract audiences</li>
+                            <li>Positioning as an authority in your chosen niche</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="skill-card">
+                        <div class="skill-number">2</div>
+                        <h4>Content Planning & Scripting</h4>
+                        <ul>
+                            <li>Structuring content for maximum engagement</li>
+                            <li>Writing effective scripts for videos and reels</li>
+                            <li>Storytelling techniques to captivate viewers</li>
+                            <li>Planning content calendars for consistency</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="skill-card">
+                        <div class="skill-number">3</div>
+                        <h4>Video Production & Editing</h4>
+                        <ul>
+                            <li>Recording high-quality videos with minimal equipment</li>
+                            <li>Professional editing techniques for polished content</li>
+                            <li>Adding effects, captions, music, and graphics</li>
+                            <li>Mastering tools: Canva, CapCut, Adobe Premiere</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill 4 -->
+                    <div class="skill-card">
+                        <div class="skill-number">4</div>
+                        <h4>Audience Engagement & Growth</h4>
+                        <ul>
+                            <li>Building loyal communities across platforms</li>
+                            <li>Understanding platform algorithms for reach</li>
+                            <li>Techniques for boosting engagement and interaction</li>
+                            <li>Tracking metrics to refine content strategy</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skill 5 -->
+                    <div class="skill-card">
+                        <div class="skill-number">5</div>
+                        <h4>Monetization Strategies</h4>
+                        <ul>
+                            <li>Revenue streams on major platforms</li>
+                            <li>Affiliate marketing, sponsorships, brand deals</li>
+                            <li>Converting followers into paying customers</li>
+                            <li>Building multiple income streams from content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monetization Methods -->
+            <div class="glass-card">
+                <h2 class="section-title">Revenue Streams You'll Master</h2>
+                <div class="monetization-grid">
+                    <div class="monetization-card">
+                        <span class="monetization-icon">🤝</span>
+                        <h4>Sponsorships</h4>
+                        <p>Brand partnerships and paid promotions</p>
+                        <div class="monetization-amount">$100 - $5,000+</div>
+                    </div>
+                    <div class="monetization-card">
+                        <span class="monetization-icon">🛒</span>
+                        <h4>Affiliate Marketing</h4>
+                        <p>Commission from product recommendations</p>
+                        <div class="monetization-amount">20-50% commissions</div>
+                    </div>
+                    <div class="monetization-card">
+                        <span class="monetization-icon">📢</span>
+                        <h4>Ad Revenue</h4>
+                        <p>Platform ad sharing programs</p>
+                        <div class="monetization-amount">$1 - $10 per 1k views</div>
+                    </div>
+                    <div class="monetization-card">
+                        <span class="monetization-icon">💎</span>
+                        <h4>Digital Products</h4>
+                        <p>eBooks, courses, templates, presets</p>
+                        <div class="monetization-amount">$10 - $500+</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="glass-card">
+                <h2 class="section-title">Essential Creation Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <span class="tool-icon">🎥</span>
+                        <h4>CapCut</h4>
+                        <p>Mobile & desktop video editing</p>
+                    </div>
+                    <div class="tool-card">
+                        <span class="tool-icon">🎨</span>
+                        <h4>Canva</h4>
+                        <p>Graphics, thumbnails, templates</p>
+                    </div>
+                    <div class="tool-card">
+                        <span class="tool-icon">✂️</span>
+                        <h4>Premiere Pro</h4>
+                        <p>Professional video editing</p>
+                    </div>
+                    <div class="tool-card">
+                        <span class="tool-icon">📊</span>
+                        <h4>Analytics</h4>
+                        <p>YouTube Studio, TikTok Analytics</p>
+                    </div>
+                    <div class="tool-card">
+                        <span class="tool-icon">📅</span>
+                        <h4>Scheduling</h4>
+                        <p>Buffer, Later, Hootsuite</p>
+                    </div>
+                    <div class="tool-card">
+                        <span class="tool-icon">🎙️</span>
+                        <h4>Audio Tools</h4>
+                        <p>Audacity, Descript</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practical Projects -->
+            <div class="glass-card">
+                <h2 class="section-title">Practical Projects & Exercises</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>Content Strategy Plan</h4>
+                        <p>Create a comprehensive content plan and calendar for your chosen niche with posting schedules</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Video Production Suite</h4>
+                        <p>Script, record, and edit your first high-quality video optimized for platform algorithms</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Growth Campaign</h4>
+                        <p>Launch a simulated campaign to engage followers and track growth metrics across platforms</p>
+                    </div>
+                    <div class="project-card">
+                        <h4>Monetization Strategy</h4>
+                        <p>Apply monetization techniques in practice scenarios to understand revenue generation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Earning Potential -->
+            <div class="glass-card">
+                <h2 class="section-title">Earning Potential in Dollars</h2>
+                <div class="earning-tiers">
+                    <div class="earning-tier">
+                        <div class="tier-title">Beginner Creator</div>
+                        <div class="tier-amount">$50 – $200 / month</div>
+                        <p>Start with ads, small sponsorships, and initial brand deals while building audience</p>
+                    </div>
+                    <div class="earning-tier">
+                        <div class="tier-title">Intermediate Creator</div>
+                        <div class="tier-amount">$500 – $2,000 / month</div>
+                        <p>Consistent posting, engaged audience, multiple monetization streams</p>
+                    </div>
+                    <div class="earning-tier">
+                        <div class="tier-title">Advanced Creator</div>
+                        <div class="tier-amount">$2,000 – $10,000+ / month</div>
+                        <p>Multiple platforms, sponsorships, affiliate marketing, and digital products</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Different -->
+            <div class="glass-card">
+                <h2 class="section-title">Why This Course is Different</h2>
+                <div class="different-grid">
+                    <div class="different-card">
+                        <h4>Creative + Business Skills</h4>
+                        <p>Combines content creation with monetization strategies, not just creative theory</p>
+                    </div>
+                    <div class="different-card">
+                        <h4>Immediate Application</h4>
+                        <p>Hands-on exercises ensure you can produce and monetize content immediately</p>
+                    </div>
+                    <div class="different-card">
+                        <h4>Multi-Platform Focus</h4>
+                        <p>Covers YouTube, TikTok, Instagram, and more for maximum reach and earnings</p>
+                    </div>
+                    <div class="different-card">
+                        <h4>Brand Building Focus</h4>
+                        <p>Designed for creating sustainable personal or business brands that earn in dollars</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outcome Section -->
+            <div class="glass-card">
+                <h2 class="section-title">Course Outcome</h2>
+                <p class="overview-text" style="margin-bottom: 2rem;">
+                    By the end of this comprehensive course, learners will be fully equipped to:
+                </p>
+                <div class="outcome-grid">
+                    <div class="outcome-card">
+                        <span class="outcome-icon">🎥</span>
+                        <h4>Content Creation Mastery</h4>
+                        <p>Skilled in scripting, filming, editing, and publishing professional content</p>
+                    </div>
+                    <div class="outcome-card">
+                        <span class="outcome-icon">🏆</span>
+                        <h4>Brand Building</h4>
+                        <p>Build strong personal or business brands with engaged communities</p>
+                    </div>
+                    <div class="outcome-card">
+                        <span class="outcome-icon">💰</span>
+                        <h4>Revenue Generation</h4>
+                        <p>Monetize content effectively across multiple platforms and streams</p>
+                    </div>
+                    <div class="outcome-card">
+                        <span class="outcome-icon">💼</span>
+                        <h4>Professional Services</h4>
+                        <p>Offer content creation and monetization services professionally</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2 class="section-title">Start Creating & Earning Today</h2>
+                <p class="overview-text" style="margin-bottom: 2rem;">
+                    Join successful creators who have transformed their passion into profitable careers, building brands and earning in dollars from anywhere in the world.
+                </p>
+                <a href="enroll.html?course=content-creation" class="btn btn-primary">
+                    Enroll in Content Course →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Transforming aspiring professionals through practical digital education.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: emmysacademy9@gmail.com</p>
+                <p>WhatsApp: +2349118074905</p>
+                <p>Discord: https://discord.gg/BeszMFN4</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Duplicate marquee for continuous scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const marquee = document.querySelector('.marquee');
+            if (marquee) {
+                marquee.innerHTML += marquee.innerHTML;
+            }
+            
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+            
+            // Animate platform cards
+            document.querySelectorAll('.platform-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Animate skill cards
+            document.querySelectorAll('.skill-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Animate monetization cards
+            document.querySelectorAll('.monetization-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

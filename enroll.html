@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enrollment - Emmy's Digital Academy</title>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --dark-gold: #FFC400;
+            --black: #0A0A0A;
+            --dark-bg: #1A1A1A;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --glass-bg: rgba(255, 215, 0, 0.1);
+            --glass-border: rgba(255, 215, 0, 0.3);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(255, 215, 0, 0.3);
+            
+            /* Price Colors */
+            --beginner-color: #00e676;
+            --intermediate-color: #283593;
+            --pro-color: #764ba2;
+            --courses-color: #20B2AA;
+            --business-color: #FF6B6B;
+            --elite-color: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Marquee News Ticker */
+        .marquee-container {
+            background: linear-gradient(90deg, var(--black), var(--dark-bg));
+            border-bottom: 2px solid var(--gold);
+            padding: 10px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-icon {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .marquee-item span {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Header with Animated Logo */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            position: relative;
+            animation: logoGlow 3s infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px var(--gold); }
+            100% { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+        }
+
+        .logo-full {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: revealText 2s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        @keyframes revealText {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.9)), 
+                        url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), #FFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Steps Section */
+        .steps-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--glow);
+            border-color: var(--gold);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Programs Section */
+        .programs-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .program-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--gold);
+        }
+
+        .program-header {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .program-badge {
+            display: inline-block;
+            color: var(--black);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Different badge colors for each program */
+        .badge-beginner {
+            background: linear-gradient(45deg, var(--beginner-color), #00C853);
+        }
+
+        .badge-intermediate {
+            background: linear-gradient(45deg, var(--intermediate-color), #1a237e);
+        }
+
+        .badge-pro {
+            background: linear-gradient(45deg, var(--pro-color), #6A11CB);
+        }
+
+        .badge-courses {
+            background: linear-gradient(45deg, var(--courses-color), #008B8B);
+        }
+
+        .badge-business {
+            background: linear-gradient(45deg, var(--business-color), #FF4757);
+        }
+
+        .badge-elite {
+            background: linear-gradient(45deg, var(--elite-color), var(--dark-gold));
+        }
+
+        .program-content {
+            padding: 2rem;
+        }
+
+        .program-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 1.5rem 0;
+            text-align: center;
+            position: relative;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .program-price::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+        }
+
+        /* Different price colors */
+        .price-beginner {
+            color: var(--beginner-color);
+        }
+
+        .price-intermediate {
+            color: var(--intermediate-color);
+        }
+
+        .price-pro {
+            color: var(--pro-color);
+        }
+
+        .price-courses {
+            color: var(--courses-color);
+        }
+
+        .price-business {
+            color: var(--business-color);
+        }
+
+        .price-elite {
+            color: var(--elite-color);
+        }
+
+        .program-details {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid currentColor;
+        }
+
+        .program-details li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .program-details li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Form Section */
+        .form-section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 4rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        select option {
+            background: var(--dark-bg);
+            color: white;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--gold);
+        }
+
+        /* Glass Golden Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 196, 0, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            color: var(--gold);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 196, 0, 0.2));
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Contact Buttons */
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 1.2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--black);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .contact-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .program-price {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .program-header {
+                padding: 1.5rem;
+            }
+
+            .program-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Marquee News Ticker -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item">
+                <span class="marquee-icon">🎯</span>
+                <span>Transform Your Skills | Limited Slots Available</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">💰</span>
+                <span>Earn in Dollars | Start Your Freelancing Journey</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🚀</span>
+                <span>1000+ Students Trained | Join Our Success Stories</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🎓</span>
+                <span>Certificate of Completion | Industry Recognized</span>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">💼</span>
+                <span>Job Placement Support | Build Your Portfolio</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <div class="logo">EDA</div>
+                <div class="logo-full">Emmy's Digital Academy</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="courses.html" class="nav-link">Courses</a>
+                <a href="mentorship.html" class="nav-link">Mentorship</a>
+                <a href="#enroll" class="nav-link">Enroll</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Begin Your Digital Mastery Journey</h1>
+            <p class="hero-subtitle">Transform your passion into profession with Emmy's Digital Academy. Enroll today and start building your future.</p>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps-section">
+        <h2 class="section-title">How to Enroll</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Complete Form</h3>
+                <p>Fill our detailed enrollment form with your information and goals</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Get Consultation</h3>
+                <p>Receive personalized guidance on the best program for you</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Make Payment</h3>
+                <p>Secure your spot with flexible payment options</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Start Learning</h3>
+                <p>Access your materials and begin your transformation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section">
+        <h2 class="section-title">Choose Your Program</h2>
+        <div class="programs-grid">
+            <!-- Digital Skills Courses -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-courses">Digital Skills</span>
+                    <h3>Digital Skills Courses</h3>
+                </div>
+                <div class="program-content">
+                    <p>Graphics, Video Editing, Web Basics - Self-paced learning with certificate</p>
+                    <div class="program-price price-courses">₦15,000 – ₦30,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>Self-paced learning</li>
+                            <li>Certificate of completion</li>
+                            <li>Practical projects included</li>
+                            <li>Optional mentor support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beginner Mentorship -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-beginner">Beginner</span>
+                    <h3>Beginner Mentorship</h3>
+                </div>
+                <div class="program-content">
+                    <p>Perfect for absolute beginners starting their digital journey</p>
+                    <div class="program-price price-beginner">₦20,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>2 Weeks duration</li>
+                            <li>2 Sessions per week</li>
+                            <li>Personalized guidance</li>
+                            <li>Weekly tasks & feedback</li>
+                            <li>Foundation building</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intermediate Mentorship -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-intermediate">Intermediate</span>
+                    <h3>Intermediate Mentorship</h3>
+                </div>
+                <div class="program-content">
+                    <p>Advanced training for skill enhancement and portfolio building</p>
+                    <div class="program-price price-intermediate">₦35,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>3 Weeks duration</li>
+                            <li>2–3 Sessions per week</li>
+                            <li>Portfolio building</li>
+                            <li>Freelancing preparation</li>
+                            <li>Direct WhatsApp support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pro Mentorship -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-pro">Advanced</span>
+                    <h3>Pro Mentorship</h3>
+                </div>
+                <div class="program-content">
+                    <p>Elite program for building a sustainable digital business</p>
+                    <div class="program-price price-pro">₦50,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>1 Month duration</li>
+                            <li>3 Sessions per week + Check-ins</li>
+                            <li>Real client-style projects</li>
+                            <li>Freelancing & bidding training</li>
+                            <li>Income-focused guidance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Accelerator -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-business">Business</span>
+                    <h3>Business Accelerator</h3>
+                </div>
+                <div class="program-content">
+                    <p>Launch or scale your digital business with expert guidance</p>
+                    <div class="program-price price-business">₦75,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>2 Months duration</li>
+                            <li>Weekly Strategy Sessions</li>
+                            <li>Business plan development</li>
+                            <li>Market research & analysis</li>
+                            <li>Digital marketing strategy</li>
+                            <li>3 months ongoing mentorship</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Elite Masterclass -->
+            <div class="program-card">
+                <div class="program-header">
+                    <span class="program-badge badge-elite">Elite</span>
+                    <h3>Elite Masterclass</h3>
+                </div>
+                <div class="program-content">
+                    <p>Comprehensive transformation program for serious professionals</p>
+                    <div class="program-price price-elite">₦120,000</div>
+                    <div class="program-details">
+                        <ul>
+                            <li>3 Months intensive training</li>
+                            <li>Weekly 1-on-1 coaching</li>
+                            <li>All Pro features included</li>
+                            <li>Advanced digital marketing</li>
+                            <li>Guaranteed internship</li>
+                            <li>Industry networking</li>
+                            <li>Certificate of excellence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section" id="enroll">
+        <div class="form-container">
+            <h2 class="form-title">Enrollment Application</h2>
+            
+            <form id="enrollmentForm">
+                <div class="form-grid">
+                    <!-- Personal Information -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">WhatsApp Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+2349118074905" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select your country</option>
+                            <option value="nigeria">Nigeria</option>
+                            <option value="ghana">Ghana</option>
+                            <option value="kenya">Kenya</option>
+                            <option value="south-africa">South Africa</option>
+                            <option value="other">Other African Country</option>
+                            <option value="outside-africa">Outside Africa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Current Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="">Select your status</option>
+                            <option value="student">Student</option>
+                            <option value="employed">Employed</option>
+                            <option value="unemployed">Unemployed</option>
+                            <option value="self-employed">Self-Employed</option>
+                            <option value="entrepreneur">Entrepreneur</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="program">Program Selection *</label>
+                        <select id="program" name="program" required>
+                            <option value="">Choose a program</option>
+                            <option value="digital-skills">Digital Skills Courses (₦15,000 – ₦30,000)</option>
+                            <option value="beginner-mentorship">Beginner Mentorship (₦20,000)</option>
+                            <option value="intermediate-mentorship">Intermediate Mentorship (₦35,000)</option>
+                            <option value="pro-mentorship">Pro Mentorship (₦50,000)</option>
+                            <option value="business-accelerator">Business Accelerator (₦75,000)</option>
+                            <option value="elite-masterclass">Elite Masterclass (₦120,000)</option>
+                        </select>
+                    </div>
+
+                    <!-- Freelancing Experience -->
+                    <div class="form-group full-width">
+                        <label>Freelancing Experience *</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="freelance-level" value="beginner">
+                                <span>Beginner - Just starting out</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="freelance-level" value="intermediate">
+                                <span>Intermediate - Some experience</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="freelance-level" value="advanced">
+                                <span>Advanced - Regular freelancer</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="freelance-level" value="none">
+                                <span>No experience yet</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Goals -->
+                    <div class="form-group full-width">
+                        <label for="goals">Your Career Goals *</label>
+                        <textarea id="goals" name="goals" 
+                                  placeholder="Tell us about your goals: What do you want to achieve? How do you plan to use these skills? What's your timeline?" 
+                                  rows="4" required></textarea>
+                    </div>
+
+                    <!-- Previous Experience -->
+                    <div class="form-group full-width">
+                        <label for="experience">Previous Digital Experience</label>
+                        <textarea id="experience" name="experience" 
+                                  placeholder="Have you taken any digital courses before? What tools or software are you familiar with? Any previous projects?" 
+                                  rows="3"></textarea>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="form-group full-width">
+                        <label for="availability">Weekly Study Availability *</label>
+                        <select id="availability" name="availability" required>
+                            <option value="">Select your availability</option>
+                            <option value="5-10">5-10 hours per week</option>
+                            <option value="10-20">10-20 hours per week</option>
+                            <option value="20-30">20-30 hours per week</option>
+                            <option value="30+">30+ hours per week</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget -->
+                    <div class="form-group">
+                        <label for="budget">Investment Budget *</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Select your budget range</option>
+                            <option value="15-30k">₦15,000 - ₦30,000</option>
+                            <option value="30-50k">₦30,000 - ₦50,000</option>
+                            <option value="50-75k">₦50,000 - ₦75,000</option>
+                            <option value="75-120k">₦75,000 - ₦120,000</option>
+                            <option value="120k+">₦120,000+</option>
+                        </select>
+                    </div>
+
+                    <!-- Payment Preference -->
+                    <div class="form-group">
+                        <label for="payment">Payment Preference *</label>
+                        <select id="payment" name="payment" required>
+                            <option value="">Select payment option</option>
+                            <option value="full">Full Payment</option>
+                            <option value="installment">Installment (2-3 months) with monthly interest</option>
+                            <option value="consult">Need consultation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">
+                    <span id="btnText">✨ Submit Application</span>
+                    <span id="btnSpinner" style="display: none;">🎯 Processing...</span>
+                </button>
+
+                <div id="successMessage" style="display: none; padding: 1rem; background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; margin-top: 1rem; text-align: center;">
+                    🎉 Application submitted! We'll contact you within 24 hours.
+                </div>
+                <div id="errorMessage" style="display: none; padding: 1rem; background: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); border-radius: 10px; margin-top: 1rem; text-align: center;">
+                    ❌ Submission failed. Please contact us directly.
+                </div>
+            </form>
+
+            <!-- Payment Information -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 215, 0, 0.05); border-radius: 15px; border: 1px solid var(--glass-border);">
+                <h3 style="color: var(--gold); margin-bottom: 1rem; text-align: center;">Payment Information</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+                    <div>
+                        <div style="color: var(--gold); font-weight: 600; margin-bottom: 5px;">Bank Transfer</div>
+                        <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Send to our corporate account</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--gold); font-weight: 600; margin-bottom: 5px;">Crypto Payments</div>
+                        <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">BTC, USDT, ETH accepted</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--gold); font-weight: 600; margin-bottom: 5px;">Installment Plans</div>
+                        <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Available for all programs</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Fallback -->
+            <div class="contact-buttons">
+                <a href="https://discord.gg/BeszMFN4" class="contact-btn" target="_blank">
+                    <span class="contact-icon">💬</span>
+                    <span>Join Discord Community</span>
+                </a>
+                <a href="https://wa.me/2349118074905" class="contact-btn" target="_blank">
+                    <span class="contact-icon">📱</span>
+                    <span>WhatsApp for Payment Details</span>
+                </a>
+                <a href="mailto:emmysacademy9@gmail.com" class="contact-btn">
+                    <span class="contact-icon">📧</span>
+                    <span>Email for Custom Packages</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emmy's Digital Academy</h3>
+                <p>Learn the skills. Build the future.</p>
+                <p>Transforming aspiring professionals through practical digital education.</p>
+                <p style="margin-top: 1rem; color: var(--gold); font-weight: 600;">🎯 6 Programs(More programs coming soon) | Flexible Pricing | Installment Plans</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><span style="color: var(--gold);">📧 Email:</span> emmysacademy9@gmail.com</p>
+                <p><span style="color: var(--gold);">📱 WhatsApp:</span> +234 911 807 4905</p>
+                <p><span style="color: var(--gold);">💬 Discord:</span> https://discord.gg/BeszMFN4</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Operating Hours: 9AM - 6PM WAT</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Emmy's Digital Academy. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5);">Prices are in Nigerian Naira (₦). International payments available.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.getElementById('enrollmentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline';
+            
+            try {
+                // Get selected program price
+                const programSelect = document.getElementById('program');
+                const selectedProgram = programSelect.options[programSelect.selectedIndex];
+                const programText = selectedProgram.text;
+                const programValue = selectedProgram.value;
+                
+                // Add program info to form data
+                const formData = new FormData(this);
+                formData.append('program_full', programText);
+                formData.append('submitted_at', new Date().toISOString());
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // For demo: 80% success rate
+                const isSuccess = Math.random() > 0.2;
+                
+                if (isSuccess) {
+                    successMessage.style.display = 'block';
+                    successMessage.innerHTML = `
+                        🎉 <strong>Application Submitted!</strong><br>
+                        We've received your application for <span style="color: var(--gold);">${programText}</span>.<br>
+                        Our team will contact you within 24 hours with next steps and payment details.
+                    `;
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Send to FormSubmit (uncomment for production)
+                    /*
+                    await fetch('https://formsubmit.co/ajax/emmysacademy9@gmail.com', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    */
+                    
+                    this.reset();
+                    
+                    // Update marquee with enrollment confirmation
+                    const marqueeItem = document.querySelector('.marquee-item');
+                    marqueeItem.innerHTML = `
+                        <span class="marquee-icon">🎯</span>
+                        <span>New Enrollment: ${programText.split('(')[0].trim()} | Welcome Aboard!</span>
+                    `;
+                    
+                } else {
+                    throw new Error('Network error');
+                }
+                
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Make marquee more prominent for error
+                const marquee = document.querySelector('.marquee-container');
+                marquee.style.background = 'linear-gradient(90deg, #FF0000, #FF6B6B)';
+                marquee.style.borderColor = '#FF0000';
+                
+                console.error('Submission error:', error);
+                
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (!value.startsWith('234') && value.length > 0) {
+                value = '234' + value;
+            }
+            if (value.length > 0) {
+                value = '+' + value;
+            }
+            e.target.value = value;
+        });
+
+        // Single checkbox selection for freelancing experience
+        document.querySelectorAll('input[name="freelance-level"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    document.querySelectorAll('input[name="freelance-level"]').forEach(cb => {
+                        if (cb !== this) cb.checked = false;
+                    });
+                }
+            });
+        });
+
+        // Auto-update budget based on selected program
+        document.getElementById('program').addEventListener('change', function() {
+            const program = this.value;
+            const budgetSelect = document.getElementById('budget');
+            
+            // Clear current selection
+            budgetSelect.value = '';
+            
+            // Set budget based on program
+            if (program.includes('digital-skills')) {
+                budgetSelect.value = '15-30k';
+            } else if (program.includes('beginner')) {
+                budgetSelect.value = '15-30k';
+            } else if (program.includes('intermediate')) {
+                budgetSelect.value = '30-50k';
+            } else if (program.includes('pro-mentorship')) {
+                budgetSelect.value = '50-75k';
+            } else if (program.includes('business')) {
+                budgetSelect.value = '50-75k';
+            } else if (program.includes('elite')) {
+                budgetSelect.value = '75-120k';
+            }
+        });
+
+        // Animate form elements
+        const formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-5px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animate program cards on scroll
+        const programCards = document.querySelectorAll('.program-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        programCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        // Duplicate marquee for continuous scroll
+        const marquee = document.querySelector('.marquee');
+        marquee.innerHTML += marquee.innerHTML;
+    </script>
+</body>
+</html>
