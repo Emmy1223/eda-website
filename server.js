@@ -1,22 +1,31 @@
 // Minimal password-reset backend (Express)
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const OpenAI = require('openai');
+const axios = require('axios');
+const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const openai = new OpenAI({ apiKey: process.env.BLACKBOX_API_KEY || 'no-key-set' });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Serve static site files from project root
 app.use(express.static(path.join(__dirname)));
 
-// Simple CORS middleware: allow local dev server (Live Server) on port 5500
-// You can override allowed origins via ALLOWED_ORIGINS env var (comma-separated)
+// Enhanced CORS: add localhost ports
 app.use((req, res, next) => {
     const allowedEnv = process.env.ALLOWED_ORIGINS;
-    const defaultOrigins = ['http://localhost:5500', 'http://127.0.0.1:5500'];
+    const defaultOrigins = [
+        'http://localhost:5500', 
+        'http://127.0.0.1:5500',
+        'http://localhost:3000',
+        'http://127.0.0.1:3000'
+    ];
     const allowed = allowedEnv ? allowedEnv.split(',') : defaultOrigins;
     const origin = req.headers.origin;
     if (origin && allowed.includes(origin)) {
@@ -49,8 +58,33 @@ if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     });
 }
 
+// Site context loader for AI chat (all HTML files)
+async function loadSiteContext() {
+    try {
+        const files = fs.readdirSync('.').filter(f => f.endsWith('.html'));
+        let context = '';
+        const maxContext = 50000; // 50KB limit
+
+        for (const file of files.slice(0, 20)) { // Max 20 files
+            if (context.length > maxContext) break;
+            const content = fs.readFileSync(file, 'utf8');
+            const $ = cheerio.load(content);
+            // Extract text, remove scripts/styles
+            $('script, style').remove();
+            const text = $('body').text().trim().replace(/\s+/g, ' ').slice(0, 5000);
+            if (text) {
+                context += `\n\n--- ${file} ---\n${text}`;
+            }
+        }
+
+        return context.slice(0, maxContext) || 'EDA Website: Digital academy courses on freelancing, job bidding, graphics design etc.';
+    } catch (err) {
+        console.error('Context load error:', err);
+        return 'EDA Website content unavailable.';
+    }
+}
+
 // Use SQLite for server-side users and bcryptjs for password hashing
-const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const DB_FILE = path.join(__dirname, 'data.db');
@@ -294,7 +328,51 @@ app.post('/api/reset-password', async (req, res) => {
     return res.json({ success: true, message: 'Code valid' });
 });
 
+// AI Chat endpoint - Blackbox.ai proxy with site context
+app.post('/api/chat', async (req, res) => {
+    try {
+        const { message } = req.body;
+        if (!message || typeof message !== 'string') {
+            return res.status(400).json({ error: 'Message required' });
+        }
+
+        const context = await loadSiteContext();
+        console.log('AI Chat:', message.substring(0, 50) + '...');
+
+        if (!process.env.BLACKBOX_API_KEY || process.env.BLACKBOX_API_KEY === 'no-key-set') {
+            // Mock response without API key
+            return res.json({
+                response: `🔧 **API Key Setup**: Add BLACKBOX_API_KEY=sk-... to .env\n\nMock: "${message}"? Here's EDA info:\n\n${context.substring(0, 500)}...\n\nGet key at blackbox.ai to enable real AI!`,
+                contextLength: context.length,
+                mock: true
+            });
+        }
+
+        // Real OpenAI-compatible call (Blackbox.ai)
+        const completion = await openai.chat.completions.create({
+            model: 'gpt-4o-mini', // or 'blackbox-model' if custom
+            messages: [
+                {
+                    role: 'system',
+                    content: `You are EDA Assistant for Emmy\'s Digital Academy website. Use this site context ONLY: ${context}\n\nAnswer accurately about courses (freelancing, job bidding, graphics design etc.), pricing, mentorship. Be helpful, concise. Site founded Dec 2025.`
+                },
+                { role: 'user', content: message }
+            ],
+            max_tokens: 500,
+            temperature: 0.7
+        });
+
+        const response = completion.choices[0].message.content;
+        res.json({ response, contextLength: context.length });
+
+    } catch (err) {
+        console.error('AI Chat error:', err.message);
+        res.status(500).json({ error: 'Chat service unavailable. Check server logs.' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT} (DEV=${process.env.DEV || 'false'})`);
     if (!transporter) console.log('No SMTP transporter configured; emails will be logged to console.');
+    console.log('✅ AI Chat ready at /api/chat (needs BLACKBOX_API_KEY)');
 });
