@@ -214,6 +214,16 @@ app.post('/api/signup', async (req, res) => {
         const { name, email, password, phone, course, plan } = req.body || {};
         if (!name || !email || !password) return res.status(400).json({ success: false, message: 'Name, email, and password required' });
 
+        // Password rules:
+        // - Must be at least 6 characters
+        // - Must not be only numbers
+        if (String(password).length < 6) {
+            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
+        }
+        if (/^\d+$/.test(String(password))) {
+            return res.status(400).json({ success: false, message: 'Password cannot be only numbers' });
+        }
+
         const existing = await findUserByEmail(email);
         if (existing) return res.status(400).json({ success: false, message: 'Email already registered' });
 

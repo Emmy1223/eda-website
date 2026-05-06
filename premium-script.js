@@ -103,8 +103,16 @@ async function handleSignup(e) {
         return;
     }
     
-    if (password.length < 8) {
-        showToast('Password must be at least 8 characters', 'error');
+    // Password rules:
+    // - Must be at least 6 characters
+    // - Must not be only numbers
+    if (password.length < 6) {
+        showToast('Password must be at least 6 characters', 'error');
+        return;
+    }
+
+    if (/^\d+$/.test(password)) {
+        showToast('Password cannot be only numbers', 'error');
         return;
     }
     
